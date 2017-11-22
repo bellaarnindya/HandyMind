@@ -15,6 +15,12 @@ public class Rectangle extends Shape {
     private float width;
     private float height;
 
+    public Rectangle(float x, float y) {
+
+        this.x = x;
+        this.y = y;
+    }
+
     public float getX() {
         return x;
     }
@@ -35,13 +41,6 @@ public class Rectangle extends Shape {
         return width;
     }
 
-    public Rectangle(float x, float y) {
-
-        this.x = x;
-        this.y = y;
-    }
-
-
     public void setWidth(float width) {
         this.width = width;
     }
@@ -53,5 +52,5 @@ public class Rectangle extends Shape {
     public void setHeight(float height) {
         this.height = height;
     }
-    
+
 }
