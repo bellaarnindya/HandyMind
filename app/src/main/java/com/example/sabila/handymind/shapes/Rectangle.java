@@ -52,5 +52,4 @@ public class Rectangle extends Shape {
     public void setHeight(float height) {
         this.height = height;
     }
-
 }
