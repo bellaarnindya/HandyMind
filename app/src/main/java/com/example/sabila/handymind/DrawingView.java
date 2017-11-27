@@ -1,11 +1,9 @@
 package com.example.sabila.handymind;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -14,6 +12,9 @@ import android.view.View;
 
 import com.example.sabila.handymind.shapes.Rectangle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Sabila on 11/15/2017.
  */
@@ -21,8 +22,13 @@ import com.example.sabila.handymind.shapes.Rectangle;
 public class DrawingView extends View {
 
     private Paint drawPaint;
-    private Rectangle rect;
-    private boolean isTouched = false;
+
+    private List<Shape> shapes;
+    private Shape touchedShape = null;
+    private Shape onCreateShape = null;
+
+    private boolean isSingleTouch = false;
+
     private static final int STROKE_SIZE = 7;
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
@@ -35,50 +41,91 @@ public class DrawingView extends View {
         drawPaint.setColor(Color.BLACK);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeWidth(STROKE_SIZE);
+
+        shapes = new ArrayList<>();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(Color.WHITE);
-        if (isTouched) {
-            canvas.drawRect(rect.getX(), rect.getY(), rect.getWidth()+rect.getX(), rect.getHeight()+rect.getY(), drawPaint);
+        for (int i = 0; i < shapes.size(); i++) {
+            shapes.get(i).draw(canvas);
         }
+
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float touchX = event.getX();
         float touchY = event.getY();
-        isTouched = true;
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                rect = new Rectangle(touchX, touchY);
+
+                for (int i = 0; i < shapes.size(); i++) {
+                    if (shapes.get(i).isTouched(touchX, touchY)) {
+                        touchedShape = shapes.get(i);
+
+                        isSingleTouch = true;
+
+                        Log.i("ACTION_DOWN", "get touched shape");
+                    }
+                }
+
+                if (touchedShape == null && !isSingleTouch) {
+                    Log.i("ACTION_DOWN", "if touched == null");
+                    Log.i("ACTION_DOWN", "  add shape");
+
+                    Shape newShape = new Rectangle(touchX, touchY);
+                    shapes.add(newShape);
+                    onCreateShape = newShape;
+                }
+
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 invalidate();
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                if (rect != null) {
-                    float width = event.getX() - this.rect.getX();
-                    float height = event.getY() - this.rect.getY();
+                Log.i("ACTION_MOVE", "move");
 
-                    if (width > 0 && height > 0) {
-                        rect.setWidth(width);
-                        rect.setHeight(height);
-                    }
-                    invalidate();
+                isSingleTouch = false;
+
+                if (onCreateShape != null) {
+                    onCreateShape.drag(touchX, touchY);
+                } else if (touchedShape != null) {
+                    touchedShape.move(touchX, touchY);
                 }
-                break;
 
-            case MotionEvent.ACTION_UP:
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 invalidate();
                 break;
 
-            default:
-                return false;
+            case MotionEvent.ACTION_UP:
+                onCreateShape = null;
+
+                if (isSingleTouch) {
+                    Log.i("ACTION_UP", "clicked");
+                    touchedShape.click();
+                    isSingleTouch = false;
+                } else {
+                    touchedShape = null;
+                }
+
+                invalidate();
+                break;
         }
+
         return true;
     }
-
 }

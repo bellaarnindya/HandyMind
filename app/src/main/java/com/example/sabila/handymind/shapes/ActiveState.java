@@ -11,6 +11,7 @@ import com.example.sabila.handymind.Shape;
 public class ActiveState implements ShapeState {
     @Override
     public void click(Shape wrapper) {
+        wrapper.setInactive();
         wrapper.setState(new InactiveState());
         Log.i("SET_STATE", "Change to Active State");
     }

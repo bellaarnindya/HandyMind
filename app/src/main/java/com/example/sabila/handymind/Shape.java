@@ -1,5 +1,8 @@
 package com.example.sabila.handymind;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
+
 import com.example.sabila.handymind.shapes.InactiveState;
 import com.example.sabila.handymind.shapes.ShapeState;
 
@@ -29,4 +32,17 @@ public abstract class Shape {
     public void click() {
         currentState.click(this);
     }
+
+    public void draw(Canvas canvas) {}
+
+    public void move(float x, float y) {}
+
+    public void drag(float x, float y) {}
+
+    public void resize(float x, float y) {}
+
+    public void setActive() {}
+    public void setInactive() {}
+
+    public boolean isTouched(float touchX, float touchY) { return false; }
 }
