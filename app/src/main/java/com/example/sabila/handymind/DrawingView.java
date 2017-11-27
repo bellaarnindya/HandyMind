@@ -69,6 +69,8 @@ public class DrawingView extends View {
 
                         isSingleTouch = true;
 
+                        touchedShape.initialMove(touchX, touchY);
+
                         Log.i("ACTION_DOWN", "get touched shape");
                     }
                 }
