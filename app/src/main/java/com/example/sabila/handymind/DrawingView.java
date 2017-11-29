@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.sabila.handymind.shapes.Circle;
 import com.example.sabila.handymind.shapes.Line;
 import com.example.sabila.handymind.shapes.Rectangle;
+import com.example.sabila.handymind.shapes.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ import static android.content.ContentValues.TAG;
 
 public class DrawingView extends View {
 
-    private Paint drawPaint;
+    private Paint drawPaint, textPaint;
     private boolean isTouched = false;
     private static final int STROKE_SIZE = 7;
     private String selectedShape;
@@ -92,13 +93,22 @@ public class DrawingView extends View {
             isTouched = true;
 
             if (selectedShape.equals("rectangle")) {
+                init();
                 shape = new Rectangle(x, y);
             }
             else if (selectedShape.equals("circle")) {
+                init();
                 shape = new Circle(x, y);
             }
             else if (selectedShape.equals("line")) {
+                init();
                 shape = new Line(x, y);
+            }
+            else if (selectedShape.equals("text")) {
+                drawPaint.setColor(Color.BLACK);
+                drawPaint.setStyle(Paint.Style.FILL);
+                drawPaint.setTextSize(50);
+                shape = new Text(x, y);
             }
         }
     }
