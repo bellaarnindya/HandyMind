@@ -45,6 +45,13 @@
         android:text="round rect"
         android:layout_toRightOf="@+id/line_btn"
         android:layout_alignParentBottom="true"/>
+    <com.example.sabila.handymind.buttons.TextButton
+        android:id="@+id/text_btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:text="Text"
+        android:layout_toRightOf="@+id/line_btn"
+        android:layout_alignParentBottom="true" />
 
     <com.example.sabila.handymind.buttons.OvalButton
         android:layout_width="60dp"
