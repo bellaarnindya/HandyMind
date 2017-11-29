@@ -41,5 +41,13 @@
         android:layout_toRightOf="@+id/circle_btn"
         android:layout_alignParentBottom="true"/>
 
+    <com.example.sabila.handymind.buttons.RoundRectButton
+        android:id="@+id/roundrect_btn"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="round rect"
+        android:layout_toRightOf="@+id/line_btn"
+        android:layout_alignParentBottom="true"/>
+
 
 </RelativeLayout>
