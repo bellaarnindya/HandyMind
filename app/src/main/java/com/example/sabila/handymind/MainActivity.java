@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import com.example.sabila.handymind.buttons.CircleButton;
 import com.example.sabila.handymind.buttons.LineButton;
 import com.example.sabila.handymind.buttons.RectButton;
+import com.example.sabila.handymind.buttons.TextButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private RectButton rectBtn;
     private CircleButton circleBtn;
     private LineButton lineBtn;
+    private TextButton textBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,12 @@ public class MainActivity extends AppCompatActivity {
         rectBtn = (RectButton) findViewById(R.id.rect_btn);
         circleBtn = (CircleButton) findViewById(R.id.circle_btn);
         lineBtn = (LineButton) findViewById(R.id.line_btn);
+        textBtn = (TextButton) findViewById(R.id.text_btn);
 
         rectBtn.setOnClickListener(setShape);
         circleBtn.setOnClickListener(setShape);
         lineBtn.setOnClickListener(setShape);
+        textBtn.setOnClickListener(setShape);
 
     }
 
@@ -57,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.line_btn:
                     drawingView.setSelectedShape("line");
+                    break;
+                case R.id.text_btn:
+                    drawingView.setSelectedShape("text");
                     break;
             }
         }
