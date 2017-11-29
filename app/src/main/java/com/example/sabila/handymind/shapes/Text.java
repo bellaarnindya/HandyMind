@@ -11,13 +11,14 @@ import com.example.sabila.handymind.Shape;
 
 public class Text extends Shape {
 
-    private String textInput="Testing";
+    private String textInput;
     private float x;
     private float y;
 
-    public Text(float x, float y) {
+    public Text(float x, float y, String inputMessage) {
         this.x = x;
         this.y = y;
+        this.textInput = inputMessage;
     }
 
     public float getX() {
@@ -34,6 +35,14 @@ public class Text extends Shape {
 
     public void setY(float y) {
         this.y = y;
+    }
+
+    public String getTextInput() {
+        return textInput;
+    }
+
+    public void setTextInput(String textInput) {
+        this.textInput = textInput;
     }
 
     @Override
