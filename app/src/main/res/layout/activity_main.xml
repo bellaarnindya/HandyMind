@@ -20,15 +20,14 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
-        <com.example.sabila.handymind.buttons.LineButton
-            android:id="@+id/line_btn"
+        <com.example.sabila.handymind.buttons.RectButton
+            android:id="@+id/rect_btn"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/circle_btn"
             android:layout_weight="1"
             android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="line"
+            android:text="rect"
             android:textColor="@android:color/white" />
 
         <com.example.sabila.handymind.buttons.CircleButton
@@ -42,14 +41,15 @@
             android:text="circle"
             android:textColor="@android:color/white" />
 
-        <com.example.sabila.handymind.buttons.RectButton
-            android:id="@+id/rect_btn"
+        <com.example.sabila.handymind.buttons.LineButton
+            android:id="@+id/line_btn"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/circle_btn"
             android:layout_weight="1"
             android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="rect"
+            android:text="line"
             android:textColor="@android:color/white" />
 
         <com.example.sabila.handymind.buttons.TextButton
@@ -62,6 +62,7 @@
             android:backgroundTint="@android:color/holo_blue_dark"
             android:text="text"
             android:textColor="@android:color/white" />
+
     </LinearLayout>
 
 
