@@ -14,6 +14,7 @@ import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
 import com.example.sabila.handymind.buttons.RoundRectButton;
 import com.example.sabila.handymind.shapes.RoundRect;
+import com.example.sabila.handymind.buttons.TextButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private LineButton lineBtn;
     private RoundRectButton roundRectBtn;
     private OvalButton ovalBtn;
+    private TextButton textBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,14 @@ public class MainActivity extends AppCompatActivity {
         lineBtn = (LineButton) findViewById(R.id.line_btn);
         roundRectBtn = (RoundRectButton) findViewById(R.id.roundrect_btn);
         ovalBtn= (OvalButton) findViewById(R.id.oval_btn);
+        textBtn = (TextButton) findViewById(R.id.text_btn);
 
         rectBtn.setOnClickListener(setShape);
         circleBtn.setOnClickListener(setShape);
         lineBtn.setOnClickListener(setShape);
         roundRectBtn.setOnClickListener(setShape);
         ovalBtn.setOnClickListener(setShape);
+        textBtn.setOnClickListener(setShape);
 
     }
 
@@ -74,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
                     drawingView.setSelectedShape("oval");
                     break;
 
+                case R.id.text_btn:
+                    drawingView.setSelectedShape("text");
+                    break;
             }
         }
     };
