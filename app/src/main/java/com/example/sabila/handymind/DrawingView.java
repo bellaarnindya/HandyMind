@@ -28,10 +28,10 @@ import static android.content.ContentValues.TAG;
 
 public class DrawingView extends View {
 
-    private Paint drawPaint, textPaint;
+    private Paint drawPaint;
     private boolean isTouched = false;
     private static final int STROKE_SIZE = 7;
-    private String selectedShape;
+    private String selectedShape, textMessage;
     public Shape shape;
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
@@ -84,7 +84,10 @@ public class DrawingView extends View {
         return true;
     }
 
-
+    public void getMessage (String messageReceived) {
+        textMessage = messageReceived;
+        setSelectedShape("text");
+    }
 
     public void setSelectedShape(String selectedShape) {
         this.selectedShape = selectedShape;
@@ -115,8 +118,9 @@ public class DrawingView extends View {
             else if (selectedShape.equals("text")) {
                 drawPaint.setColor(Color.BLACK);
                 drawPaint.setStyle(Paint.Style.FILL);
+                drawPaint.setTextAlign(Paint.Align.CENTER);
                 drawPaint.setTextSize(50);
-                shape = new Text(x, y);
+                shape = new Text(x, y, textMessage);
             }
         }
     }
