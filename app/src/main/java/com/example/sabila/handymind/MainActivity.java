@@ -10,7 +10,10 @@ import android.view.WindowManager;
 
 import com.example.sabila.handymind.buttons.CircleButton;
 import com.example.sabila.handymind.buttons.LineButton;
+import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
+import com.example.sabila.handymind.buttons.RoundRectButton;
+import com.example.sabila.handymind.shapes.RoundRect;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private RectButton rectBtn;
     private CircleButton circleBtn;
     private LineButton lineBtn;
+    private RoundRectButton roundRectBtn;
+    private OvalButton ovalBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +42,14 @@ public class MainActivity extends AppCompatActivity {
         rectBtn = (RectButton) findViewById(R.id.rect_btn);
         circleBtn = (CircleButton) findViewById(R.id.circle_btn);
         lineBtn = (LineButton) findViewById(R.id.line_btn);
+        roundRectBtn = (RoundRectButton) findViewById(R.id.roundrect_btn);
+        ovalBtn= (OvalButton) findViewById(R.id.oval_btn);
 
         rectBtn.setOnClickListener(setShape);
         circleBtn.setOnClickListener(setShape);
         lineBtn.setOnClickListener(setShape);
+        roundRectBtn.setOnClickListener(setShape);
+        ovalBtn.setOnClickListener(setShape);
 
     }
 
@@ -58,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.line_btn:
                     drawingView.setSelectedShape("line");
                     break;
+                case R.id.roundrect_btn:
+                    drawingView.setSelectedShape("roundrect");
+                    break;
+                case R.id.oval_btn:
+                    drawingView.setSelectedShape("oval");
+                    break;
+
             }
         }
     };
