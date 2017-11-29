@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.sabila.handymind.shapes.Circle;
 import com.example.sabila.handymind.shapes.Line;
 import com.example.sabila.handymind.shapes.Rectangle;
+import com.example.sabila.handymind.shapes.RoundRect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,6 +101,9 @@ public class DrawingView extends View {
             else if (selectedShape.equals("line")) {
                 shape = new Line(x, y);
             }
+            else if (selectedShape.equals("roundrect")) {
+                shape = new RoundRect(x, y);
+            }
         }
     }
 
@@ -128,6 +132,16 @@ public class DrawingView extends View {
 
                if (length > 0) {
                    ((Line) shape).setLength(length);
+               }
+           }
+           else if (shape instanceof RoundRect) {
+               float width = x - ((RoundRect) shape).getX();
+               float height = y - ((RoundRect) shape).getY();
+
+
+               if (width > 0 && height > 0) {
+                   ((RoundRect) shape).setWidth(width);
+                   ((RoundRect) shape).setHeight(height);
                }
            }
         }

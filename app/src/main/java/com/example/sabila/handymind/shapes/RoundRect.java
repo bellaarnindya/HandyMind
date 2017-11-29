@@ -13,8 +13,8 @@ public class RoundRect extends Shape {
 
     private float x;
     private float y;
-    private float rx;
-    private float ry;
+    private static final float RX = 30;
+    private static final float RY = 30;
     private float width;
     private float height;
 
@@ -39,22 +39,6 @@ public class RoundRect extends Shape {
         this.y = y;
     }
 
-    public float getRx() {
-        return rx;
-    }
-
-    public void setRx(float rx) {
-        this.rx = rx;
-    }
-
-    public float getRy() {
-        return ry;
-    }
-
-    public void setRy(float ry) {
-        this.ry = ry;
-    }
-
     public float getWidth() {
         return width;
     }
@@ -73,6 +57,6 @@ public class RoundRect extends Shape {
 
     @Override
     public void draw(Canvas canvas, Paint paint) {
-
+        canvas.drawRoundRect(x, y, x+width, y+height, RX, RY, paint);
     }
 }
