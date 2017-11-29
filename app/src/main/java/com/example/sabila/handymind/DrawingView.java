@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.example.sabila.handymind.shapes.Circle;
 import com.example.sabila.handymind.shapes.Line;
+import com.example.sabila.handymind.shapes.Oval;
 import com.example.sabila.handymind.shapes.Rectangle;
 import com.example.sabila.handymind.shapes.RoundRect;
 
@@ -104,6 +105,9 @@ public class DrawingView extends View {
             else if (selectedShape.equals("roundrect")) {
                 shape = new RoundRect(x, y);
             }
+            else if (selectedShape.equals("oval")) {
+                shape = new Oval(x, y);
+            }
         }
     }
 
@@ -143,6 +147,10 @@ public class DrawingView extends View {
                    ((RoundRect) shape).setWidth(width);
                    ((RoundRect) shape).setHeight(height);
                }
+           }
+           else if (shape instanceof Oval) {
+               ((Oval) shape).setRight(x);
+               ((Oval) shape).setBottom(y);
            }
         }
     }
