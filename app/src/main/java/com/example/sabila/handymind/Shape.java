@@ -1,5 +1,8 @@
 package com.example.sabila.handymind;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
+
 import java.util.UUID;
 
 /**
@@ -18,4 +21,5 @@ public abstract class Shape {
         return ID;
     }
 
+    public abstract void draw(Canvas canvas, Paint paint);
 }

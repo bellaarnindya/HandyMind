@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,17 +8,38 @@
     android:background="#cecece"
     tools:context="com.example.sabila.handymind.MainActivity">
 
-
     <com.example.sabila.handymind.DrawingView
+        android:id="@+id/drawing_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:background="#FFFFFF" />
+        android:layout_weight="1" />
+
+    <com.example.sabila.handymind.buttons.RectButton
+        android:id="@+id/rect_btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:text="rect"
+        android:layout_alignParentBottom="true" />
+
+    <com.example.sabila.handymind.buttons.CircleButton
+        android:id="@+id/circle_btn"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="circle"
+        android:layout_toRightOf="@+id/rect_btn"
+        android:layout_alignParentBottom="true"/>
+
+    <com.example.sabila.handymind.buttons.LineButton
+        android:id="@+id/line_btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:text="line"
+        android:layout_toRightOf="@+id/circle_btn"
+        android:layout_alignParentBottom="true"/>
 
 
-
-</LinearLayout>
+</RelativeLayout>

@@ -1,5 +1,7 @@
 package com.example.sabila.handymind.shapes;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.sabila.handymind.Shape;
@@ -37,6 +39,7 @@ public class Rectangle extends Shape {
         this.y = y;
     }
 
+
     public float getWidth() {
         return width;
     }
@@ -44,6 +47,7 @@ public class Rectangle extends Shape {
     public void setWidth(float width) {
         this.width = width;
     }
+
 
     public float getHeight() {
         return height;
@@ -53,4 +57,8 @@ public class Rectangle extends Shape {
         this.height = height;
     }
 
+    @Override
+    public void draw(Canvas canvas, Paint paint) {
+        canvas.drawRect(x, y, x+width, y+height, paint);
+    }
 }
