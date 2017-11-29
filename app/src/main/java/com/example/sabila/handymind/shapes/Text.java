@@ -11,8 +11,33 @@ import com.example.sabila.handymind.Shape;
 
 public class Text extends Shape {
 
+    private String textInput="Testing";
+    private float x;
+    private float y;
+
+    public Text(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
     @Override
     public void draw(Canvas canvas, Paint paint) {
-
+        canvas.drawText(textInput, x, y, paint);
     }
 }
