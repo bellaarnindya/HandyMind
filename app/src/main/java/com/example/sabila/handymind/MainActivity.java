@@ -109,12 +109,11 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.oval_btn:
                     drawingView.setSelectedShape("oval");
                     break;
-
-            case R.id.text_btn:
-                showDialog();
-                dialog.show();
-                break;
-        }
+                case R.id.text_btn:
+                    showDialog();
+                    dialog.show();
+                    break;
+            }
         }
     };
 
