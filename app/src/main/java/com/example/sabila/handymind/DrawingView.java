@@ -22,9 +22,6 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Sabila on 11/15/2017.
  */
@@ -35,7 +32,7 @@ public class DrawingView extends View {
 
     private List<Shape> shapes;
     private Shape touchedShape = null;
-    private Shape onCreateShape = null;
+    private Shape shapeOnCreating = null;
 
     private boolean isSingleTouch = false;
 
@@ -48,6 +45,8 @@ public class DrawingView extends View {
 
         selectedShape = "rectangle";
 
+        shapes = new ArrayList<>();
+
         init();
     }
 
@@ -56,14 +55,13 @@ public class DrawingView extends View {
         drawPaint.setColor(Color.BLACK);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeWidth(STROKE_SIZE);
-
-        shapes = new ArrayList<>();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(Color.WHITE);
+
         for (int i = 0; i < shapes.size(); i++) {
             shapes.get(i).draw(canvas);
         }
@@ -95,7 +93,7 @@ public class DrawingView extends View {
 
                     Shape newShape = createShape(touchX, touchY);
                     shapes.add(newShape);
-                    onCreateShape = newShape;
+                    shapeOnCreating = newShape;
                 }
 
                 try {
@@ -113,8 +111,8 @@ public class DrawingView extends View {
 
                 isSingleTouch = false;
 
-                if (onCreateShape != null) {
-                    onCreateShape.drag(touchX, touchY);
+                if (shapeOnCreating != null) {
+                    shapeOnCreating.drag(touchX, touchY);
                 } else if (touchedShape != null) {
                     touchedShape.move(touchX, touchY);
                 }
@@ -125,12 +123,11 @@ public class DrawingView extends View {
                     e.printStackTrace();
                 }
 
-                Log.d("move", "onTouchEvent: ");
                 invalidate();
                 break;
 
             case MotionEvent.ACTION_UP:
-                onCreateShape = null;
+                shapeOnCreating = null;
 
                 if (isSingleTouch) {
                     Log.i("ACTION_UP", "clicked");
