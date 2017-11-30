@@ -71,18 +71,19 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public void move(float touchX, float touchY) {
-//        float width = touchX - this.x;
-//        float height = touchY - this.y;
-//
-//        if (width > 0 && height > 0) {
-//            this.width = width;
-//            this.height = height;
-//        }
-        this.x = touchX;
-        this.y = touchY;
-
+    public void initialMove(float touchX, float touchY){
+        xCoordsOnTouch = touchX - x;
+        yCoordsOnTouch = touchY - y;
     }
+
+    @Override
+    public void move(float touchX, float touchY) {
+        this.x = touchX - xCoordsOnTouch;
+        this.y = touchY - yCoordsOnTouch;
+    }
+
+    @Override
+    public void finishMove(){}
 
     @Override
     public void drag(float touchX, float touchY) {

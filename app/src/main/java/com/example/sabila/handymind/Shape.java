@@ -15,6 +15,8 @@ import java.util.UUID;
 public abstract class Shape {
     private UUID ID;
     private ShapeState currentState;
+    protected float xCoordsOnTouch;
+    protected float yCoordsOnTouch;
 
     public Shape() {
         this.ID = UUID.randomUUID();
@@ -35,7 +37,11 @@ public abstract class Shape {
 
     public void draw(Canvas canvas) {}
 
+    public void initialMove(float x, float y){}
+
     public void move(float x, float y) {}
+
+    public void finishMove(){}
 
     public void drag(float x, float y) {}
 
