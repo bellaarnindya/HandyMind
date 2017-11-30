@@ -1,11 +1,15 @@
 package com.example.sabila.handymind;
 
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.example.sabila.handymind.buttons.CircleButton;
@@ -14,6 +18,7 @@ import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
 import com.example.sabila.handymind.buttons.RoundRectButton;
 import com.example.sabila.handymind.shapes.RoundRect;
+import com.example.sabila.handymind.buttons.TextButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private LineButton lineBtn;
     private RoundRectButton roundRectBtn;
     private OvalButton ovalBtn;
+    private TextButton textBtn;
+    private EditText inputText;
+    private AlertDialog dialog;
+    private String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +53,40 @@ public class MainActivity extends AppCompatActivity {
         lineBtn = (LineButton) findViewById(R.id.line_btn);
         roundRectBtn = (RoundRectButton) findViewById(R.id.roundrect_btn);
         ovalBtn= (OvalButton) findViewById(R.id.oval_btn);
+        textBtn = (TextButton) findViewById(R.id.text_btn);
 
         rectBtn.setOnClickListener(setShape);
         circleBtn.setOnClickListener(setShape);
         lineBtn.setOnClickListener(setShape);
         roundRectBtn.setOnClickListener(setShape);
         ovalBtn.setOnClickListener(setShape);
+        textBtn.setOnClickListener(setShape);
+    }
 
+    public void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Input Text");
+        builder.setMessage("Please fill this to input your message.");
+
+        inputText = new EditText(this);
+        builder.setView(inputText);
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                message = inputText.getText().toString();
+                drawingView.getMessage(message);
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        dialog = builder.create();
     }
 
     View.OnClickListener setShape = new View.OnClickListener() {
@@ -73,11 +109,14 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.oval_btn:
                     drawingView.setSelectedShape("oval");
                     break;
-
+                case R.id.text_btn:
+                    showDialog();
+                    dialog.show();
+                    break;
             }
         }
+        }
     };
-
 
 
 }

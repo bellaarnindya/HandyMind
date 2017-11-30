@@ -15,6 +15,7 @@ import com.example.sabila.handymind.shapes.Line;
 import com.example.sabila.handymind.shapes.Oval;
 import com.example.sabila.handymind.shapes.Rectangle;
 import com.example.sabila.handymind.shapes.RoundRect;
+import com.example.sabila.handymind.shapes.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class DrawingView extends View {
     private Paint drawPaint;
     private boolean isTouched = false;
     private static final int STROKE_SIZE = 7;
-    private String selectedShape;
+    private String selectedShape, textMessage;
     public Shape shape;
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
@@ -83,7 +84,10 @@ public class DrawingView extends View {
         return true;
     }
 
-
+    public void getMessage (String messageReceived) {
+        textMessage = messageReceived;
+        setSelectedShape("text");
+    }
 
     public void setSelectedShape(String selectedShape) {
         this.selectedShape = selectedShape;
@@ -94,12 +98,15 @@ public class DrawingView extends View {
             isTouched = true;
 
             if (selectedShape.equals("rectangle")) {
+                init();
                 shape = new Rectangle(x, y);
             }
             else if (selectedShape.equals("circle")) {
+                init();
                 shape = new Circle(x, y);
             }
             else if (selectedShape.equals("line")) {
+                init();
                 shape = new Line(x, y);
             }
             else if (selectedShape.equals("roundrect")) {
@@ -107,6 +114,13 @@ public class DrawingView extends View {
             }
             else if (selectedShape.equals("oval")) {
                 shape = new Oval(x, y);
+            }
+            else if (selectedShape.equals("text")) {
+                drawPaint.setColor(Color.BLACK);
+                drawPaint.setStyle(Paint.Style.FILL);
+                drawPaint.setTextAlign(Paint.Align.CENTER);
+                drawPaint.setTextSize(50);
+                shape = new Text(x, y, textMessage);
             }
         }
     }

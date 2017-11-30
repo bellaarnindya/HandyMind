@@ -12,47 +12,80 @@
         android:id="@+id/drawing_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="48dp"
         android:layout_weight="1" />
 
-    <com.example.sabila.handymind.buttons.RectButton
-        android:id="@+id/rect_btn"
-        android:layout_width="60dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="rect"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
-    <com.example.sabila.handymind.buttons.CircleButton
-        android:id="@+id/circle_btn"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="circle"
-        android:layout_toRightOf="@+id/rect_btn"
-        android:layout_alignParentBottom="true"/>
+        <com.example.sabila.handymind.buttons.RectButton
+            android:id="@+id/rect_btn"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="rect"
+            android:textColor="@android:color/white" />
 
-    <com.example.sabila.handymind.buttons.LineButton
-        android:id="@+id/line_btn"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:text="line"
-        android:layout_toRightOf="@+id/circle_btn"
-        android:layout_alignParentBottom="true"/>
+        <com.example.sabila.handymind.buttons.CircleButton
+            android:id="@+id/circle_btn"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/rect_btn"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="circle"
+            android:textColor="@android:color/white" />
 
-    <com.example.sabila.handymind.buttons.RoundRectButton
-        android:id="@+id/roundrect_btn"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:text="round rect"
-        android:layout_toRightOf="@+id/line_btn"
-        android:layout_alignParentBottom="true"/>
+        <com.example.sabila.handymind.buttons.LineButton
+            android:id="@+id/line_btn"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/circle_btn"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="line"
+            android:textColor="@android:color/white" />
 
-    <com.example.sabila.handymind.buttons.OvalButton
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/oval_btn"
-        android:text="oval"
-        android:layout_toRightOf="@id/roundrect_btn"
-        android:layout_alignParentBottom="true"/>
+        <com.example.sabila.handymind.buttons.RoundRectButton
+            android:id="@+id/roundrect_btn"
+            android:layout_width="90dp"
+            android:text="round rect"
+            android:layout_toRightOf="@+id/line_btn"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white" />
+
+        <com.example.sabila.handymind.buttons.OvalButton
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="oval"
+            android:id="@+id/oval_btn"
+            android:layout_toRightOf="@id/roundrect_btn"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white" />
+
+        <com.example.sabila.handymind.buttons.TextButton
+            android:id="@+id/text_btn"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/oval_btn"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="text"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>
