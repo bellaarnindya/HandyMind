@@ -49,6 +49,7 @@ public class Rectangle extends Shape {
         this.y = y;
     }
 
+
     public float getWidth() {
         return width;
     }
@@ -56,6 +57,7 @@ public class Rectangle extends Shape {
     public void setWidth(float width) {
         this.width = width;
     }
+
 
     public float getHeight() {
         return height;
@@ -66,6 +68,7 @@ public class Rectangle extends Shape {
     }
 
     @Override
+//<<<<<<< HEAD
     public void draw(Canvas canvas) {
         canvas.drawRect(x, y, width + x, height + y, drawPaint);
     }
@@ -123,4 +126,9 @@ public class Rectangle extends Shape {
 
     @Override
     public void setInactive() {drawPaint.setStrokeWidth(5); }
+//=======
+    public void draw(Canvas canvas, Paint paint) {
+        canvas.drawRect(x, y, x+width, y+height, paint);
+    }
+//>>>>>>> 9f14144b49bb69d52bc91b4a3a468715a26bdf63
 }
