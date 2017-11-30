@@ -46,6 +46,8 @@ public class DrawingView extends View {
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
+        selectedShape = "rectangle";
+
         init();
     }
 
