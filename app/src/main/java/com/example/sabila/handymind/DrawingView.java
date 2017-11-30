@@ -45,6 +45,7 @@ public class DrawingView extends View {
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+
         init();
     }
 
@@ -105,6 +106,7 @@ public class DrawingView extends View {
                 break;
 
             case MotionEvent.ACTION_MOVE:
+
                 Log.i("ACTION_MOVE", "move");
 
                 isSingleTouch = false;
