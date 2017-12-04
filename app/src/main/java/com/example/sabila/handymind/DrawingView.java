@@ -29,13 +29,23 @@ import static android.content.ContentValues.TAG;
 public class DrawingView extends View {
 
     private Paint drawPaint;
-    private boolean isTouched = false;
+
+    private List<Shape> shapes;
+    private Shape touchedShape = null;
+    private Shape shapeOnCreating = null;
+
+    private boolean isSingleTouch = false;
+
     private static final int STROKE_SIZE = 7;
     private String selectedShape, textMessage;
     public Shape shape;
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+
+        selectedShape = "rectangle";
+
+        shapes = new ArrayList<>();
 
         init();
     }
@@ -51,8 +61,9 @@ public class DrawingView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(Color.WHITE);
-        if (isTouched) {
-            shape.draw(canvas, drawPaint);
+
+        for (int i = 0; i < shapes.size(); i++) {
+            shapes.get(i).draw(canvas);
         }
     }
 
@@ -64,23 +75,72 @@ public class DrawingView extends View {
         Log.d(TAG, "onTouchEvent: "+event.getAction());
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                touchDown(touchX, touchY);
+                for (int i = 0; i < shapes.size(); i++) {
+                    if (shapes.get(i).isTouched(touchX, touchY)) {
+                        touchedShape = shapes.get(i);
+
+                        isSingleTouch = true;
+
+                        touchedShape.initialMove(touchX, touchY);
+
+                        Log.i("ACTION_DOWN", "get touched shape");
+                    }
+                }
+
+                if (touchedShape == null && !isSingleTouch) {
+                    Log.i("ACTION_DOWN", "if touched == null");
+                    Log.i("ACTION_DOWN", "  add shape");
+
+                    Shape newShape = createShape(touchX, touchY);
+                    shapes.add(newShape);
+                    shapeOnCreating = newShape;
+                }
+
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 invalidate();
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                Log.d("move", "onTouchEvent: ");
-                touchMove(event.getX(), event.getY());
+
+                Log.i("ACTION_MOVE", "move");
+
+                isSingleTouch = false;
+
+                if (shapeOnCreating != null) {
+                    shapeOnCreating.drag(touchX, touchY);
+                } else if (touchedShape != null) {
+                    touchedShape.move(touchX, touchY);
+                }
+
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 invalidate();
                 break;
 
             case MotionEvent.ACTION_UP:
+                shapeOnCreating = null;
+
+                if (isSingleTouch) {
+                    Log.i("ACTION_UP", "clicked");
+                    touchedShape.click();
+                    isSingleTouch = false;
+                } else {
+                    touchedShape = null;
+                }
+
                 invalidate();
                 break;
-
-            default:
-                return false;
         }
+
         return true;
     }
 
@@ -93,36 +153,36 @@ public class DrawingView extends View {
         this.selectedShape = selectedShape;
     }
 
-    private void touchDown (float x, float y) {
-        if (selectedShape != null) {
-            isTouched = true;
+    private Shape createShape(float x, float y) {
+        Shape newShape = null;
 
-            if (selectedShape.equals("rectangle")) {
-                init();
-                shape = new Rectangle(x, y);
-            }
-            else if (selectedShape.equals("circle")) {
-                init();
-                shape = new Circle(x, y);
-            }
-            else if (selectedShape.equals("line")) {
-                init();
-                shape = new Line(x, y);
-            }
-            else if (selectedShape.equals("roundrect")) {
-                shape = new RoundRect(x, y);
-            }
-            else if (selectedShape.equals("oval")) {
-                shape = new Oval(x, y);
-            }
-            else if (selectedShape.equals("text")) {
-                drawPaint.setColor(Color.BLACK);
-                drawPaint.setStyle(Paint.Style.FILL);
-                drawPaint.setTextAlign(Paint.Align.CENTER);
-                drawPaint.setTextSize(50);
-                shape = new Text(x, y, textMessage);
-            }
+        if (selectedShape.equals("rectangle")) {
+            init();
+            newShape = new Rectangle(x, y);
         }
+        else if (selectedShape.equals("circle")) {
+            init();
+            newShape = new Circle(x, y);
+        }
+        else if (selectedShape.equals("line")) {
+            init();
+            newShape = new Line(x, y);
+        }
+        else if (selectedShape.equals("roundrect")) {
+            newShape = new RoundRect(x, y);
+        }
+        else if (selectedShape.equals("oval")) {
+            newShape = new Oval(x, y);
+        }
+        else if (selectedShape.equals("text")) {
+            drawPaint.setColor(Color.BLACK);
+            drawPaint.setStyle(Paint.Style.FILL);
+            drawPaint.setTextAlign(Paint.Align.CENTER);
+            drawPaint.setTextSize(50);
+            newShape = new Text(x, y, textMessage);
+        }
+
+        return newShape;
     }
 
     private void touchMove (float x, float y) {
