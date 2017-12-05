@@ -145,6 +145,7 @@ public class DrawingView extends View {
     }
 
     public void getMessage (String messageReceived) {
+        Log.i("SET_MESSAGE", "" + messageReceived);
         textMessage = messageReceived;
         setSelectedShape("text");
     }
@@ -175,10 +176,6 @@ public class DrawingView extends View {
             newShape = new Oval(x, y);
         }
         else if (selectedShape.equals("text")) {
-            drawPaint.setColor(Color.BLACK);
-            drawPaint.setStyle(Paint.Style.FILL);
-            drawPaint.setTextAlign(Paint.Align.CENTER);
-            drawPaint.setTextSize(50);
             newShape = new Text(x, y, textMessage);
         }
 
