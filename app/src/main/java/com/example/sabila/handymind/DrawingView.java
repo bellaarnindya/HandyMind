@@ -169,6 +169,10 @@ public class DrawingView extends View {
             init();
             newShape = new Line(x, y);
         }
+        else if (selectedShape.equals("striped-line")) {
+            init();
+            newShape = new Line(x, y);
+        }
         else if (selectedShape.equals("roundrect")) {
             newShape = new RoundRect(x, y);
         }

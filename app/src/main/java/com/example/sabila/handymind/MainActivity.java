@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.sabila.handymind.buttons.CircleButton;
 import com.example.sabila.handymind.buttons.LineButton;
+import com.example.sabila.handymind.buttons.LineSButton;
 import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
 import com.example.sabila.handymind.buttons.RoundRectButton;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private RectButton rectBtn;
     private CircleButton circleBtn;
     private LineButton lineBtn;
+    private LineSButton lineSBtn;
     private RoundRectButton roundRectBtn;
     private OvalButton ovalBtn;
     private TextButton textBtn;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         rectBtn = (RectButton) findViewById(R.id.rect_btn);
         circleBtn = (CircleButton) findViewById(R.id.circle_btn);
         lineBtn = (LineButton) findViewById(R.id.line_btn);
+        lineSBtn = (LineSButton)  findViewById(R.id.line_s_btn);
         roundRectBtn = (RoundRectButton) findViewById(R.id.roundrect_btn);
         ovalBtn= (OvalButton) findViewById(R.id.oval_btn);
         textBtn = (TextButton) findViewById(R.id.text_btn);
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         rectBtn.setOnClickListener(setShape);
         circleBtn.setOnClickListener(setShape);
         lineBtn.setOnClickListener(setShape);
+        lineSBtn.setOnClickListener(setShape);
         roundRectBtn.setOnClickListener(setShape);
         ovalBtn.setOnClickListener(setShape);
         textBtn.setOnClickListener(setShape);
@@ -102,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.line_btn:
                     drawingView.setSelectedShape("line");
+                    break;
+                case R.id.line_s_btn:
+                    drawingView.setSelectedShape("striped-line");
                     break;
                 case R.id.roundrect_btn:
                     drawingView.setSelectedShape("roundrect");
