@@ -6,6 +6,8 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
 
+import com.example.sabila.handymind.LineBodyBehavior;
+import com.example.sabila.handymind.LineHeadBehavior;
 import com.example.sabila.handymind.Shape;
 
 /**
@@ -19,6 +21,8 @@ public class Line extends Shape {
     private float xEnd;
     private float yEnd;
     private float length;
+    private LineBodyBehavior bodyBehavior;
+    private LineHeadBehavior headBehavior;
 
     private Paint drawPaint;
 
