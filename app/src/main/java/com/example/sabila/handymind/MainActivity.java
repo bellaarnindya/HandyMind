@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         rectBtn = (RectButton) findViewById(R.id.rect_btn);
         circleBtn = (CircleButton) findViewById(R.id.circle_btn);
         lineBtn = (LineButton) findViewById(R.id.line_btn);
-        lineSBtn = (LineSButton)  findViewById(R.id.line_s_btn);
+        lineSBtn = (LineSButton) findViewById(R.id.line_s_btn);
         roundRectBtn = (RoundRectButton) findViewById(R.id.roundrect_btn);
         ovalBtn= (OvalButton) findViewById(R.id.oval_btn);
         textBtn = (TextButton) findViewById(R.id.text_btn);

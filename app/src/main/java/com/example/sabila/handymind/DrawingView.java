@@ -39,6 +39,7 @@ public class DrawingView extends View {
     private static final int STROKE_SIZE = 7;
     private String selectedShape, textMessage;
     public Shape shape;
+    private static boolean stripedLine = false;
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -94,6 +95,10 @@ public class DrawingView extends View {
                     Shape newShape = createShape(touchX, touchY);
                     shapes.add(newShape);
                     shapeOnCreating = newShape;
+                    if(newShape instanceof Line && stripedLine) {
+                        Log.d("DEBUG", "masuk striped line");
+                        ((Line) shapeOnCreating).setStripedLine();
+                    }
                 }
 
                 try {
@@ -172,6 +177,8 @@ public class DrawingView extends View {
         else if (selectedShape.equals("striped-line")) {
             init();
             newShape = new Line(x, y);
+            this.stripedLine = true;
+            Log.d("DEBUG", "masuk striped line");
         }
         else if (selectedShape.equals("roundrect")) {
             newShape = new RoundRect(x, y);
@@ -205,6 +212,13 @@ public class DrawingView extends View {
                }
            }
            else if (shape instanceof Line) {
+               if(stripedLine) {
+                   Log.d("DEBUG", "masuk striped line");
+                   ((Line) shape).setStripedLine();
+               }
+               else{
+                   Log.d("DEBUG", "striped line ga ke set");
+               }
                ((Line) shape).setxEnd(x);
                ((Line) shape).setyEnd(y);
                float length = distance(((Line) shape).getxStart(), ((Line) shape).getyStart(), x, y);

@@ -52,7 +52,7 @@
             android:text="line"
             android:textColor="@android:color/white" />
 
-        <com.example.sabila.handymind.buttons.LineButton
+        <com.example.sabila.handymind.buttons.LineSButton
             android:id="@+id/line_s_btn"
             android:layout_width="60dp"
             android:layout_height="wrap_content"

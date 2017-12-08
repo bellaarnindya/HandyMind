@@ -12,6 +12,6 @@ import com.example.sabila.handymind.LineHeadBehavior;
 public class LineWithoutHead extends LineHeadBehavior {
     @Override
     public void drawHead(Canvas canvas, Paint paint, float xStart, float yStart, float xEnd, float yEnd) {
-        
+
     }
 }

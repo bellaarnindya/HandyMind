@@ -9,6 +9,9 @@ import android.util.Log;
 import com.example.sabila.handymind.LineBodyBehavior;
 import com.example.sabila.handymind.LineHeadBehavior;
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
+import com.example.sabila.handymind.lineBehaviors.LineStripedBody;
+import com.example.sabila.handymind.lineBehaviors.LineWithoutHead;
 
 /**
  * Created by Sabila on 11/28/2017.
@@ -31,6 +34,8 @@ public class Line extends Shape {
         this.yStart = y;
         this.xEnd = x;
         this.yEnd = y;
+        this.bodyBehavior = new LineStraightBody();
+        this.headBehavior = new LineWithoutHead();
 
         drawPaint = new Paint();
         drawPaint.setColor(Color.BLACK);
@@ -80,6 +85,8 @@ public class Line extends Shape {
 
     @Override
     public void draw(Canvas canvas, Paint paint) {
+        this.bodyBehavior.drawBody(canvas, paint, xStart, yStart, xEnd, yEnd);
+        this.headBehavior.drawHead(canvas, paint, xStart, yStart, xEnd, yEnd);
         canvas.drawLine(xStart, yStart, xEnd, yEnd, paint);
     }
 
@@ -124,4 +131,8 @@ public class Line extends Shape {
 
     @Override
     public void setInactive() {drawPaint.setStrokeWidth(5); }
+
+    public void setStripedLine() {
+        this.bodyBehavior = new LineStripedBody();
+    }
 }
