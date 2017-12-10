@@ -9,6 +9,7 @@ import com.example.sabila.handymind.LineHeadBehavior;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
 import com.example.sabila.handymind.lineBehaviors.LineDashedBody;
+import com.example.sabila.handymind.lineBehaviors.LineWithArrowHead;
 import com.example.sabila.handymind.lineBehaviors.LineWithoutHead;
 
 /**
@@ -131,5 +132,9 @@ public class Line extends Shape {
 
     public void setDashedLine() {
         this.bodyBehavior = new LineDashedBody();
+    }
+
+    public void setArrowHead() {
+        this.headBehavior = new LineWithArrowHead();
     }
 }

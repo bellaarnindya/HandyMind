@@ -98,6 +98,7 @@ public class DrawingView extends View {
                     if(newShape instanceof Line && dashedLine) {
                         Log.d("DEBUG", "masuk dashed line");
                         ((Line) shapeOnCreating).setDashedLine();
+                        ((Line) shapeOnCreating).setArrowHead();
                     }
                 }
 
