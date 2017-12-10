@@ -39,6 +39,7 @@ public class DrawingView extends View {
     private static final int STROKE_SIZE = 7;
     private String selectedShape, textMessage;
     public Shape shape;
+    private static boolean dashedLine = false;
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -94,6 +95,10 @@ public class DrawingView extends View {
                     Shape newShape = createShape(touchX, touchY);
                     shapes.add(newShape);
                     shapeOnCreating = newShape;
+                    if(newShape instanceof Line && dashedLine) {
+                        Log.d("DEBUG", "masuk dashed line");
+                        ((Line) shapeOnCreating).setDashedLine();
+                    }
                 }
 
                 try {
@@ -168,6 +173,12 @@ public class DrawingView extends View {
         else if (selectedShape.equals("line")) {
             init();
             newShape = new Line(x, y);
+            this.dashedLine = false;
+        }
+        else if (selectedShape.equals("dashed-line")) {
+            init();
+            newShape = new Line(x, y);
+            this.dashedLine = true;
         }
         else if (selectedShape.equals("roundrect")) {
             newShape = new RoundRect(x, y);
