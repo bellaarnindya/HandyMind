@@ -3,19 +3,14 @@ package com.example.sabila.handymind;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.sabila.handymind.shapes.Circle;
+import com.example.sabila.handymind.shapes.ActiveState;
 import com.example.sabila.handymind.shapes.Line;
-import com.example.sabila.handymind.shapes.Oval;
-import com.example.sabila.handymind.shapes.Rectangle;
-import com.example.sabila.handymind.shapes.RoundRect;
-import com.example.sabila.handymind.shapes.Text;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.TextTool;
 
@@ -72,13 +67,14 @@ public class DrawingView extends View {
                     if (shapes.get(i).isTouched(touchX, touchY)) {
                         touchedShape = shapes.get(i);
 
-                        touchedShape.click();
-
                         isSingleTouch = true;
 
                         touchedShape.initialMove(touchX, touchY);
 
                         Log.i("ACTION_DOWN", "get touched shape");
+                    }
+                    else {
+                        shapes.get(i).setInactive();
                     }
                 }
 
@@ -107,7 +103,7 @@ public class DrawingView extends View {
 
                 if (shapeOnCreating != null) {
                     tool.drag(touchX, touchY);
-                } else if (touchedShape != null) {
+                } else if (touchedShape != null && touchedShape.currentState instanceof ActiveState ) {
                     touchedShape.move(touchX, touchY);
                 }
 
@@ -119,7 +115,7 @@ public class DrawingView extends View {
 
                 if (isSingleTouch) {
                     Log.i("ACTION_UP", "clicked");
-                    //touchedShape.click();
+                    touchedShape.click();
                     isSingleTouch = false;
                 } else {
                     touchedShape = null;
