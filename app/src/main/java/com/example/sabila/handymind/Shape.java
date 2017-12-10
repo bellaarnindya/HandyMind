@@ -1,11 +1,15 @@
 package com.example.sabila.handymind;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.sabila.handymind.shapes.CircleResize;
 import com.example.sabila.handymind.shapes.InactiveState;
 import com.example.sabila.handymind.shapes.ShapeState;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -18,9 +22,20 @@ public abstract class Shape {
     protected float xCoordsOnTouch;
     protected float yCoordsOnTouch;
 
+    protected List<CircleResize> resizingCircle;
+    protected boolean onResize;
+
+    protected Paint onResizePaint;
+
     public Shape() {
         this.ID = UUID.randomUUID();
         currentState = new InactiveState();
+
+        resizingCircle = new ArrayList<>();
+
+        onResizePaint = new Paint();
+        onResizePaint.setColor(Color.BLACK);
+        onResizePaint.setStyle(Paint.Style.FILL);
     }
 
     public UUID getID() {

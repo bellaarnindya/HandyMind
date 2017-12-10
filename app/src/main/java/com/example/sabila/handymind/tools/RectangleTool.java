@@ -29,5 +29,7 @@ public class RectangleTool extends Tool {
             rectangle.setWidth(width);
             rectangle.setHeight(height);
         }
+        
+        rectangle.updatePoint(x, y);
     }
 }
