@@ -87,16 +87,6 @@ public class Rectangle extends Shape {
     @Override
     public void finishMove(){}
 
-    @Override
-    public void drag(float touchX, float touchY) {
-        float width = touchX - this.x;
-        float height = touchY - this.y;
-
-        if (width > 0 && height > 0) {
-            this.width = width;
-            this.height = height;
-        }
-    }
 
     @Override
     public void resize(float touchX, float touchY) {
@@ -120,11 +110,15 @@ public class Rectangle extends Shape {
 
     @Override
     public void setActive() {
-        drawPaint.setStrokeWidth(7);
+        drawPaint.setStrokeWidth(5);
+        drawPaint.setColor(Color.BLUE);
     }
 
     @Override
-    public void setInactive() {drawPaint.setStrokeWidth(5); }
+    public void setInactive() {
+        drawPaint.setStrokeWidth(5);
+        drawPaint.setColor(Color.BLACK);
+    }
     public void draw(Canvas canvas, Paint paint) {
         canvas.drawRect(x, y, x+width, y+height, paint);
     }

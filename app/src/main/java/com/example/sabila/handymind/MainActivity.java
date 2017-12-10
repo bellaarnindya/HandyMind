@@ -19,6 +19,8 @@ import com.example.sabila.handymind.buttons.RectButton;
 import com.example.sabila.handymind.buttons.RoundRectButton;
 import com.example.sabila.handymind.shapes.RoundRect;
 import com.example.sabila.handymind.buttons.TextButton;
+import com.example.sabila.handymind.tools.CircleTool;
+import com.example.sabila.handymind.tools.RectangleTool;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -95,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.rect_btn:
-                    drawingView.setSelectedShape("rectangle");
+                    drawingView.setActiveTool(new RectangleTool());
                     break;
                 case R.id.circle_btn:
-                    drawingView.setSelectedShape("circle");
+                    drawingView.setActiveTool(new CircleTool());
                     break;
                 case R.id.line_btn:
                     drawingView.setSelectedShape("line");
