@@ -89,10 +89,6 @@ public class DrawingView extends View {
                     Shape newShape = tool.createShape(touchX, touchY);
                     shapes.add(newShape);
                     shapeOnCreating = newShape;
-                    if(newShape instanceof Line && dashedLine) {
-                        Log.d("DEBUG", "masuk dashed line");
-                        ((Line) shapeOnCreating).setDashedLine();
-                    }
                 }
                 invalidate();
                 break;
