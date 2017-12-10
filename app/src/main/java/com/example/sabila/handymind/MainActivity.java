@@ -21,6 +21,7 @@ import com.example.sabila.handymind.shapes.RoundRect;
 import com.example.sabila.handymind.buttons.TextButton;
 import com.example.sabila.handymind.tools.CircleTool;
 import com.example.sabila.handymind.tools.LineTool;
+import com.example.sabila.handymind.tools.OvalTool;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.RoundRectTool;
 
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     drawingView.setActiveTool(new RoundRectTool());
                     break;
                 case R.id.oval_btn:
-                    drawingView.setSelectedShape("oval");
+                   drawingView.setActiveTool(new OvalTool());
                     break;
                 case R.id.text_btn:
                     showDialog();
