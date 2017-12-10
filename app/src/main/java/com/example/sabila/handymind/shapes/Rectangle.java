@@ -116,7 +116,6 @@ public class Rectangle extends Shape {
 
     @Override
     public boolean isTouched(float touchX, float touchY) {
-        Log.i("RECTANGLE", touchX + " " + touchY);
         return (touchX > this.x &&
                 touchX < this.x + this.width &&
                 touchY > this.y &&
@@ -144,5 +143,19 @@ public class Rectangle extends Shape {
     public void updatePoint(float touchX, float touchY) {
         resizingCircle.get(0).updateCoordiate(getX(), getY());
         resizingCircle.get(1).updateCoordiate(getX() + width, getY() + height);
+    }
+
+    @Override
+    public boolean isResizeTouched(float touchX, float touchY) {
+        boolean flag = false;
+
+        for (int i = 0; i < resizingCircle.size(); i++) {
+            if (resizingCircle.get(i).isTouched(touchX, touchY)) {
+                flag = true;
+                break;
+            }
+        }
+
+        return flag;
     }
 }

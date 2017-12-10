@@ -13,6 +13,5 @@ public class ActiveState implements ShapeState {
     public void click(Shape wrapper) {
         wrapper.setInactive();
         wrapper.setState(new InactiveState());
-        Log.i("SET_STATE", "Change to Active State");
     }
 }

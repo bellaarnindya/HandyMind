@@ -121,7 +121,6 @@ public class Line extends Shape {
         float y = m * touchX + c;
 
         if (Math.abs(touchY - y) < EPSILON) {
-            Log.d("LINE", "isTouched");
             return true;
         }
 

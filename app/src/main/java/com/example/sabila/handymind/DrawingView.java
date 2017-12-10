@@ -3,26 +3,19 @@ package com.example.sabila.handymind;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.sabila.handymind.shapes.Circle;
+import com.example.sabila.handymind.shapes.ActiveState;
 import com.example.sabila.handymind.shapes.Line;
-import com.example.sabila.handymind.shapes.Oval;
-import com.example.sabila.handymind.shapes.Rectangle;
-import com.example.sabila.handymind.shapes.RoundRect;
-import com.example.sabila.handymind.shapes.Text;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.TextTool;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Sabila on 11/15/2017.
@@ -36,6 +29,8 @@ public class DrawingView extends View {
     private Tool tool;
 
     private boolean isSingleTouch = false;
+    private boolean isResizing = false;
+    private boolean isMoving = false;
 
     private String textMessage;
     public Shape shape;
@@ -65,32 +60,46 @@ public class DrawingView extends View {
         float touchX = event.getX();
         float touchY = event.getY();
 
-        Log.d(TAG, "onTouchEvent: "+event.getAction());
+        boolean touchOnShape = false;
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                for (int i = 0; i < shapes.size(); i++) {
-                    if (shapes.get(i).isTouched(touchX, touchY)) {
-                        touchedShape = shapes.get(i);
+                if (touchedShape != null &&
+                        touchedShape.isResizeTouched(touchX, touchY)) {
+//                    Log.i("DrawingView", "isResizing = true");
+                    isResizing = true;
+                } else {
+                    for (int i = 0; i < shapes.size(); i++) {
+                        if (shapes.get(i).isTouched(touchX, touchY)) {
+                            touchedShape = shapes.get(i);
+                            touchedShape.setActive();
 
-                        touchedShape.click();
+                            touchOnShape = true;
 
-                        isSingleTouch = true;
+                            isSingleTouch = true;
+                            isMoving = true;
 
-                        touchedShape.initialMove(touchX, touchY);
+//                            Log.i("DrawingView", "touched shape " + i);
+//                            Log.i("DrawingView", "Set Active shape " + i);
 
-                        Log.i("ACTION_DOWN", "get touched shape");
+                            touchedShape.initialMove(touchX, touchY);
+                        } else {
+//                            Log.i("DrawingView", "Set Inactive shape " + i);
+                            shapes.get(i).setInactive();
+                        }
                     }
                 }
 
-                if (touchedShape == null && !isSingleTouch) {
-                    Log.i("ACTION_DOWN", "if touched == null");
-                    Log.i("ACTION_DOWN", "  add shape");
+                if (!touchOnShape && !isResizing) {
+//                    Log.i("DrawingView", "touchedShape = null");
+                    touchedShape = null;
+                }
 
+                if (touchedShape == null && !isSingleTouch) {
                     Shape newShape = tool.createShape(touchX, touchY);
                     shapes.add(newShape);
                     shapeOnCreating = newShape;
                     if(newShape instanceof Line && dashedLine) {
-                        Log.d("DEBUG", "masuk dashed line");
                         ((Line) shapeOnCreating).setDashedLine();
                     }
                 }
@@ -100,14 +109,14 @@ public class DrawingView extends View {
                 break;
 
             case MotionEvent.ACTION_MOVE:
-
-                Log.i("ACTION_MOVE", "move");
-
+//                Log.i("MOVE", "isMoving");
                 isSingleTouch = false;
 
-                if (shapeOnCreating != null) {
+                if (isResizing) {
+                    touchedShape.resize(touchX, touchY);
+                } else if (shapeOnCreating != null) {
                     tool.drag(touchX, touchY);
-                } else if (touchedShape != null) {
+                } else if (isMoving) {
                     touchedShape.move(touchX, touchY);
                 }
 
@@ -118,12 +127,10 @@ public class DrawingView extends View {
                 shapeOnCreating = null;
 
                 if (isSingleTouch) {
-                    Log.i("ACTION_UP", "clicked");
-                    //touchedShape.click();
                     isSingleTouch = false;
-                } else {
-                    touchedShape = null;
                 }
+
+                isResizing = false;
 
                 invalidate();
                 break;
@@ -133,7 +140,6 @@ public class DrawingView extends View {
     }
 
     public void setMessage (String messageReceived) {
-        Log.i("SET_MESSAGE", "" + messageReceived);
         textMessage = messageReceived;
         ((TextTool) tool).setMessage(textMessage);
     }
