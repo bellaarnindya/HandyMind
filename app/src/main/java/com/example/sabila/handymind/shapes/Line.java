@@ -76,11 +76,6 @@ public class Line extends Shape {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawLine(xStart, yStart, xEnd, yEnd, paint);
-    }
-
-    @Override
     public void draw(Canvas canvas) {
         canvas.drawLine(xStart, yStart, xEnd, yEnd, drawPaint);
     }
@@ -103,12 +98,6 @@ public class Line extends Shape {
 
     @Override
     public void finishMove(){}
-
-    @Override
-    public void drag(float touchX, float touchY) {
-        this.setxEnd(touchX);
-        this.setyEnd(touchY);
-    }
 
     @Override
     public void resize(float touchX, float touchY) {

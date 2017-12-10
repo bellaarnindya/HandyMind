@@ -57,10 +57,6 @@ public class Circle extends Shape {
         canvas.drawCircle(cx, cy, radius, drawPaint);
     }
 
-    @Override
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawCircle(cx, cy, radius, paint);
-    }
 
     @Override
     public void initialMove(float touchX, float touchY){

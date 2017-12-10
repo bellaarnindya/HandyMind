@@ -119,7 +119,5 @@ public class Rectangle extends Shape {
         drawPaint.setStrokeWidth(5);
         drawPaint.setColor(Color.BLACK);
     }
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawRect(x, y, x+width, y+height, paint);
-    }
+
 }

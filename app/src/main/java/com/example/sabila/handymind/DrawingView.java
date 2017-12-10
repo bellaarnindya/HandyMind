@@ -16,6 +16,7 @@ import com.example.sabila.handymind.shapes.Oval;
 import com.example.sabila.handymind.shapes.Rectangle;
 import com.example.sabila.handymind.shapes.RoundRect;
 import com.example.sabila.handymind.shapes.Text;
+import com.example.sabila.handymind.tools.TextTool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +85,7 @@ public class DrawingView extends View {
                     Log.i("ACTION_DOWN", "if touched == null");
                     Log.i("ACTION_DOWN", "  add shape");
 
-                    Shape newShape = this.tool.createShape(touchX, touchY);
+                    Shape newShape = tool.createShape(touchX, touchY);
                     shapes.add(newShape);
                     shapeOnCreating = newShape;
                 }
@@ -100,7 +101,7 @@ public class DrawingView extends View {
                 isSingleTouch = false;
 
                 if (shapeOnCreating != null) {
-                    shapeOnCreating.drag(touchX, touchY);
+                    tool.drag(touchX, touchY);
                 } else if (touchedShape != null) {
                     touchedShape.move(touchX, touchY);
                 }
@@ -126,10 +127,10 @@ public class DrawingView extends View {
         return true;
     }
 
-    public void getMessage (String messageReceived) {
+    public void setMessage (String messageReceived) {
         Log.i("SET_MESSAGE", "" + messageReceived);
         textMessage = messageReceived;
-        setSelectedShape("text");
+        ((TextTool) tool).setMessage(textMessage);
     }
 
     public void setSelectedShape(String selectedShape) {

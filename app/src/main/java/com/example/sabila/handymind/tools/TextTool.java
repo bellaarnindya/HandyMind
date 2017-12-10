@@ -21,8 +21,7 @@ public class TextTool extends Tool {
 
     @Override
     public void drag(float x, float y) {
-        text.setX(x);
-        text.setY(y);
+
     }
 
     public void setMessage(String message) {

@@ -43,8 +43,6 @@ public abstract class Shape {
 
     public void finishMove(){}
 
-    public void drag(float x, float y) {}
-
     public void resize(float x, float y) {}
 
     public void setActive() {}
@@ -52,5 +50,4 @@ public abstract class Shape {
 
     public boolean isTouched(float touchX, float touchY) { return false; }
 
-    public abstract void draw(Canvas canvas, Paint paint);
 }

@@ -5,6 +5,7 @@ package com.example.sabila.handymind;
  */
 
 public abstract class Tool {
+
     public abstract Shape createShape(float x, float y);
     public abstract void drag(float x, float y);
 }
