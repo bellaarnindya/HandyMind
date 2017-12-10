@@ -7,6 +7,9 @@ import android.graphics.Paint;
 import com.example.sabila.handymind.LineBodyBehavior;
 import com.example.sabila.handymind.LineHeadBehavior;
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.ShapeObservable;
+import com.example.sabila.handymind.ShapeObserver;
+import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
 import com.example.sabila.handymind.lineBehaviors.LineDashedBody;
 import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
 import com.example.sabila.handymind.lineBehaviors.LineWithArrowHead;
@@ -16,7 +19,7 @@ import com.example.sabila.handymind.lineBehaviors.LineWithoutHead;
  * Created by Sabila on 11/28/2017.
  */
 
-public class Line extends Shape {
+public class Line extends ShapeObserver {
 
     private float xStart;
     private float yStart;
@@ -147,5 +150,11 @@ public class Line extends Shape {
 
     public void setArrowHead() {
         this.headBehavior = new LineWithArrowHead();
+    }
+
+    @Override
+    public void update(float touchX, float touchY) {
+        setxEnd(touchX);
+        setyEnd(touchY);
     }
 }

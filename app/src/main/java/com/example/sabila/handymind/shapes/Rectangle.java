@@ -5,16 +5,24 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.ShapeObservable;
+import com.example.sabila.handymind.ShapeObserver;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observer;
 
 /**
  * Created by Sabila on 11/20/2017.
  */
 
-public class Rectangle extends Shape {
+public class Rectangle extends ShapeObservable {
     private float x;
     private float y;
     private float width;
     private float height;
+
+    private ArrayList<ShapeObserver> observers;
 
     private Paint drawPaint;
 
@@ -94,7 +102,8 @@ public class Rectangle extends Shape {
         this.x = touchX - xCoordsOnTouch;
         this.y = touchY - yCoordsOnTouch;
 
-        this.updatePoint();
+        this.updatePoint(touchX, touchY);
+        notifyAllObservers(touchX, touchY);
     }
 
     @Override
@@ -108,6 +117,13 @@ public class Rectangle extends Shape {
     public float getRight() { return this.x + this.width; }
     @Override
     public float getLeft() { return this.x; }
+
+        if (width > 0 && height > 0) {
+            this.width = width;
+            this.height = height;
+        }
+
+        this.updatePoint(touchX, touchY);
 
     @Override
     public void setRight(float x) { this.width = x - this.x; }
@@ -145,5 +161,28 @@ public class Rectangle extends Shape {
         drawPaint.setStrokeWidth(5);
         onResize = false;
         this.setState(new InactiveState());
+    }
+
+    private void drawResizingCircles(Canvas canvas) {
+        for (int i = 0; i < resizingCircle.size(); i++) {
+            resizingCircle.get(i).draw(canvas);
+        }
+    }
+
+    public void updatePoint(float touchX, float touchY) {
+        resizingCircle.get(0).updateCoordiate(getX(), getY());
+        resizingCircle.get(1).updateCoordiate(getX() + width, getY() + height);
+    }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers(float touchX, float touchY) {
+        for (ShapeObserver observer : observers) {
+            observer.update(touchX, touchY);
+        }
     }
 }

@@ -19,8 +19,8 @@ import java.util.UUID;
  */
 
 public abstract class Shape {
-    private UUID ID;
-    public ShapeState currentState;
+    protected UUID ID;
+    protected ShapeState currentState;
     protected float xCoordsOnTouch;
     protected float yCoordsOnTouch;
 
