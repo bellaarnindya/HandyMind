@@ -9,17 +9,17 @@ import com.example.sabila.handymind.Button;
  * Created by nafiar on 08/12/2017.
  */
 
-public class LineSButton extends Button{
+public class DashedLineButton extends Button{
 
-    public LineSButton(Context context) {
+    public DashedLineButton(Context context) {
         super(context);
     }
 
-    public LineSButton(Context context, AttributeSet attrs) {
+    public DashedLineButton(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public LineSButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DashedLineButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 }

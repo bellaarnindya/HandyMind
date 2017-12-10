@@ -52,15 +52,15 @@
             android:text="line"
             android:textColor="@android:color/white" />
 
-        <com.example.sabila.handymind.buttons.LineSButton
-            android:id="@+id/line_s_btn"
+        <com.example.sabila.handymind.buttons.DashedLineButton
+            android:id="@+id/dashed_line_btn"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/line_btn"
             android:layout_weight="1"
             android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="line S."
+            android:text="D. Line"
             android:textColor="@android:color/white" />
 
         <com.example.sabila.handymind.buttons.RoundRectButton

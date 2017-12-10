@@ -3,14 +3,12 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
-import android.util.Log;
 
 import com.example.sabila.handymind.LineBodyBehavior;
 import com.example.sabila.handymind.LineHeadBehavior;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
-import com.example.sabila.handymind.lineBehaviors.LineStripedBody;
+import com.example.sabila.handymind.lineBehaviors.LineDashedBody;
 import com.example.sabila.handymind.lineBehaviors.LineWithoutHead;
 
 /**
@@ -85,14 +83,13 @@ public class Line extends Shape {
 
     @Override
     public void draw(Canvas canvas, Paint paint) {
-        this.bodyBehavior.drawBody(canvas, paint, xStart, yStart, xEnd, yEnd);
-        this.headBehavior.drawHead(canvas, paint, xStart, yStart, xEnd, yEnd);
         canvas.drawLine(xStart, yStart, xEnd, yEnd, paint);
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawLine(xStart, yStart, xEnd, yEnd, drawPaint);
+        this.bodyBehavior.drawBody(canvas, drawPaint, xStart, yStart, xEnd, yEnd);
+        this.headBehavior.drawHead(canvas, drawPaint, xStart, yStart, xEnd, yEnd);
     }
 
     @Override
@@ -132,7 +129,7 @@ public class Line extends Shape {
     @Override
     public void setInactive() {drawPaint.setStrokeWidth(5); }
 
-    public void setStripedLine() {
-        this.bodyBehavior = new LineStripedBody();
+    public void setDashedLine() {
+        this.bodyBehavior = new LineDashedBody();
     }
 }

@@ -9,16 +9,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 import com.example.sabila.handymind.buttons.CircleButton;
 import com.example.sabila.handymind.buttons.LineButton;
-import com.example.sabila.handymind.buttons.LineSButton;
+import com.example.sabila.handymind.buttons.DashedLineButton;
 import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
 import com.example.sabila.handymind.buttons.RoundRectButton;
-import com.example.sabila.handymind.shapes.RoundRect;
 import com.example.sabila.handymind.buttons.TextButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private RectButton rectBtn;
     private CircleButton circleBtn;
     private LineButton lineBtn;
-    private LineSButton lineSBtn;
+    private DashedLineButton dashedLineBtn;
     private RoundRectButton roundRectBtn;
     private OvalButton ovalBtn;
     private TextButton textBtn;
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         rectBtn = (RectButton) findViewById(R.id.rect_btn);
         circleBtn = (CircleButton) findViewById(R.id.circle_btn);
         lineBtn = (LineButton) findViewById(R.id.line_btn);
-        lineSBtn = (LineSButton) findViewById(R.id.line_s_btn);
+        dashedLineBtn = (DashedLineButton) findViewById(R.id.dashed_line_btn);
         roundRectBtn = (RoundRectButton) findViewById(R.id.roundrect_btn);
         ovalBtn= (OvalButton) findViewById(R.id.oval_btn);
         textBtn = (TextButton) findViewById(R.id.text_btn);
@@ -61,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         rectBtn.setOnClickListener(setShape);
         circleBtn.setOnClickListener(setShape);
         lineBtn.setOnClickListener(setShape);
-        lineSBtn.setOnClickListener(setShape);
+        dashedLineBtn.setOnClickListener(setShape);
         roundRectBtn.setOnClickListener(setShape);
         ovalBtn.setOnClickListener(setShape);
         textBtn.setOnClickListener(setShape);
@@ -107,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.line_btn:
                     drawingView.setSelectedShape("line");
                     break;
-                case R.id.line_s_btn:
-                    drawingView.setSelectedShape("striped-line");
+                case R.id.dashed_line_btn:
+                    drawingView.setSelectedShape("dashed-line");
                     break;
                 case R.id.roundrect_btn:
                     drawingView.setSelectedShape("roundrect");
