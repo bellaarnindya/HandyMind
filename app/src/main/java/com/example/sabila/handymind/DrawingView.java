@@ -36,7 +36,6 @@ public class DrawingView extends View {
 
     private boolean isSingleTouch = false;
 
-    private static final int STROKE_SIZE = 7;
     private String selectedShape, textMessage;
     public Shape shape;
 
@@ -46,16 +45,8 @@ public class DrawingView extends View {
         selectedShape = "rectangle";
 
         shapes = new ArrayList<>();
-
-        init();
     }
 
-    private void init() {
-        drawPaint = new Paint();
-        drawPaint.setColor(Color.BLACK);
-        drawPaint.setStyle(Paint.Style.STROKE);
-        drawPaint.setStrokeWidth(STROKE_SIZE);
-    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -96,11 +87,6 @@ public class DrawingView extends View {
                     shapeOnCreating = newShape;
                 }
 
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
 
                 invalidate();
                 break;
@@ -115,12 +101,6 @@ public class DrawingView extends View {
                     shapeOnCreating.drag(touchX, touchY);
                 } else if (touchedShape != null) {
                     touchedShape.move(touchX, touchY);
-                }
-
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
 
                 invalidate();
@@ -158,15 +138,12 @@ public class DrawingView extends View {
         Shape newShape = null;
 
         if (selectedShape.equals("rectangle")) {
-            init();
             newShape = new Rectangle(x, y);
         }
         else if (selectedShape.equals("circle")) {
-            init();
             newShape = new Circle(x, y);
         }
         else if (selectedShape.equals("line")) {
-            init();
             newShape = new Line(x, y);
         }
         else if (selectedShape.equals("roundrect")) {
@@ -181,57 +158,4 @@ public class DrawingView extends View {
 
         return newShape;
     }
-
-    private void touchMove (float x, float y) {
-        if (shape != null) {
-           if (shape instanceof Rectangle) {
-               float width = x - ((Rectangle) shape).getX();
-               float height = y - ((Rectangle) shape).getY();
-
-               if (width > 0 && height > 0) {
-                   ((Rectangle) shape).setWidth(width);
-                   ((Rectangle) shape).setHeight(height);
-               }
-           }
-           else if (shape instanceof Circle) {
-               float radius = distance(((Circle) shape).getCx(), ((Circle) shape).getCy(), x, y);
-
-               if (radius > 0) {
-                   ((Circle) shape).setRadius(radius);
-               }
-           }
-           else if (shape instanceof Line) {
-               ((Line) shape).setxEnd(x);
-               ((Line) shape).setyEnd(y);
-               float length = distance(((Line) shape).getxStart(), ((Line) shape).getyStart(), x, y);
-
-               if (length > 0) {
-                   ((Line) shape).setLength(length);
-               }
-           }
-           else if (shape instanceof RoundRect) {
-               float width = x - ((RoundRect) shape).getX();
-               float height = y - ((RoundRect) shape).getY();
-
-
-               if (width > 0 && height > 0) {
-                   ((RoundRect) shape).setWidth(width);
-                   ((RoundRect) shape).setHeight(height);
-               }
-           }
-           else if (shape instanceof Oval) {
-               ((Oval) shape).setRight(x);
-               ((Oval) shape).setBottom(y);
-           }
-        }
-    }
-
-    private float distance (float x1, float y1, float x2, float y2) {
-        double x = Double.parseDouble(Float.toString(x1));
-        double y = Double.parseDouble(Float.toString(y1));
-        double a = Double.parseDouble(Float.toString(x2));
-        double b = Double.parseDouble(Float.toString(y2));
-        return (float) Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
-    }
-
 }
