@@ -30,13 +30,13 @@ public class Line extends Shape {
 
     private Paint drawPaint;
 
-    public Line(float x, float y) {
+    public Line(float x, float y, LineBodyBehavior bodyBehavior, LineHeadBehavior headBehavior) {
         this.xStart = x;
         this.yStart = y;
         this.xEnd = x;
         this.yEnd = y;
-        this.bodyBehavior = new LineStraightBody();
-        this.headBehavior = new LineWithoutHead();
+        this.bodyBehavior = bodyBehavior;
+        this.headBehavior = headBehavior;
 
         drawPaint = new Paint();
         drawPaint.setColor(Color.BLACK);

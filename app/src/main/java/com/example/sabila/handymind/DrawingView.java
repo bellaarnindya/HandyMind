@@ -94,8 +94,6 @@ public class DrawingView extends View {
                         ((Line) shapeOnCreating).setDashedLine();
                     }
                 }
-
-
                 invalidate();
                 break;
 

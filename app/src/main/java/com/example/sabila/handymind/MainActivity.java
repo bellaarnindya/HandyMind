@@ -18,6 +18,9 @@ import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
 import com.example.sabila.handymind.buttons.RoundRectButton;
 import com.example.sabila.handymind.buttons.TextButton;
+import com.example.sabila.handymind.lineBehaviors.LineDashedBody;
+import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
+import com.example.sabila.handymind.lineBehaviors.LineWithoutHead;
 import com.example.sabila.handymind.tools.CircleTool;
 import com.example.sabila.handymind.tools.LineTool;
 import com.example.sabila.handymind.tools.OvalTool;
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         roundRectBtn = (RoundRectButton) findViewById(R.id.roundrect_btn);
         ovalBtn= (OvalButton) findViewById(R.id.oval_btn);
         textBtn = (TextButton) findViewById(R.id.text_btn);
+        dashedLineBtn = (DashedLineButton) findViewById(R.id.dashed_line_btn);
 
         rectBtn.setOnClickListener(this);
         circleBtn.setOnClickListener(this);
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         roundRectBtn.setOnClickListener(this);
         ovalBtn.setOnClickListener(this);
         textBtn.setOnClickListener(this);
+        dashedLineBtn.setOnClickListener(this);
     }
 
     public void showDialog() {
@@ -106,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawingView.setActiveTool(new CircleTool());
                 break;
             case R.id.line_btn:
-                drawingView.setActiveTool(new LineTool());
+                drawingView.setActiveTool(new LineTool(new LineStraightBody(), new LineWithoutHead()));
                 break;
             case R.id.roundrect_btn:
                 drawingView.setActiveTool(new RoundRectTool());
@@ -119,6 +124,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 showDialog();
                 dialog.show();
                 break;
+            case R.id.dashed_line_btn:
+                drawingView.setActiveTool(new LineTool(new LineDashedBody(), new LineWithoutHead()));
+                break;
+
         }
     }
 }
