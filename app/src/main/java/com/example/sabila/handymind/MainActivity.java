@@ -18,8 +18,14 @@ import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
 import com.example.sabila.handymind.buttons.RoundRectButton;
 import com.example.sabila.handymind.buttons.TextButton;
+import com.example.sabila.handymind.tools.CircleTool;
+import com.example.sabila.handymind.tools.LineTool;
+import com.example.sabila.handymind.tools.OvalTool;
+import com.example.sabila.handymind.tools.RectangleTool;
+import com.example.sabila.handymind.tools.RoundRectTool;
+import com.example.sabila.handymind.tools.TextTool;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DrawingView drawingView;
     private RectButton rectBtn;
@@ -56,13 +62,12 @@ public class MainActivity extends AppCompatActivity {
         ovalBtn= (OvalButton) findViewById(R.id.oval_btn);
         textBtn = (TextButton) findViewById(R.id.text_btn);
 
-        rectBtn.setOnClickListener(setShape);
-        circleBtn.setOnClickListener(setShape);
-        lineBtn.setOnClickListener(setShape);
-        dashedLineBtn.setOnClickListener(setShape);
-        roundRectBtn.setOnClickListener(setShape);
-        ovalBtn.setOnClickListener(setShape);
-        textBtn.setOnClickListener(setShape);
+        rectBtn.setOnClickListener(this);
+        circleBtn.setOnClickListener(this);
+        lineBtn.setOnClickListener(this);
+        roundRectBtn.setOnClickListener(this);
+        ovalBtn.setOnClickListener(this);
+        textBtn.setOnClickListener(this);
     }
 
     public void showDialog() {
@@ -77,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 message = inputText.getText().toString();
-                drawingView.getMessage(message);
+                drawingView.setMessage(message);
             }
         });
 
@@ -91,34 +96,29 @@ public class MainActivity extends AppCompatActivity {
         dialog = builder.create();
     }
 
-    View.OnClickListener setShape = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.rect_btn:
-                    drawingView.setSelectedShape("rectangle");
-                    break;
-                case R.id.circle_btn:
-                    drawingView.setSelectedShape("circle");
-                    break;
-                case R.id.line_btn:
-                    drawingView.setSelectedShape("line");
-                    break;
-                case R.id.dashed_line_btn:
-                    drawingView.setSelectedShape("dashed-line");
-                    break;
-                case R.id.roundrect_btn:
-                    drawingView.setSelectedShape("roundrect");
-                    break;
-                case R.id.oval_btn:
-                    drawingView.setSelectedShape("oval");
-                    break;
-                case R.id.text_btn:
-                    showDialog();
-                    dialog.show();
-                    break;
-            }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.rect_btn:
+                drawingView.setActiveTool(new RectangleTool());
+                break;
+            case R.id.circle_btn:
+                drawingView.setActiveTool(new CircleTool());
+                break;
+            case R.id.line_btn:
+                drawingView.setActiveTool(new LineTool());
+                break;
+            case R.id.roundrect_btn:
+                drawingView.setActiveTool(new RoundRectTool());
+                break;
+            case R.id.oval_btn:
+                drawingView.setActiveTool(new OvalTool());
+                break;
+            case R.id.text_btn:
+                drawingView.setActiveTool(new TextTool());
+                showDialog();
+                dialog.show();
+                break;
         }
-    };
+    }
 }
