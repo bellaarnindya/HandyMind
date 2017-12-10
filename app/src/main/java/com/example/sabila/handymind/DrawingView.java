@@ -16,6 +16,7 @@ import com.example.sabila.handymind.shapes.Oval;
 import com.example.sabila.handymind.shapes.Rectangle;
 import com.example.sabila.handymind.shapes.RoundRect;
 import com.example.sabila.handymind.shapes.Text;
+import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.TextTool;
 
 import java.util.ArrayList;
@@ -32,18 +33,17 @@ public class DrawingView extends View {
     private List<Shape> shapes;
     private Shape touchedShape = null;
     private Shape shapeOnCreating = null;
-    private Shape bufferShape = null;
     private Tool tool;
 
     private boolean isSingleTouch = false;
 
-    private String selectedShape, textMessage;
+    private String textMessage;
     public Shape shape;
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
-        selectedShape = "rectangle";
+        tool = new RectangleTool();
 
         shapes = new ArrayList<>();
     }
@@ -133,9 +133,6 @@ public class DrawingView extends View {
         ((TextTool) tool).setMessage(textMessage);
     }
 
-    public void setSelectedShape(String selectedShape) {
-        this.selectedShape = selectedShape;
-    }
 
     public void setActiveTool(Tool activeTool) {
         this.tool = activeTool;
