@@ -24,6 +24,7 @@ import com.example.sabila.handymind.tools.LineTool;
 import com.example.sabila.handymind.tools.OvalTool;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.RoundRectTool;
+import com.example.sabila.handymind.tools.TextTool;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 message = inputText.getText().toString();
-                drawingView.getMessage(message);
+                drawingView.setMessage(message);
             }
         });
 
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                    drawingView.setActiveTool(new OvalTool());
                     break;
                 case R.id.text_btn:
+                    drawingView.setActiveTool(new TextTool());
                     showDialog();
                     dialog.show();
                     break;
