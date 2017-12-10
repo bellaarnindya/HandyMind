@@ -8,12 +8,14 @@ import android.util.Log;
 
 import com.example.sabila.handymind.Shape;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Sabila on 11/20/2017.
  */
 
 public class Rectangle extends Shape {
-
     private float x;
     private float y;
     private float width;
@@ -31,6 +33,14 @@ public class Rectangle extends Shape {
         drawPaint.setColor(Color.BLACK);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeWidth(4);
+
+        onResize = false;
+
+        CircleResize c1 = new CircleResize(x, y);
+        CircleResize c2 = new CircleResize(x, y);
+
+        resizingCircle.add(c1);
+        resizingCircle.add(c2);
     }
 
     public float getX() {
@@ -49,7 +59,6 @@ public class Rectangle extends Shape {
         this.y = y;
     }
 
-
     public float getWidth() {
         return width;
     }
@@ -57,7 +66,6 @@ public class Rectangle extends Shape {
     public void setWidth(float width) {
         this.width = width;
     }
-
 
     public float getHeight() {
         return height;
@@ -70,6 +78,10 @@ public class Rectangle extends Shape {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawRect(x, y, width + x, height + y, drawPaint);
+
+        if (onResize) {
+            this.drawResizingCircles(canvas);
+        }
     }
 
     @Override
@@ -82,6 +94,8 @@ public class Rectangle extends Shape {
     public void move(float touchX, float touchY) {
         this.x = touchX - xCoordsOnTouch;
         this.y = touchY - yCoordsOnTouch;
+
+        this.updatePoint(touchX, touchY);
     }
 
     @Override
@@ -96,6 +110,8 @@ public class Rectangle extends Shape {
             this.width = width;
             this.height = height;
         }
+
+        resizingCircle.get(1).updateCoordiate(touchX, touchY);
     }
 
     @Override
@@ -107,6 +123,8 @@ public class Rectangle extends Shape {
             this.width = width;
             this.height = height;
         }
+
+        this.updatePoint(touchX, touchY);
     }
 
     @Override
@@ -121,11 +139,28 @@ public class Rectangle extends Shape {
     @Override
     public void setActive() {
         drawPaint.setStrokeWidth(7);
+        onResize = true;
     }
 
     @Override
-    public void setInactive() {drawPaint.setStrokeWidth(5); }
+    public void setInactive() {
+        drawPaint.setStrokeWidth(5);
+        onResize = false;
+    }
+
+    @Override
     public void draw(Canvas canvas, Paint paint) {
         canvas.drawRect(x, y, x+width, y+height, paint);
+    }
+
+    private void drawResizingCircles(Canvas canvas) {
+        for (int i = 0; i < resizingCircle.size(); i++) {
+            resizingCircle.get(i).draw(canvas);
+        }
+    }
+
+    private void updatePoint(float touchX, float touchY) {
+        resizingCircle.get(0).updateCoordiate(getX(), getY());
+        resizingCircle.get(1).updateCoordiate(getX() + width, getY() + height);
     }
 }
