@@ -1,10 +1,15 @@
 package com.example.sabila.handymind;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,6 +29,13 @@ import com.example.sabila.handymind.tools.OvalTool;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.RoundRectTool;
 import com.example.sabila.handymind.tools.TextTool;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+
+import static java.lang.System.out;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -119,6 +131,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 showDialog();
                 dialog.show();
                 break;
+            case R.id.save_btn:
+                try {
+                    String filename = new String();
+                    out = new java.io.PrintStream(filename);
+                    Bitmap bmp = null;
+                    bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
+                    // PNG is a lossless format, the compression factor (100) is ignored
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (out != null) {
+                        out.close();
+                    }
+                }
+                break;
         }
     }
+
 }
