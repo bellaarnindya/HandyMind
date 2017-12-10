@@ -9,15 +9,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 import com.example.sabila.handymind.buttons.CircleButton;
 import com.example.sabila.handymind.buttons.LineButton;
+import com.example.sabila.handymind.buttons.DashedLineButton;
 import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
 import com.example.sabila.handymind.buttons.RoundRectButton;
-import com.example.sabila.handymind.shapes.RoundRect;
 import com.example.sabila.handymind.buttons.TextButton;
 import com.example.sabila.handymind.tools.CircleTool;
 import com.example.sabila.handymind.tools.LineTool;
@@ -32,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RectButton rectBtn;
     private CircleButton circleBtn;
     private LineButton lineBtn;
+    private DashedLineButton dashedLineBtn;
     private RoundRectButton roundRectBtn;
     private OvalButton ovalBtn;
     private TextButton textBtn;
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rectBtn = (RectButton) findViewById(R.id.rect_btn);
         circleBtn = (CircleButton) findViewById(R.id.circle_btn);
         lineBtn = (LineButton) findViewById(R.id.line_btn);
+        dashedLineBtn = (DashedLineButton) findViewById(R.id.dashed_line_btn);
         roundRectBtn = (RoundRectButton) findViewById(R.id.roundrect_btn);
         ovalBtn= (OvalButton) findViewById(R.id.oval_btn);
         textBtn = (TextButton) findViewById(R.id.text_btn);

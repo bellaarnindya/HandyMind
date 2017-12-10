@@ -39,6 +39,7 @@ public class DrawingView extends View {
 
     private String textMessage;
     public Shape shape;
+    private static boolean dashedLine = false;
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -88,6 +89,10 @@ public class DrawingView extends View {
                     Shape newShape = tool.createShape(touchX, touchY);
                     shapes.add(newShape);
                     shapeOnCreating = newShape;
+                    if(newShape instanceof Line && dashedLine) {
+                        Log.d("DEBUG", "masuk dashed line");
+                        ((Line) shapeOnCreating).setDashedLine();
+                    }
                 }
 
 

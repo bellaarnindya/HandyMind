@@ -3,10 +3,15 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.util.Log;
 
+import com.example.sabila.handymind.LineBodyBehavior;
+import com.example.sabila.handymind.LineHeadBehavior;
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
+import com.example.sabila.handymind.lineBehaviors.LineDashedBody;
+import com.example.sabila.handymind.lineBehaviors.LineWithArrowHead;
+import com.example.sabila.handymind.lineBehaviors.LineWithoutHead;
 
 /**
  * Created by Sabila on 11/28/2017.
@@ -20,6 +25,8 @@ public class Line extends Shape {
     private float yEnd;
     private float length;
     private final float EPSILON = 15;
+    private LineBodyBehavior bodyBehavior;
+    private LineHeadBehavior headBehavior;
 
     private Paint drawPaint;
 
@@ -28,6 +35,8 @@ public class Line extends Shape {
         this.yStart = y;
         this.xEnd = x;
         this.yEnd = y;
+        this.bodyBehavior = new LineStraightBody();
+        this.headBehavior = new LineWithoutHead();
 
         drawPaint = new Paint();
         drawPaint.setColor(Color.BLACK);
@@ -77,7 +86,8 @@ public class Line extends Shape {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawLine(xStart, yStart, xEnd, yEnd, drawPaint);
+        this.bodyBehavior.drawBody(canvas, drawPaint, xStart, yStart, xEnd, yEnd);
+        this.headBehavior.drawHead(canvas, drawPaint, xStart, yStart, xEnd, yEnd);
     }
 
     @Override
@@ -130,4 +140,12 @@ public class Line extends Shape {
 
     @Override
     public void setInactive() {drawPaint.setStrokeWidth(5); }
+
+    public void setDashedLine() {
+        this.bodyBehavior = new LineDashedBody();
+    }
+
+    public void setArrowHead() {
+        this.headBehavior = new LineWithArrowHead();
+    }
 }
