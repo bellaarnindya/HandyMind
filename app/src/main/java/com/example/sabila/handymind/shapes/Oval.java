@@ -97,25 +97,10 @@ public class Oval extends Shape {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawOval(left, top, right, bottom, paint);
-    }
-
-    @Override
     public void draw(Canvas canvas) {
         canvas.drawOval(left, top, right, bottom, drawPaint);
     }
 
-    @Override
-    public void drag(float touchX, float touchY) {
-        float width = touchX - this.getLeft();
-        float height = touchY - this.getTop();
-
-        if (width > 0 && height > 0) {
-            this.setRight(touchX);
-            this.setBottom(touchY);
-        }
-    }
 
     @Override
     public boolean isTouched(float touchX, float touchY) {

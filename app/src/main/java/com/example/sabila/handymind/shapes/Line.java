@@ -23,6 +23,7 @@ public class Line extends Shape {
     private float xEnd;
     private float yEnd;
     private float length;
+    private final float EPSILON = 15;
     private LineBodyBehavior bodyBehavior;
     private LineHeadBehavior headBehavior;
 
@@ -83,11 +84,6 @@ public class Line extends Shape {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawLine(xStart, yStart, xEnd, yEnd, paint);
-    }
-
-    @Override
     public void draw(Canvas canvas) {
         this.bodyBehavior.drawBody(canvas, drawPaint, xStart, yStart, xEnd, yEnd);
         this.headBehavior.drawHead(canvas, drawPaint, xStart, yStart, xEnd, yEnd);
@@ -95,22 +91,22 @@ public class Line extends Shape {
 
     @Override
     public void initialMove(float touchX, float touchY){
-
+        xCoordsOnTouch = touchX - xStart;
+        yCoordsOnTouch = touchY - yStart;
     }
 
     @Override
     public void move(float touchX, float touchY) {
-
+        float diffX = (touchX - xCoordsOnTouch) - this.xStart;
+        float diffY = (touchY - yCoordsOnTouch) - this.yStart;
+        this.xStart = touchX - xCoordsOnTouch;
+        this.yStart = touchY - yCoordsOnTouch;
+        this.xEnd = this.xEnd + diffX;
+        this.yEnd = this.yEnd +diffY;
     }
 
     @Override
     public void finishMove(){}
-
-    @Override
-    public void drag(float touchX, float touchY) {
-        this.setxEnd(touchX);
-        this.setyEnd(touchY);
-    }
 
     @Override
     public void resize(float touchX, float touchY) {
@@ -119,7 +115,21 @@ public class Line extends Shape {
 
     @Override
     public boolean isTouched(float touchX, float touchY) {
+        float m = getSlope();
+        float c = yEnd - m * xEnd;
+        float y = m * touchX + c;
+
+        if (Math.abs(touchY - y) < EPSILON) {
+            Log.d("LINE", "isTouched");
+            return true;
+        }
+
         return false;
+    }
+
+    private float getSlope() {
+        float m = (yEnd - yStart)/(xEnd - xStart);
+        return m;
     }
 
     @Override

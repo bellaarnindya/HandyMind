@@ -57,10 +57,6 @@ public class Circle extends Shape {
         canvas.drawCircle(cx, cy, radius, drawPaint);
     }
 
-    @Override
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawCircle(cx, cy, radius, paint);
-    }
 
     @Override
     public void initialMove(float touchX, float touchY){
@@ -77,18 +73,6 @@ public class Circle extends Shape {
     @Override
     public void finishMove(){}
 
-    @Override
-    public void drag(float touchX, float touchY) {
-        double x = Double.parseDouble(Float.toString(this.getCx()));
-        double y = Double.parseDouble(Float.toString(this.getCy()));
-        double a = Double.parseDouble(Float.toString(touchX));
-        double b = Double.parseDouble(Float.toString(touchY));
-        float radius =  (float) Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
-
-        if (radius > 0) {
-            this.setRadius(radius);
-        }
-    }
 
     @Override
     public boolean isTouched(float touchX, float touchY) {

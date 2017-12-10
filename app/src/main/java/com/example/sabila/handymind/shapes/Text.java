@@ -57,11 +57,6 @@ public class Text extends Shape {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawText(textInput, x, y, paint);
-    }
-
-    @Override
     public void draw(Canvas canvas) {
         canvas.drawText(textInput, x, y, drawPaint);
     }
@@ -80,9 +75,6 @@ public class Text extends Shape {
 
     @Override
     public void finishMove(){}
-
-    @Override
-    public void drag(float touchX, float touchY) {}
 
     @Override
     public void resize(float touchX, float touchY) {}

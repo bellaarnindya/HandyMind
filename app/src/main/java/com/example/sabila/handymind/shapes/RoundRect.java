@@ -65,11 +65,6 @@ public class RoundRect extends Shape {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawRoundRect(x, y, x+width, y+height, RX, RY, paint);
-    }
-
-    @Override
     public void draw(Canvas canvas) {
         canvas.drawRoundRect(x, y, width + x, height + y, RX, RY, drawPaint);
     }
@@ -89,16 +84,6 @@ public class RoundRect extends Shape {
     @Override
     public void finishMove(){}
 
-    @Override
-    public void drag(float touchX, float touchY) {
-        float width = touchX - this.x;
-        float height = touchY - this.y;
-
-        if (width > 0 && height > 0) {
-            this.width = width;
-            this.height = height;
-        }
-    }
 
     @Override
     public void resize(float touchX, float touchY) {
