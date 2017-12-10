@@ -19,6 +19,7 @@
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@android:color/white"
         android:orientation="vertical">
 
         <LinearLayout
@@ -55,7 +56,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/newbtn"
-                    android:backgroundTint="@color/colorPrimaryDark" />
+                    android:backgroundTint="@color/button_tint" />
 
                 <Button
                     android:id="@+id/select_btn"
@@ -63,7 +64,7 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:background="@drawable/selectbtn"
-                    android:backgroundTint="@color/colorPrimaryDark" />
+                    android:backgroundTint="@color/button_tint" />
             </LinearLayout>
 
             <LinearLayout
@@ -83,7 +84,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/undobtn"
-                    android:backgroundTint="@color/colorPrimaryDark" />
+                    android:backgroundTint="@color/button_tint" />
 
                 <Button
                     android:id="@+id/redo_btn"
@@ -91,7 +92,7 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:background="@drawable/redobtn"
-                    android:backgroundTint="@color/colorPrimaryDark" />
+                    android:backgroundTint="@color/button_tint" />
             </LinearLayout>
 
             <LinearLayout
@@ -111,7 +112,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/erasebtn"
-                    android:backgroundTint="@color/colorPrimaryDark" />
+                    android:backgroundTint="@color/button_tint" />
 
                 <Button
                     android:id="@+id/save_btn"
@@ -119,7 +120,7 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:background="@drawable/savebtn"
-                    android:backgroundTint="@color/colorPrimaryDark" />
+                    android:backgroundTint="@color/button_tint" />
             </LinearLayout>
 
         </LinearLayout>
@@ -159,8 +160,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/rectbtn"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    android:textColor="@android:color/white" />
+                    android:backgroundTint="@color/button_tint" />
 
                 <com.example.sabila.handymind.buttons.RoundRectButton
                     android:id="@+id/roundrect_btn"
@@ -170,8 +170,7 @@
                     android:layout_toRightOf="@+id/rect_btn"
                     android:layout_weight="1"
                     android:background="@drawable/roundrectbtn"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    android:textColor="@android:color/white" />
+                    android:backgroundTint="@color/button_tint" />
 
             </LinearLayout>
 
@@ -193,8 +192,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/circlebtn"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    android:textColor="@android:color/white" />
+                    android:backgroundTint="@color/button_tint" />
 
                 <com.example.sabila.handymind.buttons.OvalButton
                     android:id="@+id/oval_btn"
@@ -203,8 +201,7 @@
                     android:layout_alignParentBottom="false"
                     android:layout_weight="1"
                     android:background="@drawable/ovalbtn"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    android:textColor="@android:color/white" />
+                    android:backgroundTint="@color/button_tint" />
             </LinearLayout>
 
             <LinearLayout
@@ -225,8 +222,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/linebtn"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    android:textColor="@android:color/white" />
+                    android:backgroundTint="@color/button_tint" />
 
                 <com.example.sabila.handymind.buttons.DashedLineButton
                     android:id="@+id/dashed_line_btn"
@@ -235,8 +231,7 @@
                     android:layout_alignParentBottom="false"
                     android:layout_weight="1"
                     android:background="@drawable/dashlinebtn"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    android:textColor="@android:color/white" />
+                    android:backgroundTint="@color/button_tint" />
             </LinearLayout>
 
             <LinearLayout
@@ -257,7 +252,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/textbtn"
-                    android:backgroundTint="@color/colorPrimaryDark" />
+                    android:backgroundTint="@color/button_tint" />
             </LinearLayout>
 
         </LinearLayout>
