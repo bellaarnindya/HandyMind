@@ -7,19 +7,24 @@ import android.graphics.Rect;
 import android.util.Log;
 
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.ShapeObservable;
+import com.example.sabila.handymind.ShapeObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
 /**
  * Created by Sabila on 11/20/2017.
  */
 
-public class Rectangle extends Shape {
+public class Rectangle extends ShapeObservable {
     private float x;
     private float y;
     private float width;
     private float height;
+
+    private ArrayList<ShapeObserver> observers;
 
     private Paint drawPaint;
 
@@ -96,6 +101,7 @@ public class Rectangle extends Shape {
         this.y = touchY - yCoordsOnTouch;
 
         this.updatePoint(touchX, touchY);
+        notifyAllObservers(touchX, touchY);
     }
 
     @Override
@@ -112,6 +118,7 @@ public class Rectangle extends Shape {
         }
 
         this.updatePoint(touchX, touchY);
+
     }
 
     @Override
@@ -144,5 +151,17 @@ public class Rectangle extends Shape {
     public void updatePoint(float touchX, float touchY) {
         resizingCircle.get(0).updateCoordiate(getX(), getY());
         resizingCircle.get(1).updateCoordiate(getX() + width, getY() + height);
+    }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers(float touchX, float touchY) {
+        for (ShapeObserver observer : observers) {
+            observer.update(touchX, touchY);
+        }
     }
 }
