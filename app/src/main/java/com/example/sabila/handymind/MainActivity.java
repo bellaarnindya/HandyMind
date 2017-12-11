@@ -171,7 +171,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     outputStream.flush();
                     outputStream.close();
 
-//                    openScreenshot(imageFile);
                 } catch (Throwable e) {
                     // Several error may come out with file handling or DOM
                     e.printStackTrace();
@@ -179,13 +178,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
-//    private void openScreenshot(File imageFile) {
-//        Intent intent = new Intent();
-//        intent.setAction(Intent.ACTION_VIEW);
-//        Uri uri = Uri.fromFile(imageFile);
-//        intent.setDataAndType(uri, "image/*");
-//        startActivity(intent);
-//    }
-
 }
