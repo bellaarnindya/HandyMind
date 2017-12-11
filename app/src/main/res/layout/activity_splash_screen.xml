@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitCenter"
-        android:src="@drawable/splashscreenlow" />
+        android:src="@drawable/splashscreen" />
 
     <ProgressBar
         android:id="@+id/progresBar"
@@ -22,5 +22,19 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="200dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Beta Version 0.5"
+        android:textAllCaps="true"
+        android:textColor="#666666"
+        android:textSize="8sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
