@@ -64,12 +64,41 @@ public abstract class Shape {
 
     public void finishMove(){}
 
-    public void resize(int selectedCircle, float x, float y) {}
-
     public void setActive() {}
     public void setInactive() {}
 
     public boolean isTouched(float touchX, float touchY) { return false; }
 
     public int isResizeTouched(float touchX, float touchY) { return -1; }
+
+    public void updatePoint(float touchX, float touchY) {}
+
+    public void moveTopLeft(float touchX, float touchY){ }
+    public void moveTopRight(float touchX, float touchY){ }
+    public void moveBottomRight(float touchX, float touchY){ }
+    public void moveBottomLeft(float touchX, float touchY){ }
+
+    public void resize(int selectedCircle, float touchX, float touchY) {
+        switch(selectedCircle) {
+            case 0: {
+                moveTopLeft(touchX, touchY);
+                break;
+            }
+            case 1: {
+                moveTopRight(touchX, touchY);
+                break;
+            }
+            case 2: {
+                moveBottomRight(touchX, touchY);
+                break;
+            }
+            case 3: {
+                moveBottomLeft(touchX, touchY);
+                break;
+            }
+        }
+
+        this.updatePoint(touchX, touchY);
+    }
+
 }

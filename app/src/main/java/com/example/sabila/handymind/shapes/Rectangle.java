@@ -106,64 +106,59 @@ public class Rectangle extends Shape {
     public void finishMove(){}
 
     @Override
-    public void resize(int selectedCircle, float touchX, float touchY) {
-        switch (selectedCircle) {
-            case 0: {
-                float xRight = this.x + this.width;
-                float yBottom = this.y + this.height;
+    public void moveTopLeft(float touchX, float touchY){
+        float xRight = this.x + this.width;
+        float yBottom = this.y + this.height;
 
-                float width = xRight - touchX;
-                float height = yBottom - touchY;
+        float width = xRight - touchX;
+        float height = yBottom - touchY;
 
-                if (width > 0 && height > 0) {
-                    this.x = touchX;
-                    this.y = touchY;
-                    this.width = width;
-                    this.height = height;
-                }
-
-                break;
-            }
-            case 1: {
-                float yBottom = this.y + this.height;
-
-                float width = touchX - this.x;
-                float height = yBottom - touchY;
-
-                if (width > 0 && height > 0) {
-                    this.y = touchY;
-                    this.width = width;
-                    this.height = height;
-                }
-
-                break;
-            }
-            case 2: {
-                float width = touchX - this.x;
-                float height = touchY - this.y;
-
-                if (width > 0 && height > 0) {
-                    this.width = width;
-                    this.height = height;
-                }
-
-                break;
-            }
-            case 3: {
-                float yTop = this.y;
-                float xRight = this.x + width;
-
-                float width = xRight - touchX;
-                float height = touchY - yTop;
-
-                if (width > 0 && height > 0) {
-                    this.x = touchX;
-                    this.width = width;
-                    this.height = height;
-                }
-            }
+        if (width > 0 && height > 0) {
+            this.x = touchX;
+            this.y = touchY;
+            this.width = width;
+            this.height = height;
         }
-        this.updatePoint(touchX, touchY);
+    }
+
+    @Override
+    public void moveTopRight(float touchX, float touchY){
+        float yBottom = this.y + this.height;
+
+        float width = touchX - this.x;
+        float height = yBottom - touchY;
+
+        if (width > 0 && height > 0) {
+            this.y = touchY;
+            this.width = width;
+            this.height = height;
+        }
+    }
+
+    @Override
+    public void moveBottomRight(float touchX, float touchY){
+        float width = touchX - this.x;
+        float height = touchY - this.y;
+
+        if (width > 0 && height > 0) {
+            this.width = width;
+            this.height = height;
+        }
+    }
+
+    @Override
+    public void moveBottomLeft(float touchX, float touchY){
+        float yTop = this.y;
+        float xRight = this.x + width;
+
+        float width = xRight - touchX;
+        float height = touchY - yTop;
+
+        if (width > 0 && height > 0) {
+            this.x = touchX;
+            this.width = width;
+            this.height = height;
+        }
     }
 
     @Override
@@ -192,6 +187,7 @@ public class Rectangle extends Shape {
         }
     }
 
+    @Override
     public void updatePoint(float touchX, float touchY) {
         resizingCircle.get(0).updateCoordiate(getX(), getY());
         resizingCircle.get(1).updateCoordiate(getX() + width, getY());
