@@ -1,11 +1,16 @@
 package com.example.sabila.handymind;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +18,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
+import android.widget.*;
+import android.widget.Button;
 
 
 import com.example.sabila.handymind.buttons.CircleButton;
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText inputText;
     private AlertDialog dialog;
     private String message;
+    private Button saveBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         roundRectBtn = (RoundRectButton) findViewById(R.id.roundrect_btn);
         ovalBtn= (OvalButton) findViewById(R.id.oval_btn);
         textBtn = (TextButton) findViewById(R.id.text_btn);
+        saveBtn = (android.widget.Button) findViewById(R.id.save_button);
+
 
         rectBtn.setOnClickListener(this);
         circleBtn.setOnClickListener(this);
@@ -80,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         roundRectBtn.setOnClickListener(this);
         ovalBtn.setOnClickListener(this);
         textBtn.setOnClickListener(this);
+        saveBtn.setOnClickListener(this);
     }
 
     public void showDialog() {
@@ -108,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dialog = builder.create();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -131,22 +142,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 showDialog();
                 dialog.show();
                 break;
-            case R.id.save_btn:
+            case R.id.save_button:
+                if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    //Log.v(TAG,"Permission is granted");
+                    //File write logic here
+                    //return true;
+                }
+                else ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+
+                Date now = new Date();
+                android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
                 try {
-                    String filename = new String();
-                    out = new java.io.PrintStream(filename);
-                    Bitmap bmp = null;
-                    bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
-                    // PNG is a lossless format, the compression factor (100) is ignored
-                } catch (Exception e) {
+                    // image naming and path  to include sd card  appending name you choose for file
+                    String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
+                    Log.d("path",mPath);
+
+                    // create bitmap screen capture
+                    View v1 = getWindow().getDecorView().getRootView();
+                    v1.setDrawingCacheEnabled(true);
+                    Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+                    v1.setDrawingCacheEnabled(false);
+
+                    File imageFile = new File(mPath);
+
+                    FileOutputStream outputStream = new FileOutputStream(imageFile);
+                    int quality = 100;
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+                    outputStream.flush();
+                    outputStream.close();
+
+//                    openScreenshot(imageFile);
+                } catch (Throwable e) {
+                    // Several error may come out with file handling or DOM
                     e.printStackTrace();
-                } finally {
-                    if (out != null) {
-                        out.close();
-                    }
                 }
                 break;
         }
     }
+
+//    private void openScreenshot(File imageFile) {
+//        Intent intent = new Intent();
+//        intent.setAction(Intent.ACTION_VIEW);
+//        Uri uri = Uri.fromFile(imageFile);
+//        intent.setDataAndType(uri, "image/*");
+//        startActivity(intent);
+//    }
 
 }
