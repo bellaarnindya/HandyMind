@@ -69,7 +69,18 @@ public abstract class Shape {
 
     public boolean isTouched(float touchX, float touchY) { return false; }
 
-    public int isResizeTouched(float touchX, float touchY) { return -1; }
+    public int isResizeTouched(float touchX, float touchY) {
+        int circleTouched = -1;
+
+        for (int i = 0; i < resizingCircle.size(); i++) {
+            if (resizingCircle.get(i).isTouched(touchX, touchY)) {
+                circleTouched = i;
+                break;
+            }
+        }
+
+        return circleTouched;
+    }
 
     public void updatePoint(float touchX, float touchY) {}
 
@@ -101,4 +112,19 @@ public abstract class Shape {
         this.updatePoint(touchX, touchY);
     }
 
+    protected void drawResizingCircles(Canvas canvas) {
+        for (int i = 0; i < resizingCircle.size(); i++) {
+            resizingCircle.get(i).draw(canvas);
+        }
+    }
+
+    protected float getLeft(){ return (float) 0.0; };
+    protected float getRight(){ return (float) 0.0; };
+    protected float getBottom(){ return (float) 0.0; };
+    protected float getTop(){ return (float) 0.0; };
+
+    protected void setLeft(float x){  };
+    protected void setRight(float x){  };
+    protected void setBottom(float y){  };
+    protected void setTop(float y){  };
 }
