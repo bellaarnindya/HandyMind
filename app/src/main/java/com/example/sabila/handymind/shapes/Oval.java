@@ -34,36 +34,40 @@ public class Oval extends Shape {
         drawPaint.setColor(Color.BLACK);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeWidth(4);
+
+        onResize = false;
+
+        CircleResize cTopLeft = new CircleResize(left, top);
+        CircleResize cTopRight = new CircleResize(left, top);
+        CircleResize cBottomRight = new CircleResize(left, top);
+        CircleResize cBottomLeft = new CircleResize(left, top);
+
+        resizingCircle.add(cTopLeft);
+        resizingCircle.add(cTopRight);
+        resizingCircle.add(cBottomRight);
+        resizingCircle.add(cBottomLeft);
     }
 
-    public float getLeft() {
-        return left;
+    public float getLeft() { return left; }
+    public float getTop() {
+        return top;
+    }
+    public float getRight() {
+        return right;
+    }
+    public float getBottom() {
+        return bottom;
     }
 
     public void setLeft(float left) {
         this.left = left;
     }
-
-    public float getTop() {
-        return top;
-    }
-
     public void setTop(float top) {
         this.top = top;
     }
-
-    public float getRight() {
-        return right;
-    }
-
     public void setRight(float right) {
         this.right = right;
     }
-
-    public float getBottom() {
-        return bottom;
-    }
-
     public void setBottom(float bottom) {
         this.bottom = bottom;
     }
@@ -99,6 +103,10 @@ public class Oval extends Shape {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawOval(left, top, right, bottom, drawPaint);
+
+        if (onResize) {
+            this.drawResizingCircles(canvas);
+        }
     }
 
 
@@ -132,13 +140,19 @@ public class Oval extends Shape {
         this.setBottom(this.bottomOnTouch + deltaY);
         this.setRight(this.rightOnTouch + deltaX);
         this.setLeft(this.leftOnTouch + deltaX);
+
+        this.updatePoint();
     }
 
     @Override
     public void setActive() {
         drawPaint.setStrokeWidth(7);
+        onResize = true;
     }
 
     @Override
-    public void setInactive() {drawPaint.setStrokeWidth(5); }
+    public void setInactive() {
+        drawPaint.setStrokeWidth(5);
+        onResize = false;
+    }
 }
