@@ -161,13 +161,13 @@ public abstract class Shape {
         }
     }
 
-    protected float getLeft(){ return (float) 0.0; };
-    protected float getRight(){ return (float) 0.0; };
-    protected float getBottom(){ return (float) 0.0; };
-    protected float getTop(){ return (float) 0.0; };
+    protected float getLeft(){ return (float) 0.0; }
+    protected float getRight(){ return (float) 0.0; }
+    protected float getBottom(){ return (float) 0.0; }
+    protected float getTop(){ return (float) 0.0; }
 
-    protected void setLeft(float x){  };
-    protected void setRight(float x){  };
-    protected void setBottom(float y){  };
-    protected void setTop(float y){  };
+    protected void setLeft(float x){  }
+    protected void setRight(float x){  }
+    protected void setBottom(float y){  }
+    protected void setTop(float y){  }
 }
