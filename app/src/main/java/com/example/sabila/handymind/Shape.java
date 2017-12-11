@@ -84,10 +84,53 @@ public abstract class Shape {
 
     public void updatePoint(float touchX, float touchY) {}
 
-    public void moveTopLeft(float touchX, float touchY){ }
-    public void moveTopRight(float touchX, float touchY){ }
-    public void moveBottomRight(float touchX, float touchY){ }
-    public void moveBottomLeft(float touchX, float touchY){ }
+    public void moveTopLeft(float touchX, float touchY){
+        float right = getRight();
+        float bottom = getBottom();
+
+        float width = right - touchX;
+        float height = bottom - touchY;
+
+        if (width > 0 && height > 0) {
+            setTop(touchY);
+            setLeft(touchX);
+        }
+    }
+
+    public void moveTopRight(float touchX, float touchY){
+        float yBottom = getBottom();
+
+        float width = touchX - getLeft();
+        float height = yBottom - touchY;
+
+        if (width > 0 && height > 0) {
+            setTop(touchY);
+            setRight(touchX);
+        }
+    }
+
+    public void moveBottomRight(float touchX, float touchY){
+        float width = touchX - getLeft();
+        float height = touchY - getTop();
+
+        if (width > 0 && height > 0) {
+            setBottom(touchY);
+            setRight(touchX);
+        }
+    }
+
+    public void moveBottomLeft(float touchX, float touchY){
+        float yTop = getTop();
+        float xRight = getRight();
+
+        float width = xRight - touchX;
+        float height = touchY - yTop;
+
+        if (width > 0 && height > 0) {
+            setBottom(touchY);
+            setLeft(touchX);
+        }
+    }
 
     public void resize(int selectedCircle, float touchX, float touchY) {
         switch(selectedCircle) {

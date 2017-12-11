@@ -131,58 +131,6 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public void moveTopLeft(float touchX, float touchY){
-        float right = getRight();
-        float bottom = getBottom();
-
-        float width = right - touchX;
-        float height = bottom - touchY;
-
-        if (width > 0 && height > 0) {
-            setTop(touchY);
-            setLeft(touchX);
-        }
-    }
-
-    @Override
-    public void moveTopRight(float touchX, float touchY){
-        float yBottom = getBottom();
-
-        float width = touchX - getLeft();
-        float height = yBottom - touchY;
-
-        if (width > 0 && height > 0) {
-            setTop(touchY);
-            setRight(touchX);
-        }
-    }
-
-    @Override
-    public void moveBottomRight(float touchX, float touchY){
-        float width = touchX - getLeft();
-        float height = touchY - getTop();
-
-        if (width > 0 && height > 0) {
-            setBottom(touchY);
-            setRight(touchX);
-        }
-    }
-
-    @Override
-    public void moveBottomLeft(float touchX, float touchY){
-        float yTop = getTop();
-        float xRight = getRight();
-
-        float width = xRight - touchX;
-        float height = touchY - yTop;
-
-        if (width > 0 && height > 0) {
-            setBottom(touchY);
-            setLeft(touchX);
-        }
-    }
-
-    @Override
     public boolean isTouched(float touchX, float touchY) {
         return (touchX > this.x &&
                 touchX < this.x + this.width &&
