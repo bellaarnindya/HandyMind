@@ -26,6 +26,18 @@ public class Circle extends Shape {
         drawPaint.setColor(Color.BLACK);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeWidth(4);
+
+        onResize = false;
+
+        CircleResize cTopLeft = new CircleResize(cx, cy);
+        CircleResize cTopRight = new CircleResize(cx, cy);
+        CircleResize cBottomRight = new CircleResize(cx, cy);
+        CircleResize cBottomLeft = new CircleResize(cx, cy);
+
+        resizingCircle.add(cTopLeft);
+        resizingCircle.add(cTopRight);
+        resizingCircle.add(cBottomRight);
+        resizingCircle.add(cBottomLeft);
     }
 
     public float getCx() {
@@ -55,6 +67,10 @@ public class Circle extends Shape {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawCircle(cx, cy, radius, drawPaint);
+
+        if (onResize) {
+            this.drawResizingCircles(canvas);
+        }
     }
 
 
@@ -68,6 +84,8 @@ public class Circle extends Shape {
     public void move(float touchX, float touchY) {
         this.cx = touchX - xCoordsOnTouch;
         this.cy = touchY - yCoordsOnTouch;
+
+        this.updatePoint();
     }
 
     @Override
@@ -91,8 +109,31 @@ public class Circle extends Shape {
     @Override
     public void setActive() {
         drawPaint.setStrokeWidth(7);
+        onResize = true;
+
     }
 
     @Override
-    public void setInactive() {drawPaint.setStrokeWidth(5); }
+    public void setInactive() {
+        drawPaint.setStrokeWidth(5);
+        onResize = false;
+    }
+
+    @Override
+    public float getTop() { return this.cy - this.radius; }
+    @Override
+    public float getBottom() { return this.cy + this.radius; }
+    @Override
+    public float getRight() { return this.cx + this.radius; }
+    @Override
+    public float getLeft() { return this.cx - this.radius; }
+
+    @Override
+    public void setRight(float x) { this.setRadius(x - this.cx); }
+    @Override
+    public void setLeft(float x) { this.setRadius(this.cx - x); }
+    @Override
+    public void setBottom(float y) { this.setRadius(y - this.cy); }
+    @Override
+    public void setTop(float y) { this.setRadius(this.cy - y); }
 }
