@@ -110,9 +110,7 @@ public class Line extends Shape {
     public void finishMove(){}
 
     @Override
-    public void resize(float touchX, float touchY) {
-
-    }
+    public void resize(int selectedCircle, float x, float y) {}
 
     @Override
     public boolean isTouched(float touchX, float touchY) {

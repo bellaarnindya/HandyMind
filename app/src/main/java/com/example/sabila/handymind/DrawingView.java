@@ -36,6 +36,8 @@ public class DrawingView extends View {
     public Shape shape;
     private static boolean dashedLine = false;
 
+    private int selectedCircle = -1;
+
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
@@ -65,7 +67,7 @@ public class DrawingView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (touchedShape != null &&
-                        touchedShape.isResizeTouched(touchX, touchY)) {
+                        (selectedCircle = touchedShape.isResizeTouched(touchX, touchY)) != -1) {
 //                    Log.i("DrawingView", "isResizing = true");
                     isResizing = true;
                 } else {
@@ -113,7 +115,7 @@ public class DrawingView extends View {
                 isSingleTouch = false;
 
                 if (isResizing) {
-                    touchedShape.resize(touchX, touchY);
+                    touchedShape.resize(selectedCircle, touchX, touchY);
                 } else if (shapeOnCreating != null) {
                     tool.drag(touchX, touchY);
                 } else if (isMoving) {

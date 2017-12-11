@@ -64,12 +64,12 @@ public abstract class Shape {
 
     public void finishMove(){}
 
-    public void resize(float x, float y) {}
+    public void resize(int selectedCircle, float x, float y) {}
 
     public void setActive() {}
     public void setInactive() {}
 
     public boolean isTouched(float touchX, float touchY) { return false; }
 
-    public boolean isResizeTouched(float touchX, float touchY) { return false; }
+    public int isResizeTouched(float touchX, float touchY) { return -1; }
 }
