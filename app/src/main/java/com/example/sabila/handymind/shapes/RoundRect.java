@@ -86,15 +86,16 @@ public class RoundRect extends Shape {
 
 
     @Override
-    public void resize(float touchX, float touchY) {
-        float width = touchX - this.x;
-        float height = touchY - this.y;
-
-        if (width > 0 && height > 0) {
-            this.width = width;
-            this.height = height;
-        }
-    }
+    public void resize(int selectedCircle, float x, float y) {}
+//    public void resize(float touchX, float touchY) {
+//        float width = touchX - this.x;
+//        float height = touchY - this.y;
+//
+//        if (width > 0 && height > 0) {
+//            this.width = width;
+//            this.height = height;
+//        }
+//    }
 
     @Override
     public boolean isTouched(float touchX, float touchY) {

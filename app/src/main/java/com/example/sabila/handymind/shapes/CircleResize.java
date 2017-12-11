@@ -37,20 +37,18 @@ public class CircleResize {
         radius = (float) 20;
     }
 
-    public float getRadius() { return this.radius; }
-
     public void draw(Canvas canvas) {
         canvas.drawCircle(x, y, radius, drawPaint);
     }
 
-    public boolean isTouched(float pointX, float pointY, float touchX, float touchY) {
-        double x = Double.parseDouble(Float.toString(pointX));
-        double y = Double.parseDouble(Float.toString(pointY));
+    public boolean isTouched(float touchX, float touchY) {
+        double x = Double.parseDouble(Float.toString(this.x));
+        double y = Double.parseDouble(Float.toString(this.y));
         double a = Double.parseDouble(Float.toString(touchX));
         double b = Double.parseDouble(Float.toString(touchY));
         float distance = (float) Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
 
-        if (distance <= this.getRadius()) {
+        if (distance <= this.radius) {
             return true;
         }
         return false;

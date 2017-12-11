@@ -3,7 +3,9 @@ package com.example.sabila.handymind;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
+import com.example.sabila.handymind.shapes.ActiveState;
 import com.example.sabila.handymind.shapes.CircleResize;
 import com.example.sabila.handymind.shapes.InactiveState;
 import com.example.sabila.handymind.shapes.ShapeState;
@@ -50,6 +52,10 @@ public abstract class Shape {
         currentState.click(this);
     }
 
+    public ShapeState getCurrentState() {
+        return currentState;
+    }
+
     public void draw(Canvas canvas) {}
 
     public void initialMove(float x, float y){}
@@ -58,11 +64,12 @@ public abstract class Shape {
 
     public void finishMove(){}
 
-    public void resize(float x, float y) {}
+    public void resize(int selectedCircle, float x, float y) {}
 
     public void setActive() {}
     public void setInactive() {}
 
     public boolean isTouched(float touchX, float touchY) { return false; }
 
+    public int isResizeTouched(float touchX, float touchY) { return -1; }
 }
