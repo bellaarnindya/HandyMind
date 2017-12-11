@@ -82,7 +82,12 @@ public abstract class Shape {
         return circleTouched;
     }
 
-    public void updatePoint(float touchX, float touchY) {}
+    public void updatePoint() {
+        resizingCircle.get(0).updateCoordiate(getLeft(), getTop());
+        resizingCircle.get(1).updateCoordiate(getRight(), getTop());
+        resizingCircle.get(2).updateCoordiate(getRight(), getBottom());
+        resizingCircle.get(3).updateCoordiate(getLeft(), getBottom());
+    }
 
     public void moveTopLeft(float touchX, float touchY){
         float right = getRight();
@@ -152,7 +157,7 @@ public abstract class Shape {
             }
         }
 
-        this.updatePoint(touchX, touchY);
+        this.updatePoint();
     }
 
     protected void drawResizingCircles(Canvas canvas) {

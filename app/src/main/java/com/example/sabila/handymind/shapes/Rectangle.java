@@ -99,7 +99,7 @@ public class Rectangle extends Shape {
         this.x = touchX - xCoordsOnTouch;
         this.y = touchY - yCoordsOnTouch;
 
-        this.updatePoint(touchX, touchY);
+        this.updatePoint();
     }
 
     @Override
@@ -148,13 +148,5 @@ public class Rectangle extends Shape {
     public void setInactive() {
         drawPaint.setStrokeWidth(5);
         onResize = false;
-    }
-
-    @Override
-    public void updatePoint(float touchX, float touchY) {
-        resizingCircle.get(0).updateCoordiate(getX(), getY());
-        resizingCircle.get(1).updateCoordiate(getX() + width, getY());
-        resizingCircle.get(2).updateCoordiate(getX() + width, getY() + height);
-        resizingCircle.get(3).updateCoordiate(getX(), getY() + height);
     }
 }
