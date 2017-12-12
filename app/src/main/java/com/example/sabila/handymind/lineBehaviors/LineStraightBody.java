@@ -3,8 +3,6 @@ package com.example.sabila.handymind.lineBehaviors;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import com.example.sabila.handymind.LineBodyBehavior;
-
 /**
  * Created by nafiar on 08/12/2017.
  */
