@@ -97,9 +97,6 @@ public class DrawingView extends View {
                     Shape newShape = tool.createShape(touchX, touchY);
                     shapes.add(newShape);
                     shapeOnCreating = newShape;
-//                    if(tool instanceof DashedLineTool) {
-//                        ((Line) shapeOnCreating).setDashedLine();
-//                    }
                 }
 
 

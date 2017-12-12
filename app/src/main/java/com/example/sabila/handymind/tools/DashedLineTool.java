@@ -1,7 +1,5 @@
 package com.example.sabila.handymind.tools;
 
-import android.util.Log;
-
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.Tool;
 import com.example.sabila.handymind.shapes.Line;
@@ -17,7 +15,6 @@ public class DashedLineTool extends Tool {
     public Shape createShape(float x, float y) {
         line = new Line(x, y);
         line.setDashedLine();
-        Log.d("DEBUG","berhasil set dashedline");
         return line;
     }
 

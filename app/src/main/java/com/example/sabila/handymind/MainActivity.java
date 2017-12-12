@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rectBtn.setOnClickListener(this);
         circleBtn.setOnClickListener(this);
         lineBtn.setOnClickListener(this);
+        dashedLineBtn.setOnClickListener(this);
         roundRectBtn.setOnClickListener(this);
         ovalBtn.setOnClickListener(this);
         textBtn.setOnClickListener(this);
@@ -126,11 +127,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawingView.setActiveTool(new CircleTool());
                 break;
             case R.id.line_btn:
-                Log.d("DEBUG","masuk line tool");
                 drawingView.setActiveTool(new LineTool());
                 break;
             case R.id.dashed_line_btn:
-                Log.d("DEBUG","masuk dashed line tool");
                 drawingView.setActiveTool(new DashedLineTool());
                 break;
             case R.id.roundrect_btn:
