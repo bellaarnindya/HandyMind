@@ -2,37 +2,33 @@ package com.example.sabila.handymind;
 
 import android.Manifest;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.*;
 import android.widget.Button;
-
+import android.widget.EditText;
+import android.widget.PopupWindow;
 
 import com.example.sabila.handymind.buttons.CircleButton;
-import com.example.sabila.handymind.buttons.LineButton;
 import com.example.sabila.handymind.buttons.DashedLineButton;
+import com.example.sabila.handymind.buttons.LineButton;
 import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
 import com.example.sabila.handymind.buttons.RoundRectButton;
 import com.example.sabila.handymind.buttons.TextButton;
 import com.example.sabila.handymind.tools.CircleTool;
+import com.example.sabila.handymind.tools.DashedLineTool;
 import com.example.sabila.handymind.tools.LineTool;
 import com.example.sabila.handymind.tools.OvalTool;
 import com.example.sabila.handymind.tools.RectangleTool;
@@ -41,10 +37,7 @@ import com.example.sabila.handymind.tools.TextTool;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Date;
-
-import static java.lang.System.out;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -90,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rectBtn.setOnClickListener(this);
         circleBtn.setOnClickListener(this);
         lineBtn.setOnClickListener(this);
+        dashedLineBtn.setOnClickListener(this);
         roundRectBtn.setOnClickListener(this);
         ovalBtn.setOnClickListener(this);
         textBtn.setOnClickListener(this);
@@ -134,6 +128,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.line_btn:
                 drawingView.setActiveTool(new LineTool());
+                break;
+            case R.id.dashed_line_btn:
+                drawingView.setActiveTool(new DashedLineTool());
                 break;
             case R.id.roundrect_btn:
                 drawingView.setActiveTool(new RoundRectTool());

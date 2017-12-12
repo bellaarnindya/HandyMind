@@ -5,12 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.sabila.handymind.shapes.ActiveState;
-import com.example.sabila.handymind.shapes.Line;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.TextTool;
 
@@ -34,7 +31,6 @@ public class DrawingView extends View {
 
     private String textMessage;
     public Shape shape;
-    private static boolean dashedLine = false;
 
     private int selectedCircle = -1;
 
@@ -101,9 +97,6 @@ public class DrawingView extends View {
                     Shape newShape = tool.createShape(touchX, touchY);
                     shapes.add(newShape);
                     shapeOnCreating = newShape;
-                    if(newShape instanceof Line && dashedLine) {
-                        ((Line) shapeOnCreating).setDashedLine();
-                    }
                 }
 
 
