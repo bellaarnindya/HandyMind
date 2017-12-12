@@ -115,7 +115,7 @@ public class DrawingView extends View {
 
                 if (isSingleTouch) {
                     Log.i("ACTION_UP", "clicked");
-                    touchedShape.click();
+//                    touchedShape.click();
                     isSingleTouch = false;
                 } else {
                     touchedShape = null;
