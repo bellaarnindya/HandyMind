@@ -3,10 +3,9 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 
-import com.example.sabila.handymind.LineBodyBehavior;
-import com.example.sabila.handymind.LineHeadBehavior;
+import com.example.sabila.handymind.lineBehaviors.LineBodyBehavior;
+import com.example.sabila.handymind.lineBehaviors.LineHeadBehavior;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.lineBehaviors.LineDashedBody;
 import com.example.sabila.handymind.lineBehaviors.LineStraightBody;

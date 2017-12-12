@@ -31,6 +31,7 @@ public class ShapeCaretaker {
 //            remove_after();
 //        }
         listOfShapeMemento.add(memento);
+        currentMemento = memento;
         currentMementoNum += 1;
     }
 

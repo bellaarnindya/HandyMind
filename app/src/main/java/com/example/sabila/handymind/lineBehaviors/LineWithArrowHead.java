@@ -2,9 +2,6 @@ package com.example.sabila.handymind.lineBehaviors;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
-
-import com.example.sabila.handymind.LineHeadBehavior;
 
 /**
  * Created by pclp on 08/12/2017.
