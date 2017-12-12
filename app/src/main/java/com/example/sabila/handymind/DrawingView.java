@@ -90,6 +90,9 @@ public class DrawingView extends View {
                             shapes.get(i).setInactive();
                         }
                     }
+                    else {
+                        shapes.get(i).setInactive();
+                    }
                 }
 
                 if (!touchOnShape && !isResizing) {
