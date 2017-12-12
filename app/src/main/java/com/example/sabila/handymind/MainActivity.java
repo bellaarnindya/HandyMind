@@ -15,7 +15,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.*;
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private AlertDialog dialog;
     private String message;
     private Button saveBtn;
+    private PopupWindow popupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Log.d("path",mPath);
 
                     // create bitmap screen capture
-                    View v1 = getWindow().getDecorView().getRootView();
+                    View v1 = findViewById(R.id.drawing_view);
                     v1.setDrawingCacheEnabled(true);
                     Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
                     v1.setDrawingCacheEnabled(false);
@@ -170,6 +174,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
                     outputStream.flush();
                     outputStream.close();
+
+                    // Show popup
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Save Status");
+                    builder.setMessage("Save success, file located at " + mPath);
+
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+
+                    AlertDialog savePopUp = builder.create();
+                    savePopUp.show();
+
 
                 } catch (Throwable e) {
                     // Several error may come out with file handling or DOM
