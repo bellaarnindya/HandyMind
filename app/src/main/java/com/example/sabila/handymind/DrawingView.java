@@ -5,11 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.sabila.handymind.shapes.ActiveState;
 import com.example.sabila.handymind.shapes.Line;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.TextTool;
@@ -89,9 +87,6 @@ public class DrawingView extends View {
 //                            Log.i("DrawingView", "Set Inactive shape " + i);
                             shapes.get(i).setInactive();
                         }
-                    }
-                    else {
-                        shapes.get(i).setInactive();
                     }
                 }
 
