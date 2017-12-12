@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dialog.show();
                 break;
             case R.id.save_button:
-                if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                if(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
                     //Log.v(TAG,"Permission is granted");
                     //File write logic here
                     //return true;
