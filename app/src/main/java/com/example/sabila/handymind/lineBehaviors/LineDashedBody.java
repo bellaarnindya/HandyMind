@@ -2,6 +2,7 @@ package com.example.sabila.handymind.lineBehaviors;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.example.sabila.handymind.LineBodyBehavior;
 
@@ -12,6 +13,7 @@ import com.example.sabila.handymind.LineBodyBehavior;
 public class LineDashedBody extends LineBodyBehavior {
     @Override
     public void drawBody(Canvas canvas, Paint paint, float xStart, float yStart, float xEnd, float yEnd) {
+        Log.d("DEBUG","masuk draw dashedline");
         float x1 = xStart;
         float y1 = yStart;
         float x2, y2;
