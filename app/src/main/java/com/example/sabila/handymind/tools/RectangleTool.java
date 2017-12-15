@@ -6,6 +6,8 @@ import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.Tool;
 import com.example.sabila.handymind.shapes.Rectangle;
 
+import java.util.List;
+
 /**
  * Created by Sabila on 12/10/2017.
  */
@@ -31,5 +33,10 @@ public class RectangleTool extends Tool {
         }
         
         rectangle.updatePoint(x, y);
+    }
+
+    @Override
+    public void touchUp(List<Shape> shapeList) {
+
     }
 }

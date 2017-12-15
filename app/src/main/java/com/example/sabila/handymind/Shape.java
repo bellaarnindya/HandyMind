@@ -64,5 +64,9 @@ public abstract class Shape {
     public void setInactive() {}
 
     public boolean isTouched(float touchX, float touchY) { return false; }
+    public abstract float getRightX();
+    public abstract float getRightY();
+    public abstract float getLeftX();
+    public abstract float getLeftY();
 
 }

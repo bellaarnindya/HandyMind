@@ -111,4 +111,24 @@ public class RoundRect extends Shape {
 
     @Override
     public void setInactive() {drawPaint.setStrokeWidth(5); }
+
+    @Override
+    public float getRightX() {
+        return this.x + this.width;
+    }
+
+    @Override
+    public float getRightY() {
+        return this.height / 2;
+    }
+
+    @Override
+    public float getLeftX() {
+        return this.x;
+    }
+
+    @Override
+    public float getLeftY() {
+        return this.height / 2;
+    }
 }

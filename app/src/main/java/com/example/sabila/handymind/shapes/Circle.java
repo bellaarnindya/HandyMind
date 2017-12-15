@@ -95,4 +95,24 @@ public class Circle extends Shape {
 
     @Override
     public void setInactive() {drawPaint.setStrokeWidth(5); }
+
+    @Override
+    public float getRightX() {
+        return (float) (this.cx + (radius * Math.cos(180)));
+    }
+
+    @Override
+    public float getRightY() {
+        return (float) (this.cy + (radius * Math.sin(180)));
+    }
+
+    @Override
+    public float getLeftX() {
+        return (float) (this.cx + (radius * Math.cos(0)));
+    }
+
+    @Override
+    public float getLeftY() {
+        return (float) (this.cy + (radius * Math.sin(0)));
+    }
 }
