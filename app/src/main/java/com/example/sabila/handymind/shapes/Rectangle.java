@@ -5,10 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.sabila.handymind.Shape;
-import com.example.sabila.handymind.ShapeObservable;
 import com.example.sabila.handymind.ShapeObserver;
-import com.example.sabila.handymind.observables.ShapeDestinationObservable;
-import com.example.sabila.handymind.observables.ShapeSourceObservable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +21,7 @@ public class Rectangle extends Shape {
     private float width;
     private float height;
 
-    private ArrayList<ShapeObserver> observers;
+    private ArrayList<ShapeObserver> rectObservers;
 
     private Paint drawPaint;
 
@@ -33,6 +30,8 @@ public class Rectangle extends Shape {
         this.y = y;
         this.width = (float)0;
         this.height = (float)0;
+
+        rectObservers = new ArrayList<>();
 
         drawPaint = new Paint();
         drawPaint.setColor(Color.BLACK);
@@ -104,7 +103,8 @@ public class Rectangle extends Shape {
         this.x = touchX - xCoordsOnTouch;
         this.y = touchY - yCoordsOnTouch;
 
-        this.updatePoint(touchX, touchY);
+        this.updatePoint();
+        notifyAllObservers();
     }
 
     @Override
@@ -164,34 +164,15 @@ public class Rectangle extends Shape {
         this.setState(new InactiveState());
     }
 
-    private void drawResizingCircles(Canvas canvas) {
-        for (int i = 0; i < resizingCircle.size(); i++) {
-            resizingCircle.get(i).draw(canvas);
+    @Override
+    public void attach(ShapeObserver observer) {
+        rectObservers.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        for (ShapeObserver observer : rectObservers) {
+            observer.update(this);
         }
-    }
-
-    public void updatePoint(float touchX, float touchY) {
-        resizingCircle.get(0).updateCoordiate(getX(), getY());
-        resizingCircle.get(1).updateCoordiate(getX() + width, getY() + height);
-    }
-
-    @Override
-    public float getRightX() {
-        return this.x + this.width;
-    }
-
-    @Override
-    public float getRightY() {
-        return this.height / 2;
-    }
-
-    @Override
-    public float getLeftX() {
-        return this.x;
-    }
-
-    @Override
-    public float getLeftY() {
-        return this.height / 2;
     }
 }

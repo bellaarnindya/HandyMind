@@ -19,7 +19,10 @@ public class LineStartObserver extends ShapeObserver {
     }
 
     @Override
-    public void update(float x, float y) {
+    public void update(Shape shape) {
+        float x = shape.getRight();
+        float y = (shape.getBottom() + shape.getTop()) / 2;
+
         lineObserver.setxStart(x);
         lineObserver.setyStart(y);
     }
