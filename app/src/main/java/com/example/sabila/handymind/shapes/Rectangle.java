@@ -176,16 +176,4 @@ public class Rectangle extends Shape {
         this.width = 0;
         this.height = 0;
     }
-
-    @Override
-    public void attach(ShapeObserver observer) {
-        rectObservers.add(observer);
-    }
-
-    @Override
-    public void notifyAllObservers() {
-        for (ShapeObserver observer : rectObservers) {
-            observer.update(this);
-        }
-    }
 }

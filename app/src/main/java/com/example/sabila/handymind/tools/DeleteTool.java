@@ -21,13 +21,13 @@ public class DeleteTool extends Tool {
             if (shape.isTouched(x, y)) {
                 shape.setActive();
                 shapeToDelete = shape;
+                int indexOfDelete = shapeList.indexOf(shapeToDelete);
+                shapeToDelete.delete();
+                drawingView.deleteShape(indexOfDelete);
+                shapeToDelete.notifyAllObservers();
                 break;
             }
         }
-        int indexOfDelete = shapeList.indexOf(shapeToDelete);
-        shapeToDelete.delete();
-        drawingView.deleteShape(indexOfDelete);
-        shapeToDelete.notifyAllObservers();
     }
 
     @Override
