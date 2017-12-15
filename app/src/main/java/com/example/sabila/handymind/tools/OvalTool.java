@@ -15,10 +15,9 @@ public class OvalTool extends Tool {
     private Oval oval;
 
     @Override
-    public Shape touchDown(float x, float y, DrawingView drawingView) {
+    public void touchDown(float x, float y, DrawingView drawingView) {
         oval = new Oval(x, y);
         drawingView.addShape(oval);
-        return oval;
     }
 
     @Override

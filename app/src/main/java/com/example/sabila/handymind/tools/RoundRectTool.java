@@ -15,10 +15,9 @@ public class RoundRectTool extends Tool {
     private RoundRect roundRect;
 
     @Override
-    public Shape touchDown(float x, float y, DrawingView drawingView) {
+    public void touchDown(float x, float y, DrawingView drawingView) {
         roundRect = new RoundRect(x, y);
         drawingView.addShape(roundRect);
-        return roundRect;
     }
 
     @Override

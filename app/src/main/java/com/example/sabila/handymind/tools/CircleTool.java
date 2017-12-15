@@ -16,10 +16,9 @@ public class CircleTool extends Tool {
     private Circle circle;
 
     @Override
-    public Shape touchDown(float x, float y, DrawingView drawingView) {
+    public void touchDown(float x, float y, DrawingView drawingView) {
         circle = new Circle(x, y);
         drawingView.addShape(circle);
-        return circle;
     }
 
     @Override
