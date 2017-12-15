@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private AlertDialog dialog;
     private String message;
     private Button saveBtn;
+    private Button deleteBtn;
+    private Button undoBtn;
+    private Button redoBtn;
     private PopupWindow popupWindow;
 
     @Override
@@ -77,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         roundRectBtn = (RoundRectButton) findViewById(R.id.roundrect_btn);
         ovalBtn= (OvalButton) findViewById(R.id.oval_btn);
         textBtn = (TextButton) findViewById(R.id.text_btn);
+        undoBtn = (android.widget.Button) findViewById(R.id.undo_btn);
+        redoBtn = (android.widget.Button) findViewById(R.id.redo_btn);
+        deleteBtn = (android.widget.Button) findViewById(R.id.delete_button);
         saveBtn = (android.widget.Button) findViewById(R.id.save_button);
 
 
@@ -87,6 +93,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         roundRectBtn.setOnClickListener(this);
         ovalBtn.setOnClickListener(this);
         textBtn.setOnClickListener(this);
+        undoBtn.setOnClickListener(this);
+        redoBtn.setOnClickListener(this);
+        deleteBtn.setOnClickListener(this);
         saveBtn.setOnClickListener(this);
     }
 
