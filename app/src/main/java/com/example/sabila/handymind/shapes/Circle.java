@@ -110,13 +110,14 @@ public class Circle extends Shape {
     public void setActive() {
         drawPaint.setStrokeWidth(7);
         onResize = true;
-
+        this.setState(new ActiveState());
     }
 
     @Override
     public void setInactive() {
         drawPaint.setStrokeWidth(5);
         onResize = false;
+        this.setState(new InactiveState());
     }
 
     @Override
