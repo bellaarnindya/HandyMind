@@ -5,9 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.sabila.handymind.Memento.ShapeCaretaker;
+import com.example.sabila.handymind.Memento.ShapeMemento;
+import com.example.sabila.handymind.Memento.ShapeOriginator;
+import com.example.sabila.handymind.shapes.ActiveState;
 import com.example.sabila.handymind.shapes.Line;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.TextTool;
@@ -35,12 +40,16 @@ public class DrawingView extends View {
 
     private int selectedCircle = -1;
 
+    private ShapeCaretaker caretaker;
+    private ShapeOriginator originator;
+
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         tool = new RectangleTool();
-
         shapes = new ArrayList<>();
+        caretaker = new ShapeCaretaker();
+        originator = new ShapeOriginator();
     }
 
 
@@ -98,8 +107,8 @@ public class DrawingView extends View {
                     Shape newShape = tool.createShape(touchX, touchY);
                     shapes.add(newShape);
                     shapeOnCreating = newShape;
+                    saveShapeState();
                 }
-
 
                 invalidate();
                 break;
@@ -153,9 +162,62 @@ public class DrawingView extends View {
             int indexOfDelete = shapes.indexOf(touchedShape);
             touchedShape = null;
             shapes.remove(indexOfDelete);
+            saveShapeState();
 
             invalidate();
         }
     }
 
+    public void saveShapeState() {
+        originator.setShapeList(shapes);
+        caretaker.saveState( originator.save() );
+    }
+
+    public void undo() {
+        Log.d("Debug", "masuk fungsi undo");
+
+        if (caretaker.getUndo()) {
+            Log.d("Debug", "bisa undo");
+            shapes = new ArrayList<>();
+            shapes = caretaker.getCurrentMemento().shapeList;
+            originator.setShapeList(shapes);
+            invalidate();
+        }
+        else {
+            Log.d("Debug", "undo memento kosong");
+            shapes = originator.restore();
+            setFalse();
+            invalidate();
+        }
+
+        invalidate();
+    }
+
+    public void redo() {
+
+        ShapeMemento coba = caretaker.getCurrentMemento();
+        shapes = coba.shapeList;
+//        invalidate();
+//        ShapeMemento redoMemento = caretaker.getRedo();
+//        if (redoMemento != null) {
+//            shapes = redoMemento.shapeList;
+//            originator.setShapeList(shapes);
+//            setFalse();
+//        }
+//        else {
+//            shapes = originator.restore();
+//            setFalse();
+//        }
+
+
+        invalidate();
+    }
+
+    private void setFalse() {
+        touchedShape = null;
+        shapeOnCreating = null;
+        isSingleTouch = false;
+        isResizing = false;
+        isMoving = false;
+    }
 }

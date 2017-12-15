@@ -1,7 +1,10 @@
 package com.example.sabila.handymind.Memento;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by nafiar on 12/12/17.
@@ -10,8 +13,8 @@ import java.util.List;
 public class ShapeCaretaker {
     private List<ShapeMemento> listOfShapeMemento;
     public ShapeMemento currentMemento ;
-    public static int currentMementoNum;
-    public final static int maxMemento = 20;
+    private static int currentMementoNum;
+    private final static int maxMemento = 20;
 
     public ShapeCaretaker() {
         listOfShapeMemento = new ArrayList<>();
@@ -28,32 +31,71 @@ public class ShapeCaretaker {
 //            }
 //        }
 //        else {
-//            remove_after();
+//            remove_last();
 //        }
         listOfShapeMemento.add(memento);
         currentMemento = memento;
         currentMementoNum += 1;
     }
 
-    public ShapeMemento undo() {
+    public boolean getUndo() {
 
-        int index = listOfShapeMemento.indexOf(currentMemento);
-        ShapeMemento getMemento = listOfShapeMemento.get(index-1);
-        currentMemento = getMemento;
+//        ListIterator it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento));
+//        Log.d("Debug", "index sekarang : " + listOfShapeMemento.indexOf(currentMemento));
+//        if (it.hasPrevious()) {
+//            int prevIndex = it.previousIndex();
+//            currentMemento = listOfShapeMemento.get(prevIndex);
+//            Log.d("Debug", "index sekarang : " + listOfShapeMemento.indexOf(currentMemento));
+//            return currentMemento;
+//        }
+//        else {
+//            return null;
+//        }
+//        ListIterator it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento));
+        int currentIndex = listOfShapeMemento.indexOf(currentMemento);
+        Log.d("Debug", "current index : " + currentIndex);
+        ShapeMemento undoMemento = listOfShapeMemento.get(currentIndex-1);
+        if (undoMemento != null) {
+            currentMemento = undoMemento;
+            Log.d("Debug", "undo index : " + listOfShapeMemento.indexOf(currentMemento));
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
+    public boolean getRedo() {
+
+        ListIterator it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento));
+        int currentIndex = listOfShapeMemento.indexOf(currentMemento);
+        ShapeMemento redoMemento = listOfShapeMemento.get(currentIndex+1);
+        if (redoMemento != null) {
+            currentMemento = redoMemento;
+            return true;
+        }
+        else {
+            return false;
+        }
+
+//        Log.d("Debug", "index sekarang : " + listOfShapeMemento.indexOf(currentMemento));
+//        if (it.hasNext()) {
+//            ShapeMemento getNext = (ShapeMemento) it.next();
+//            currentMemento = getNext;
+//            Log.d("Debug", "index sekarang : " + listOfShapeMemento.indexOf(currentMemento));
+//            return currentMemento;
+//        }
+//        else {
+//            return null;
+//        }
+    }
+
+    public ShapeMemento getCurrentMemento() {
+        Log.d("Debug", "current index : " + listOfShapeMemento.indexOf(currentMemento));
         return currentMemento;
     }
 
-    public ShapeMemento redo() {
-
-        int index = listOfShapeMemento.indexOf(currentMemento);
-        ShapeMemento getMemento = listOfShapeMemento.get(index+1);
-        currentMemento = getMemento;
-
-        return currentMemento;
-    }
-
-//    public remove_after() {
+//    public remove_last() {
 //
 //    }
 }

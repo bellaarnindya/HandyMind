@@ -153,8 +153,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dialog.show();
                 break;
             case R.id.delete_button:
-//                Log.d("Debug", "delete button pressed");
                 drawingView.deleteShape();
+                break;
+            case R.id.undo_btn:
+                drawingView.undo();
+                break;
+            case R.id.redo_btn:
+                drawingView.redo();
                 break;
             case R.id.save_button:
                 if(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){

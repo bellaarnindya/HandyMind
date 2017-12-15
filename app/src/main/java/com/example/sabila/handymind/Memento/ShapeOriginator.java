@@ -12,9 +12,8 @@ import java.util.List;
 public class ShapeOriginator {
     public List<Shape> shapeList;
 
-    public ShapeOriginator(List<Shape> list) {
+    public ShapeOriginator() {
         shapeList = new ArrayList<>();
-        shapeList = list;
     }
 
     public void setShapeList(List<Shape> list) {
@@ -25,7 +24,7 @@ public class ShapeOriginator {
         return new ShapeMemento(shapeList);
     }
 
-    public void restore(ShapeMemento memento) {
-        shapeList = memento.shapeList;
+    public List<Shape> restore() {
+        return shapeList;
     }
 }
