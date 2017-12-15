@@ -20,10 +20,9 @@ public class LineTool extends Tool {
     private Line line;
 
     @Override
-    public Shape touchDown(float x, float y, DrawingView drawingView) {
+    public void touchDown(float x, float y, DrawingView drawingView) {
         line = new Line(x, y);
         drawingView.addShape(line);
-        return line;
     }
 
     @Override

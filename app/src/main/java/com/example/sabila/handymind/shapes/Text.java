@@ -108,4 +108,8 @@ public class Text extends Shape {
     public void notifyAllObservers() {
         super.notifyAllObservers();
     }
+
+    public boolean intersects(float x, float y, Shape shape) {
+        return shape.isTouched(x, y);
+    }
 }

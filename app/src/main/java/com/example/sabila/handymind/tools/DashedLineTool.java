@@ -17,11 +17,10 @@ public class DashedLineTool extends Tool {
     private Line line;
 
     @Override
-    public Shape touchDown(float x, float y, DrawingView drawingView) {
+    public void touchDown(float x, float y, DrawingView drawingView) {
         line = new Line(x, y);
         line.setDashedLine();
         drawingView.addShape(line);
-        return line;
     }
 
     @Override

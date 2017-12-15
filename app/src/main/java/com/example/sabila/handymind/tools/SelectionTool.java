@@ -20,7 +20,7 @@ public class SelectionTool extends Tool {
     private int selectedCircle = -1;
 
     @Override
-    public Shape touchDown(float x, float y, DrawingView drawingView) {
+    public void touchDown(float x, float y, DrawingView drawingView) {
         List<Shape> shapeList = drawingView.getShapes();
         for (Shape shape : shapeList) {
             if (shape.isTouched(x, y)) {
@@ -46,8 +46,6 @@ public class SelectionTool extends Tool {
         if (!touchOnShape && !isResizing) {
             touchedShape = null;
         }
-
-        return touchedShape;
     }
 
     @Override

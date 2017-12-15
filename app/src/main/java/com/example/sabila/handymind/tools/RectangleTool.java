@@ -18,10 +18,9 @@ public class RectangleTool extends Tool {
     private Rectangle rectangle;
 
     @Override
-    public Shape touchDown(float x, float y, DrawingView drawingView) {
+    public void touchDown(float x, float y, DrawingView drawingView) {
         rectangle = new Rectangle(x, y);
         drawingView.addShape(rectangle);
-        return rectangle;
     }
 
     @Override

@@ -21,18 +21,10 @@ import java.util.List;
 public class DrawingView extends View {
 
     private List<Shape> shapes;
-    private Shape touchedShape = null;
-    private Shape shapeOnCreating = null;
     private Tool tool;
-
-    private boolean isSingleTouch = false;
-    private boolean isResizing = false;
-    private boolean isMoving = false;
 
     private String textMessage;
     public Shape shape;
-
-    private int selectedCircle = -1;
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -58,8 +50,6 @@ public class DrawingView extends View {
         float touchX = event.getX();
         float touchY = event.getY();
 
-        boolean touchOnShape = false;
-
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
 
@@ -67,42 +57,21 @@ public class DrawingView extends View {
                     this.tool.touchDown(touchX, touchY, this);
                 }
 
-//                if (touchedShape == null && !isSingleTouch) {
-//                    Shape newShape = tool.touchDown(touchX, touchY, this);
-//                    shapes.add(newShape);
-//                    shapeOnCreating = newShape;
-//                }
-
                 invalidate();
                 break;
 
             case MotionEvent.ACTION_MOVE:
-//                Log.i("MOVE", "isMoving");
-                isSingleTouch = false;
-
-                this.tool.touchMove(touchX, touchY);
-
-//                if (isResizing) {
-//                    touchedShape.resize(selectedCircle, touchX, touchY);
-//                } else if (shapeOnCreating != null) {
-//                    tool.touchMove(touchX, touchY);
-//                } else if (isMoving) {
-//                    touchedShape.move(touchX, touchY);
-//                }
+                if (this.tool != null) {
+                    this.tool.touchMove(touchX, touchY);
+                }
 
                 invalidate();
                 break;
 
             case MotionEvent.ACTION_UP:
-                shapeOnCreating = null;
-
-                this.tool.touchUp(this);
-
-                if (isSingleTouch) {
-                    isSingleTouch = false;
+                if (this.tool != null) {
+                    this.tool.touchUp(this);
                 }
-
-                isResizing = false;
 
                 invalidate();
                 break;

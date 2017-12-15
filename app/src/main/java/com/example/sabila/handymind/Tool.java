@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class Tool {
 
-    public abstract Shape touchDown(float x, float y, DrawingView drawingView);
+    public abstract void touchDown(float x, float y, DrawingView drawingView);
     public abstract void touchMove(float x, float y);
     public abstract void touchUp(DrawingView drawingView);
 }
