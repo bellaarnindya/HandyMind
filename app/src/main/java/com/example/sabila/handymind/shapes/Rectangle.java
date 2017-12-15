@@ -7,10 +7,7 @@ import android.graphics.Rect;
 import android.util.Log;
 
 import com.example.sabila.handymind.Shape;
-import com.example.sabila.handymind.ShapeObservable;
 import com.example.sabila.handymind.ShapeObserver;
-import com.example.sabila.handymind.observables.ShapeDestinationObservable;
-import com.example.sabila.handymind.observables.ShapeSourceObservable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +23,7 @@ public class Rectangle extends Shape {
     private float width;
     private float height;
 
-    private ArrayList<ShapeObserver> observers;
+    private ArrayList<ShapeObserver> rectObservers;
 
     private Paint drawPaint;
 
@@ -35,6 +32,8 @@ public class Rectangle extends Shape {
         this.y = y;
         this.width = (float)0;
         this.height = (float)0;
+
+        rectObservers = new ArrayList<>();
 
         drawPaint = new Paint();
         drawPaint.setColor(Color.BLACK);
@@ -107,6 +106,7 @@ public class Rectangle extends Shape {
         this.y = touchY - yCoordsOnTouch;
 
         this.updatePoint();
+        notifyAllObservers();
     }
 
     @Override
@@ -155,5 +155,17 @@ public class Rectangle extends Shape {
     public void setInactive() {
         drawPaint.setStrokeWidth(5);
         onResize = false;
+    }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+        rectObservers.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        for (ShapeObserver observer : rectObservers) {
+            observer.update(this);
+        }
     }
 }

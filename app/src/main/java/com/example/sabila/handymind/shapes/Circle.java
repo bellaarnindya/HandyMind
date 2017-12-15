@@ -5,6 +5,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.ShapeObservable;
+import com.example.sabila.handymind.ShapeObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sabila on 11/28/2017.
@@ -15,12 +20,15 @@ public class Circle extends Shape {
     private float cx;
     private float cy;
     private float radius;
+    private List<ShapeObserver> circleObservers;
 
     private Paint drawPaint;
 
     public Circle(float cx, float cy) {
         this.cx = cx;
         this.cy = cy;
+
+        circleObservers = new ArrayList<>();
 
         drawPaint = new Paint();
         drawPaint.setColor(Color.BLACK);
@@ -86,6 +94,7 @@ public class Circle extends Shape {
         this.cy = touchY - yCoordsOnTouch;
 
         this.updatePoint();
+        notifyAllObservers();
     }
 
     @Override
@@ -137,4 +146,15 @@ public class Circle extends Shape {
     @Override
     public void setTop(float y) { this.setRadius(this.cy - y); }
 
+    @Override
+    public void attach(ShapeObserver observer) {
+        circleObservers.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        for (ShapeObserver observer : circleObservers) {
+            observer.update(this);
+        }
+    }
 }

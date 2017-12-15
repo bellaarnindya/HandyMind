@@ -104,4 +104,8 @@ public class Text extends Shape {
         drawPaint.setStrokeWidth(5);
     }
 
+    @Override
+    public void notifyAllObservers() {
+        super.notifyAllObservers();
+    }
 }

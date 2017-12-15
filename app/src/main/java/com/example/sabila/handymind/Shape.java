@@ -18,7 +18,7 @@ import java.util.UUID;
  * Created by Sabila on 11/20/2017.
  */
 
-public abstract class Shape {
+public abstract class Shape implements ShapeObservable{
     private UUID ID;
     public ShapeState currentState;
     protected float xCoordsOnTouch;
@@ -175,4 +175,14 @@ public abstract class Shape {
     public void setRight(float x){  }
     public void setBottom(float y){  }
     public void setTop(float y){  }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+
+    }
+
+    @Override
+    public void notifyAllObservers() {
+
+    }
 }

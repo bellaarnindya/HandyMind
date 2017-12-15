@@ -5,7 +5,6 @@ package com.example.sabila.handymind;
  */
 
 public abstract class ShapeObserver {
-    protected ShapeObservable shapeObservable;
 
-    public abstract void update(float x, float y);
+    public abstract void update(Shape shapeObservable);
 }

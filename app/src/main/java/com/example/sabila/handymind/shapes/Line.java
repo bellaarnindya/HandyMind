@@ -153,4 +153,9 @@ public class Line extends Shape {
     public boolean intersects(float x, float y, Shape shape){
         return shape.isTouched(x, y);
     }
+
+    @Override
+    public void notifyAllObservers() {
+        super.notifyAllObservers();
+    }
 }
