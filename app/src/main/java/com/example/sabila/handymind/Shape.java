@@ -68,10 +68,6 @@ public abstract class Shape {
     public void setInactive() {}
 
     public boolean isTouched(float touchX, float touchY) { return false; }
-    public abstract float getRightX();
-    public abstract float getRightY();
-    public abstract float getLeftX();
-    public abstract float getLeftY();
 
     public int isResizeTouched(float touchX, float touchY) {
         int circleTouched = -1;
@@ -170,13 +166,13 @@ public abstract class Shape {
         }
     }
 
-    protected float getLeft(){ return (float) 0.0; }
-    protected float getRight(){ return (float) 0.0; }
-    protected float getBottom(){ return (float) 0.0; }
-    protected float getTop(){ return (float) 0.0; }
+    public float getLeft(){ return (float) 0.0; }
+    public float getRight(){ return (float) 0.0; }
+    public float getBottom(){ return (float) 0.0; }
+    public float getTop(){ return (float) 0.0; }
 
-    protected void setLeft(float x){  }
-    protected void setRight(float x){  }
-    protected void setBottom(float y){  }
-    protected void setTop(float y){  }
+    public void setLeft(float x){  }
+    public void setRight(float x){  }
+    public void setBottom(float y){  }
+    public void setTop(float y){  }
 }

@@ -22,7 +22,12 @@ public class ShapeDestinationObservable extends ShapeObservable {
 
     @Override
     public void setShape(Shape shape) {
+        this.shape = shape;
+    }
 
+    @Override
+    public Shape getShape() {
+        return this.shape;
     }
 
     @Override
@@ -38,7 +43,7 @@ public class ShapeDestinationObservable extends ShapeObservable {
     @Override
     public void notifyAllObservers(float touchX, float touchY) {
         for (ShapeObserver observer : shapeObservers) {
-            observer.update(this.shape.getLeftX(), this.shape.getLeftY());
+            observer.update(this.shape.getLeft(), (this.shape.getBottom() - this.shape.getTop()) / 2);
         }
     }
 }

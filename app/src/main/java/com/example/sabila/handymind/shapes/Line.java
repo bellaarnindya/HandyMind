@@ -149,25 +149,6 @@ public class Line extends Shape {
         this.headBehavior = new LineWithArrowHead();
     }
 
-    @Override
-    public float getRightX() {
-        return this.xEnd;
-    }
-
-    @Override
-    public float getRightY() {
-        return this.yEnd;
-    }
-
-    @Override
-    public float getLeftX() {
-        return this.xStart;
-    }
-
-    @Override
-    public float getLeftY() {
-        return yStart;
-    }
 
     public boolean intersects(float x, float y, Shape shape){
         return shape.isTouched(x, y);

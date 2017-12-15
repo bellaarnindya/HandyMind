@@ -104,23 +104,4 @@ public class Text extends Shape {
         drawPaint.setStrokeWidth(5);
     }
 
-    @Override
-    public float getRightX() {
-        return 0;
-    }
-
-    @Override
-    public float getRightY() {
-        return 0;
-    }
-
-    @Override
-    public float getLeftX() {
-        return 0;
-    }
-
-    @Override
-    public float getLeftY() {
-        return 0;
-    }
 }

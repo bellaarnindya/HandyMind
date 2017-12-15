@@ -28,6 +28,11 @@ public class ShapeSourceObservable extends ShapeObservable {
     }
 
     @Override
+    public Shape getShape() {
+        return this.shape;
+    }
+
+    @Override
     public void attach(ShapeObserver observer) {
         shapeObservers.add(observer);
     }

@@ -39,6 +39,5 @@ public class RectangleTool extends Tool {
 
     @Override
     public void touchUp(DrawingView drawingView) {
-
     }
 }

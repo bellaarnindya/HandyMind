@@ -123,13 +123,13 @@ public class RoundRect extends Shape {
     }
 
     @Override
-    protected float getLeft(){ return this.x; }
+    public float getLeft(){ return this.x; }
     @Override
-    protected float getRight(){ return this.x + this.width; }
+    public float getRight(){ return this.x + this.width; }
     @Override
-    protected float getBottom(){ return this.y + this.height; }
+    public float getBottom(){ return this.y + this.height; }
     @Override
-    protected float getTop(){ return this.y; }
+    public float getTop(){ return this.y; }
 
     @Override
     public void setRight(float x) { this.width = x - this.x; }
@@ -145,26 +145,5 @@ public class RoundRect extends Shape {
         float bottom = getBottom();
         this.setHeight(bottom - y);
         this.y = y;
-    }
-    public void setInactive() {drawPaint.setStrokeWidth(5); }
-
-    @Override
-    public float getRightX() {
-        return this.x + this.width;
-    }
-
-    @Override
-    public float getRightY() {
-        return this.height / 2;
-    }
-
-    @Override
-    public float getLeftX() {
-        return this.x;
-    }
-
-    @Override
-    public float getLeftY() {
-        return this.height / 2;
     }
 }

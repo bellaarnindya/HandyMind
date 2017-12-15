@@ -155,24 +155,4 @@ public class Oval extends Shape {
         drawPaint.setStrokeWidth(5);
         onResize = false;
     }
-
-    @Override
-    public float getRightX() {
-        return this.right;
-    }
-
-    @Override
-    public float getRightY() {
-        return (this.top - this.bottom) / 2;
-    }
-
-    @Override
-    public float getLeftX() {
-        return this.left;
-    }
-
-    @Override
-    public float getLeftY() {
-        return (this.top - this.bottom) / 2;
-    }
 }

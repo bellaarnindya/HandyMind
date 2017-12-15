@@ -9,6 +9,8 @@ import android.util.Log;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.ShapeObservable;
 import com.example.sabila.handymind.ShapeObserver;
+import com.example.sabila.handymind.observables.ShapeDestinationObservable;
+import com.example.sabila.handymind.observables.ShapeSourceObservable;
 
 import java.util.ArrayList;
 import java.util.List;
