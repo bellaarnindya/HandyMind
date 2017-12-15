@@ -13,7 +13,6 @@ import com.example.sabila.handymind.Memento.ShapeCaretaker;
 import com.example.sabila.handymind.Memento.ShapeMemento;
 import com.example.sabila.handymind.Memento.ShapeOriginator;
 import com.example.sabila.handymind.shapes.ActiveState;
-import com.example.sabila.handymind.shapes.Line;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.TextTool;
 
