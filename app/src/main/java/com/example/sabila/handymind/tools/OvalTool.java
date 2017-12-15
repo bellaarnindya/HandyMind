@@ -30,6 +30,8 @@ public class OvalTool extends Tool {
             oval.setRight(x);
             oval.setBottom(y);
         }
+
+        oval.updatePoint();
     }
 
     @Override

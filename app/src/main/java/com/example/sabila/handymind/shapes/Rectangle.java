@@ -41,11 +41,15 @@ public class Rectangle extends Shape {
 
         onResize = false;
 
-        CircleResize c1 = new CircleResize(x, y);
-        CircleResize c2 = new CircleResize(x, y);
+        CircleResize cTopLeft = new CircleResize(x, y);
+        CircleResize cTopRight = new CircleResize(x, y);
+        CircleResize cBottomRight = new CircleResize(x, y);
+        CircleResize cBottomLeft = new CircleResize(x, y);
 
-        resizingCircle.add(c1);
-        resizingCircle.add(c2);
+        resizingCircle.add(cTopLeft);
+        resizingCircle.add(cTopRight);
+        resizingCircle.add(cBottomRight);
+        resizingCircle.add(cBottomLeft);
     }
 
     public float getX() {
@@ -100,29 +104,39 @@ public class Rectangle extends Shape {
         this.x = touchX - xCoordsOnTouch;
         this.y = touchY - yCoordsOnTouch;
 
-        this.updatePoint(touchX, touchY);
+        this.updatePoint();
     }
 
     @Override
     public void finishMove(){}
 
     @Override
-    public void resize(float touchX, float touchY) {
-        float width = touchX - this.x;
-        float height = touchY - this.y;
+    public float getTop() { return this.y; }
+    @Override
+    public float getBottom() { return this.y + this.height; }
+    @Override
+    public float getRight() { return this.x + this.width; }
+    @Override
+    public float getLeft() { return this.x; }
 
-        if (width > 0 && height > 0) {
-            this.width = width;
-            this.height = height;
-        }
-
-        this.updatePoint(touchX, touchY);
-
+    @Override
+    public void setRight(float x) { this.width = x - this.x; }
+    @Override
+    public void setLeft(float x) {
+        this.setWidth(getRight() - x);
+        this.x = x;
+    }
+    @Override
+    public void setBottom(float y) { this.height = y - this.y; }
+    @Override
+    public void setTop(float y) {
+        float bottom = getBottom();
+        this.setHeight(bottom - y);
+        this.y = y;
     }
 
     @Override
     public boolean isTouched(float touchX, float touchY) {
-        Log.i("RECTANGLE", touchX + " " + touchY);
         return (touchX > this.x &&
                 touchX < this.x + this.width &&
                 touchY > this.y &&
@@ -139,36 +153,5 @@ public class Rectangle extends Shape {
     public void setInactive() {
         drawPaint.setStrokeWidth(5);
         onResize = false;
-    }
-
-    private void drawResizingCircles(Canvas canvas) {
-        for (int i = 0; i < resizingCircle.size(); i++) {
-            resizingCircle.get(i).draw(canvas);
-        }
-    }
-
-    public void updatePoint(float touchX, float touchY) {
-        resizingCircle.get(0).updateCoordiate(getX(), getY());
-        resizingCircle.get(1).updateCoordiate(getX() + width, getY() + height);
-    }
-
-    @Override
-    public float getRightX() {
-        return this.x + this.width;
-    }
-
-    @Override
-    public float getRightY() {
-        return this.height / 2;
-    }
-
-    @Override
-    public float getLeftX() {
-        return this.x;
-    }
-
-    @Override
-    public float getLeftY() {
-        return this.height / 2;
     }
 }

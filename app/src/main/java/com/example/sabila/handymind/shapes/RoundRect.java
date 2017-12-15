@@ -30,6 +30,18 @@ public class RoundRect extends Shape {
         drawPaint.setColor(Color.BLACK);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeWidth(4);
+
+        onResize = false;
+
+        CircleResize cTopLeft = new CircleResize(x, y);
+        CircleResize cTopRight = new CircleResize(x, y);
+        CircleResize cBottomRight = new CircleResize(x, y);
+        CircleResize cBottomLeft = new CircleResize(x, y);
+
+        resizingCircle.add(cTopLeft);
+        resizingCircle.add(cTopRight);
+        resizingCircle.add(cBottomRight);
+        resizingCircle.add(cBottomLeft);
     }
 
     public float getX() {
@@ -67,6 +79,10 @@ public class RoundRect extends Shape {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawRoundRect(x, y, width + x, height + y, RX, RY, drawPaint);
+
+        if (onResize) {
+            this.drawResizingCircles(canvas);
+        }
     }
 
     @Override
@@ -79,22 +95,12 @@ public class RoundRect extends Shape {
     public void move(float touchX, float touchY) {
         this.x = touchX - xCoordsOnTouch;
         this.y = touchY - yCoordsOnTouch;
+
+        this.updatePoint();
     }
 
     @Override
     public void finishMove(){}
-
-
-    @Override
-    public void resize(float touchX, float touchY) {
-        float width = touchX - this.x;
-        float height = touchY - this.y;
-
-        if (width > 0 && height > 0) {
-            this.width = width;
-            this.height = height;
-        }
-    }
 
     @Override
     public boolean isTouched(float touchX, float touchY) {
@@ -107,9 +113,39 @@ public class RoundRect extends Shape {
     @Override
     public void setActive() {
         drawPaint.setStrokeWidth(7);
+        onResize = true;
     }
 
     @Override
+    public void setInactive() {
+        drawPaint.setStrokeWidth(5);
+        onResize = false;
+    }
+
+    @Override
+    protected float getLeft(){ return this.x; }
+    @Override
+    protected float getRight(){ return this.x + this.width; }
+    @Override
+    protected float getBottom(){ return this.y + this.height; }
+    @Override
+    protected float getTop(){ return this.y; }
+
+    @Override
+    public void setRight(float x) { this.width = x - this.x; }
+    @Override
+    public void setLeft(float x) {
+        this.setWidth(getRight() - x);
+        this.x = x;
+    }
+    @Override
+    public void setBottom(float y) { this.height = y - this.y; }
+    @Override
+    public void setTop(float y) {
+        float bottom = getBottom();
+        this.setHeight(bottom - y);
+        this.y = y;
+    }
     public void setInactive() {drawPaint.setStrokeWidth(5); }
 
     @Override

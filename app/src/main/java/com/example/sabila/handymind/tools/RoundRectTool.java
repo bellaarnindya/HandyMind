@@ -30,6 +30,8 @@ public class RoundRectTool extends Tool {
             roundRect.setWidth(width);
             roundRect.setHeight(height);
         }
+
+        roundRect.updatePoint();
     }
 
     @Override

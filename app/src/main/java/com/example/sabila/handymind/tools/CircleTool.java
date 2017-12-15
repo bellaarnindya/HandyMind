@@ -33,6 +33,8 @@ public class CircleTool extends Tool {
         if (radius > 0) {
             circle.setRadius(radius);
         }
+
+        circle.updatePoint();
     }
 
     @Override

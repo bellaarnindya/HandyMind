@@ -12,6 +12,7 @@ import com.example.sabila.handymind.ShapeObservable;
 import com.example.sabila.handymind.ShapeObserver;
 import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
 import com.example.sabila.handymind.lineBehaviors.LineDashedBody;
+import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
 import com.example.sabila.handymind.lineBehaviors.LineWithArrowHead;
 import com.example.sabila.handymind.lineBehaviors.LineWithoutHead;
 
@@ -112,9 +113,7 @@ public class Line extends Shape {
     public void finishMove(){}
 
     @Override
-    public void resize(float touchX, float touchY) {
-
-    }
+    public void resize(int selectedCircle, float x, float y) {}
 
     @Override
     public boolean isTouched(float touchX, float touchY) {
@@ -123,7 +122,6 @@ public class Line extends Shape {
         float y = m * touchX + c;
 
         if (Math.abs(touchY - y) < EPSILON) {
-            Log.d("LINE", "isTouched");
             return true;
         }
 

@@ -34,7 +34,7 @@ public class RectangleTool extends Tool {
             rectangle.setHeight(height);
         }
         
-        rectangle.updatePoint(x, y);
+        rectangle.updatePoint();
     }
 
     @Override
