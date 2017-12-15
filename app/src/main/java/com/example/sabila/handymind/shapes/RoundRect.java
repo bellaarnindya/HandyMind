@@ -106,6 +106,7 @@ public class RoundRect extends Shape {
         this.y = touchY - yCoordsOnTouch;
 
         this.updatePoint();
+        notifyAllObservers();
     }
 
     @Override
