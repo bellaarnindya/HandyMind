@@ -1,5 +1,6 @@
 package com.example.sabila.handymind.tools;
 
+import com.example.sabila.handymind.DrawingView;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.Tool;
 import com.example.sabila.handymind.shapes.Text;
@@ -16,13 +17,14 @@ public class TextTool extends Tool {
     private String message;
 
     @Override
-    public Shape createShape(float x, float y) {
+    public Shape touchDown(float x, float y, DrawingView drawingView) {
         text = new Text(x, y, message);
+        drawingView.addShape(text);
         return text;
     }
 
     @Override
-    public void drag(float x, float y) {
+    public void touchMove(float x, float y) {
 
     }
 
@@ -31,7 +33,7 @@ public class TextTool extends Tool {
     }
 
     @Override
-    public void touchUp(List<Shape> shapeList) {
+    public void touchUp(DrawingView drawingView) {
 
     }
 }

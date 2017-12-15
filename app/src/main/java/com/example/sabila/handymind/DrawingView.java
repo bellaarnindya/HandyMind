@@ -86,7 +86,7 @@ public class DrawingView extends View {
                     Log.i("ACTION_DOWN", "if touched == null");
                     Log.i("ACTION_DOWN", "  add shape");
 
-                    Shape newShape = tool.createShape(touchX, touchY);
+                    Shape newShape = tool.touchDown(touchX, touchY, this);
                     shapes.add(newShape);
                     shapeOnCreating = newShape;
                     if(newShape instanceof Line && dashedLine) {
@@ -106,7 +106,7 @@ public class DrawingView extends View {
                 isSingleTouch = false;
 
                 if (shapeOnCreating != null) {
-                    tool.drag(touchX, touchY);
+                    tool.touchMove(touchX, touchY);
                 } else if (touchedShape != null) {
                     touchedShape.move(touchX, touchY);
                 }
@@ -117,7 +117,7 @@ public class DrawingView extends View {
             case MotionEvent.ACTION_UP:
                 shapeOnCreating = null;
 
-                this.tool.touchUp(shapes);
+                this.tool.touchUp(this);
 
                 if (isSingleTouch) {
                     Log.i("ACTION_UP", "clicked");
@@ -144,6 +144,14 @@ public class DrawingView extends View {
     public void setActiveTool(Tool activeTool) {
         this.tool = activeTool;
 
+    }
+
+    public List<Shape> getShapes() {
+        return this.shapes;
+    }
+
+    public void addShape(Shape shape) {
+        shapes.add(shape);
     }
 
 }

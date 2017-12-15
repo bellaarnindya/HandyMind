@@ -1,5 +1,6 @@
 package com.example.sabila.handymind.tools;
 
+import com.example.sabila.handymind.DrawingView;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.Tool;
 import com.example.sabila.handymind.observables.ShapeDestinationObservable;
@@ -18,19 +19,21 @@ public class LineTool extends Tool {
     private Line line;
 
     @Override
-    public Shape createShape(float x, float y) {
+    public Shape touchDown(float x, float y, DrawingView drawingView) {
         line = new Line(x, y);
+        drawingView.addShape(line);
         return line;
     }
 
     @Override
-    public void drag(float x, float y) {
+    public void touchMove(float x, float y) {
         line.setxEnd(x);
         line.setyEnd(y);
     }
 
     @Override
-    public void touchUp(List<Shape> shapeList) {
+    public void touchUp(DrawingView drawingView) {
+        List<Shape> shapeList = drawingView.getShapes();
         for (Shape shape : shapeList) {
             if (line.intersects(line.getxStart(), line.getyStart(), shape)) {
                 ShapeSourceObservable shapeSourceObservable = new ShapeSourceObservable(shape);

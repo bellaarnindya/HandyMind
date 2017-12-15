@@ -3,33 +3,27 @@ package com.example.sabila.handymind.tools;
 import com.example.sabila.handymind.DrawingView;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.Tool;
-import com.example.sabila.handymind.shapes.Oval;
 
 import java.util.List;
 
 /**
- * Created by Sabila on 12/10/2017.
+ * Created by Sabila on 12/15/2017.
  */
 
-public class OvalTool extends Tool {
-    private Oval oval;
+public class SelectionTool extends Tool {
 
     @Override
     public Shape touchDown(float x, float y, DrawingView drawingView) {
-        oval = new Oval(x, y);
-        drawingView.addShape(oval);
-        return oval;
+        List<Shape> shapeList = drawingView.getShapes();
+        for (Shape shape : shapeList) {
+            if (shape.isTouched(x, y));
+        }
+        return null;
     }
 
     @Override
     public void touchMove(float x, float y) {
-        float width = x - oval.getLeft();
-        float height = y - oval.getTop();
 
-        if (width > 0 && height > 0) {
-            oval.setRight(x);
-            oval.setBottom(y);
-        }
     }
 
     @Override
