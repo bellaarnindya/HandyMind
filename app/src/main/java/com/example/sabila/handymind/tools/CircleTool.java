@@ -1,5 +1,6 @@
 package com.example.sabila.handymind.tools;
 
+import com.example.sabila.handymind.DrawingView;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.Tool;
 import com.example.sabila.handymind.shapes.Circle;
@@ -15,13 +16,14 @@ public class CircleTool extends Tool {
     private Circle circle;
 
     @Override
-    public Shape createShape(float x, float y) {
+    public Shape touchDown(float x, float y, DrawingView drawingView) {
         circle = new Circle(x, y);
+        drawingView.addShape(circle);
         return circle;
     }
 
     @Override
-    public void drag(float x, float y) {
+    public void touchMove(float x, float y) {
         double x1 = Double.parseDouble(Float.toString(circle.getCx()));
         double y1 = Double.parseDouble(Float.toString(circle.getCy()));
         double a = Double.parseDouble(Float.toString(x));
@@ -36,7 +38,7 @@ public class CircleTool extends Tool {
     }
 
     @Override
-    public void touchUp(List<Shape> shapeList) {
+    public void touchUp(DrawingView drawingView) {
 
     }
 }

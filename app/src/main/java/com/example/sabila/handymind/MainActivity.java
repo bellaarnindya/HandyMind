@@ -33,6 +33,7 @@ import com.example.sabila.handymind.tools.LineTool;
 import com.example.sabila.handymind.tools.OvalTool;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.RoundRectTool;
+import com.example.sabila.handymind.tools.SelectionTool;
 import com.example.sabila.handymind.tools.TextTool;
 
 import java.io.File;
@@ -151,6 +152,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawingView.setActiveTool(new TextTool());
                 showDialog();
                 dialog.show();
+                break;
+            case R.id.select_btn:
+                drawingView.setActiveTool(new SelectionTool());
                 break;
             case R.id.delete_button:
 //                Log.d("Debug", "delete button pressed");

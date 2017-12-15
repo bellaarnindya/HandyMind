@@ -122,7 +122,7 @@ public class DrawingView extends View {
             case MotionEvent.ACTION_UP:
                 shapeOnCreating = null;
 
-                this.tool.touchUp(shapes);
+                this.tool.touchUp(this);
 
                 if (isSingleTouch) {
                     isSingleTouch = false;

@@ -1,5 +1,6 @@
 package com.example.sabila.handymind.tools;
 
+import com.example.sabila.handymind.DrawingView;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.Tool;
 import com.example.sabila.handymind.shapes.Oval;
@@ -14,13 +15,14 @@ public class OvalTool extends Tool {
     private Oval oval;
 
     @Override
-    public Shape createShape(float x, float y) {
+    public Shape touchDown(float x, float y, DrawingView drawingView) {
         oval = new Oval(x, y);
+        drawingView.addShape(oval);
         return oval;
     }
 
     @Override
-    public void drag(float x, float y) {
+    public void touchMove(float x, float y) {
         float width = x - oval.getLeft();
         float height = y - oval.getTop();
 
@@ -33,7 +35,7 @@ public class OvalTool extends Tool {
     }
 
     @Override
-    public void touchUp(List<Shape> shapeList) {
+    public void touchUp(DrawingView drawingView) {
 
     }
 }
