@@ -16,7 +16,7 @@ import java.util.Observer;
  * Created by Sabila on 11/20/2017.
  */
 
-public class Rectangle extends ShapeObservable {
+public class Rectangle extends Shape {
     private float x;
     private float y;
     private float width;
@@ -103,7 +103,6 @@ public class Rectangle extends ShapeObservable {
         this.y = touchY - yCoordsOnTouch;
 
         this.updatePoint(touchX, touchY);
-        notifyAllObservers(touchX, touchY);
     }
 
     @Override
@@ -175,14 +174,22 @@ public class Rectangle extends ShapeObservable {
     }
 
     @Override
-    public void attach(ShapeObserver observer) {
-        observers.add(observer);
+    public float getRightX() {
+        return this.x + this.width;
     }
 
     @Override
-    public void notifyAllObservers(float touchX, float touchY) {
-        for (ShapeObserver observer : observers) {
-            observer.update(touchX, touchY);
-        }
+    public float getRightY() {
+        return this.height / 2;
+    }
+
+    @Override
+    public float getLeftX() {
+        return this.x;
+    }
+
+    @Override
+    public float getLeftY() {
+        return this.height / 2;
     }
 }

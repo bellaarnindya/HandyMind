@@ -19,7 +19,7 @@ import com.example.sabila.handymind.lineBehaviors.LineWithoutHead;
  * Created by Sabila on 11/28/2017.
  */
 
-public class Line extends ShapeObserver {
+public class Line extends Shape {
 
     private float xStart;
     private float yStart;
@@ -153,8 +153,26 @@ public class Line extends ShapeObserver {
     }
 
     @Override
-    public void update(float touchX, float touchY) {
-        setxEnd(touchX);
-        setyEnd(touchY);
+    public float getRightX() {
+        return this.xEnd;
+    }
+
+    @Override
+    public float getRightY() {
+        return this.yEnd;
+    }
+
+    @Override
+    public float getLeftX() {
+        return this.xStart;
+    }
+
+    @Override
+    public float getLeftY() {
+        return yStart;
+    }
+
+    public boolean intersects(float x, float y, Shape shape){
+        return shape.isTouched(x, y);
     }
 }
