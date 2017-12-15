@@ -3,7 +3,6 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 
 import com.example.sabila.handymind.LineBodyBehavior;
 import com.example.sabila.handymind.LineHeadBehavior;
@@ -133,10 +132,14 @@ public class Line extends Shape {
     @Override
     public void setActive() {
         drawPaint.setStrokeWidth(7);
+        this.setState(new ActiveState());
     }
 
     @Override
-    public void setInactive() {drawPaint.setStrokeWidth(5); }
+    public void setInactive() {
+        drawPaint.setStrokeWidth(5);
+        this.setState(new InactiveState());
+    }
 
     public void setDashedLine() {
         this.bodyBehavior = new LineDashedBody();

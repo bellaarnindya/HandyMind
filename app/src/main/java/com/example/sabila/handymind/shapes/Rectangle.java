@@ -3,13 +3,8 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.util.Log;
 
 import com.example.sabila.handymind.Shape;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Sabila on 11/20/2017.
@@ -142,11 +137,13 @@ public class Rectangle extends Shape {
     public void setActive() {
         drawPaint.setStrokeWidth(7);
         onResize = true;
+        this.setState(new ActiveState());
     }
 
     @Override
     public void setInactive() {
         drawPaint.setStrokeWidth(5);
         onResize = false;
+        this.setState(new InactiveState());
     }
 }
