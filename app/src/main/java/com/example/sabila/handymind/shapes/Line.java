@@ -158,4 +158,5 @@ public class Line extends Shape {
     public void notifyAllObservers() {
         super.notifyAllObservers();
     }
+
 }

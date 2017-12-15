@@ -158,6 +158,7 @@ public abstract class Shape implements ShapeObservable{
         }
 
         this.updatePoint();
+        notifyAllObservers();
     }
 
     protected void drawResizingCircles(Canvas canvas) {
