@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.sabila.handymind.shapes.ActiveState;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.TextTool;
 
@@ -143,6 +144,18 @@ public class DrawingView extends View {
     public void setActiveTool(Tool activeTool) {
         this.tool = activeTool;
 
+    }
+
+    public void deleteShape() {
+
+        if (touchedShape != null && touchedShape.currentState instanceof ActiveState) {
+            
+            int indexOfDelete = shapes.indexOf(touchedShape);
+            touchedShape = null;
+            shapes.remove(indexOfDelete);
+
+            invalidate();
+        }
     }
 
 }
