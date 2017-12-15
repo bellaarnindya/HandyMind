@@ -18,7 +18,7 @@ import java.util.UUID;
  * Created by Sabila on 11/20/2017.
  */
 
-public abstract class Shape {
+public abstract class Shape implements ShapeObservable{
     private UUID ID;
     public ShapeState currentState;
     protected float xCoordsOnTouch;
@@ -158,6 +158,7 @@ public abstract class Shape {
         }
 
         this.updatePoint();
+        notifyAllObservers();
     }
 
     protected void drawResizingCircles(Canvas canvas) {
@@ -166,13 +167,25 @@ public abstract class Shape {
         }
     }
 
-    protected float getLeft(){ return (float) 0.0; }
-    protected float getRight(){ return (float) 0.0; }
-    protected float getBottom(){ return (float) 0.0; }
-    protected float getTop(){ return (float) 0.0; }
+    public float getLeft(){ return (float) 0.0; }
+    public float getRight(){ return (float) 0.0; }
+    public float getBottom(){ return (float) 0.0; }
+    public float getTop(){ return (float) 0.0; }
 
-    protected void setLeft(float x){  }
-    protected void setRight(float x){  }
-    protected void setBottom(float y){  }
-    protected void setTop(float y){  }
+    public void setLeft(float x){  }
+    public void setRight(float x){  }
+    public void setBottom(float y){  }
+    public void setTop(float y){  }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+
+    }
+
+    @Override
+    public void notifyAllObservers() {
+
+    }
+
+    public abstract void delete();
 }

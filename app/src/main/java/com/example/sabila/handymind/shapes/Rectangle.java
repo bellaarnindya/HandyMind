@@ -5,6 +5,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.ShapeObserver;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observer;
 
 /**
  * Created by Sabila on 11/20/2017.
@@ -16,6 +21,8 @@ public class Rectangle extends Shape {
     private float width;
     private float height;
 
+    private ArrayList<ShapeObserver> rectObservers;
+
     private Paint drawPaint;
 
     public Rectangle(float x, float y) {
@@ -23,6 +30,8 @@ public class Rectangle extends Shape {
         this.y = y;
         this.width = (float)0;
         this.height = (float)0;
+
+        rectObservers = new ArrayList<>();
 
         drawPaint = new Paint();
         drawPaint.setColor(Color.BLACK);
@@ -95,6 +104,7 @@ public class Rectangle extends Shape {
         this.y = touchY - yCoordsOnTouch;
 
         this.updatePoint();
+        notifyAllObservers();
     }
 
     @Override
@@ -145,5 +155,25 @@ public class Rectangle extends Shape {
         drawPaint.setStrokeWidth(5);
         onResize = false;
         this.setState(new InactiveState());
+    }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+        rectObservers.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        for (ShapeObserver observer : rectObservers) {
+            observer.update(this);
+        }
+    }
+
+    @Override
+    public void delete() {
+        this.x = -1;
+        this.y = -1;
+        this.width = 0;
+        this.height = 0;
     }
 }

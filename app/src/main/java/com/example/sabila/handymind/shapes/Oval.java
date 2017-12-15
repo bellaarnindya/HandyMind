@@ -5,6 +5,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.ShapeObservable;
+import com.example.sabila.handymind.ShapeObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sabila on 11/29/2017.
@@ -22,6 +27,8 @@ public class Oval extends Shape {
     private float rightOnTouch;
     private float bottomOnTouch;
 
+    private List<ShapeObserver> ovalObservers;
+
     private Paint drawPaint;
 
     public Oval(float left, float top) {
@@ -29,6 +36,8 @@ public class Oval extends Shape {
         this.right = left;
         this.top = top;
         this.bottom = top;
+
+        ovalObservers = new ArrayList<>();
 
         drawPaint = new Paint();
         drawPaint.setColor(Color.BLACK);
@@ -142,6 +151,7 @@ public class Oval extends Shape {
         this.setLeft(this.leftOnTouch + deltaX);
 
         this.updatePoint();
+        notifyAllObservers();
     }
 
     @Override
@@ -156,5 +166,25 @@ public class Oval extends Shape {
         drawPaint.setStrokeWidth(5);
         onResize = false;
         this.setState(new InactiveState());
+    }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+        ovalObservers.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        for (ShapeObserver observer : ovalObservers) {
+            observer.update(this);
+        }
+    }
+
+    @Override
+    public void delete() {
+        this.top = -1;
+        this.bottom = -1;
+        this.right = -1;
+        this.left = -1;
     }
 }
