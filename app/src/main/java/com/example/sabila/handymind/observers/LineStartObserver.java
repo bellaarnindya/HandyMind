@@ -25,5 +25,9 @@ public class LineStartObserver extends ShapeObserver {
 
         lineObserver.setxStart(x);
         lineObserver.setyStart(y);
+
+        if (x < 0 || y < 0) {
+            lineObserver.delete();
+        }
     }
 }

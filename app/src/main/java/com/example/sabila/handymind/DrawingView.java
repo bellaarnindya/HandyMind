@@ -92,16 +92,16 @@ public class DrawingView extends View {
 
     }
 
-    public void deleteShape() {
+    public void addShape(Shape shape) {
+        shapes.add(shape);
+    }
 
-        if (touchedShape != null && touchedShape.currentState instanceof ActiveState) {
-            
-            int indexOfDelete = shapes.indexOf(touchedShape);
-            touchedShape = null;
-            shapes.remove(indexOfDelete);
+    public List<Shape> getShapes() {
+        return shapes;
+    }
 
-            invalidate();
-        }
+    public void deleteShape(int index) {
+        shapes.remove(index);
     }
 
 }

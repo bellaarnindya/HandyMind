@@ -162,4 +162,12 @@ public class Line extends Shape {
         super.notifyAllObservers();
     }
 
+    @Override
+    public void delete() {
+        this.xStart = -1;
+        this.yStart = -1;
+        this.xEnd = -1;
+        this.yEnd = -1;
+        this.length = 0;
+    }
 }

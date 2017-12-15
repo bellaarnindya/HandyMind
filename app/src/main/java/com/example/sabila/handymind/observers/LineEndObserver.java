@@ -25,5 +25,9 @@ public class LineEndObserver extends ShapeObserver {
 
         lineObserver.setxEnd(x);
         lineObserver.setyEnd(y);
+
+        if (x < 0 || y < 0) {
+            lineObserver.delete();
+        }
     }
 }

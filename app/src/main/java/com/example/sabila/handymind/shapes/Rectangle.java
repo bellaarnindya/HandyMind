@@ -119,13 +119,6 @@ public class Rectangle extends Shape {
     @Override
     public float getLeft() { return this.x; }
 
-        if (width > 0 && height > 0) {
-            this.width = width;
-            this.height = height;
-        }
-
-        this.updatePoint(touchX, touchY);
-
     @Override
     public void setRight(float x) { this.width = x - this.x; }
     @Override
@@ -174,5 +167,13 @@ public class Rectangle extends Shape {
         for (ShapeObserver observer : rectObservers) {
             observer.update(this);
         }
+    }
+
+    @Override
+    public void delete() {
+        this.x = -1;
+        this.y = -1;
+        this.width = 0;
+        this.height = 0;
     }
 }

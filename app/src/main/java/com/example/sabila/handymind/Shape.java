@@ -186,4 +186,6 @@ public abstract class Shape implements ShapeObservable{
     public void notifyAllObservers() {
 
     }
+
+    public abstract void delete();
 }

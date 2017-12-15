@@ -112,4 +112,10 @@ public class Text extends Shape {
     public boolean intersects(float x, float y, Shape shape) {
         return shape.isTouched(x, y);
     }
+
+    @Override
+    public void delete() {
+        this.x = -1;
+        this.y = -1;
+    }
 }

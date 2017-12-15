@@ -22,6 +22,7 @@ import android.widget.PopupWindow;
 
 import com.example.sabila.handymind.buttons.CircleButton;
 import com.example.sabila.handymind.buttons.DashedLineButton;
+import com.example.sabila.handymind.buttons.DeleteButton;
 import com.example.sabila.handymind.buttons.LineButton;
 import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
@@ -30,6 +31,7 @@ import com.example.sabila.handymind.buttons.SelectButton;
 import com.example.sabila.handymind.buttons.TextButton;
 import com.example.sabila.handymind.tools.CircleTool;
 import com.example.sabila.handymind.tools.DashedLineTool;
+import com.example.sabila.handymind.tools.DeleteTool;
 import com.example.sabila.handymind.tools.LineTool;
 import com.example.sabila.handymind.tools.OvalTool;
 import com.example.sabila.handymind.tools.RectangleTool;
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private AlertDialog dialog;
     private String message;
     private Button saveBtn;
-    private Button deleteBtn;
+    private DeleteButton deleteBtn;
     private Button undoBtn;
     private Button redoBtn;
     private PopupWindow popupWindow;
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textBtn = (TextButton) findViewById(R.id.text_btn);
         undoBtn = (android.widget.Button) findViewById(R.id.undo_btn);
         redoBtn = (android.widget.Button) findViewById(R.id.redo_btn);
-        deleteBtn = (android.widget.Button) findViewById(R.id.delete_button);
+        deleteBtn = (DeleteButton) findViewById(R.id.delete_button);
         saveBtn = (android.widget.Button) findViewById(R.id.save_button);
         selectBtn = (SelectButton) findViewById(R.id.select_btn);
 
@@ -161,8 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawingView.setActiveTool(new SelectionTool());
                 break;
             case R.id.delete_button:
-//                Log.d("Debug", "delete button pressed");
-                drawingView.deleteShape();
+                drawingView.setActiveTool(new DeleteTool());
                 break;
             case R.id.save_button:
                 if(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
@@ -213,10 +214,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     // Several error may come out with file handling or DOM
                     e.printStackTrace();
                 }
-                break;
-            case R.id.select_btn:
-                drawingView.setActiveTool(new SelectionTool());
-                Log.d("selection", "selection tool selected");
                 break;
         }
     }

@@ -169,4 +169,12 @@ public class RoundRect extends Shape {
             observer.update(this);
         }
     }
+
+    @Override
+    public void delete() {
+        this.x = -1;
+        this.y = -1;
+        this.width = 0;
+        this.height = 0;
+    }
 }

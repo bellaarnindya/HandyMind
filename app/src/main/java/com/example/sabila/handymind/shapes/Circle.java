@@ -158,4 +158,11 @@ public class Circle extends Shape {
             observer.update(this);
         }
     }
+
+    @Override
+    public void delete() {
+        this.cx = -1;
+        this.cy = -1;
+        this.radius = 0;
+    }
 }

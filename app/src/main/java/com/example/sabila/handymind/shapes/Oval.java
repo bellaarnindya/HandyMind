@@ -179,4 +179,12 @@ public class Oval extends Shape {
             observer.update(this);
         }
     }
+
+    @Override
+    public void delete() {
+        this.top = -1;
+        this.bottom = -1;
+        this.right = -1;
+        this.left = -1;
+    }
 }
