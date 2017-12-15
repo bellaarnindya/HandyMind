@@ -187,4 +187,16 @@ public class Oval extends Shape {
         this.right = -1;
         this.left = -1;
     }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+        ovalObservers.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        for (ShapeObserver observer : ovalObservers) {
+            observer.update(this);
+        }
+    }
 }

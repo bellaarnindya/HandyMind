@@ -215,6 +215,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
                 break;
+            case R.id.select_btn:
+                drawingView.setActiveTool(new SelectionTool());
+                Log.d("selection", "selection tool selected");
+                break;
         }
     }
 }
