@@ -1,5 +1,7 @@
 package com.example.sabila.handymind.tools;
 
+import android.util.Log;
+
 import com.example.sabila.handymind.DrawingView;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.Tool;
@@ -35,18 +37,26 @@ public class LineTool extends Tool {
     public void touchUp(DrawingView drawingView) {
         List<Shape> shapeList = drawingView.getShapes();
         for (Shape shape : shapeList) {
+            if (shape instanceof Line) continue;
+
             if (line.intersects(line.getxStart(), line.getyStart(), shape)) {
+
                 ShapeSourceObservable shapeSourceObservable = new ShapeSourceObservable(shape);
                 LineStartObserver lineStartObserver = new LineStartObserver(line);
-                line.setxStart(shape.getRightX());
-                line.setyStart(shape.getRightY());
+
+                float midY = (shape.getBottom() + shape.getTop()) / 2;
+
+                lineStartObserver.update(shape.getRight(), midY);
                 shapeSourceObservable.attach(lineStartObserver);
             }
             if (line.intersects(line.getxEnd(), line.getyEnd(), shape)) {
+
                 ShapeDestinationObservable shapeDestinationObservable = new ShapeDestinationObservable(shape);
                 LineEndObserver lineEndObserver = new LineEndObserver(line);
-                line.setxEnd(shape.getLeftX());
-                line.setyEnd(shape.getLeftY());
+
+                float midY = (shape.getBottom() + shape.getTop()) / 2;
+
+                lineEndObserver.update(shape.getLeft(), midY);
                 shapeDestinationObservable.attach(lineEndObserver);
             }
         }

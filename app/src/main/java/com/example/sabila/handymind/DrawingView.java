@@ -63,43 +63,16 @@ public class DrawingView extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (touchedShape != null &&
-                        (selectedCircle = touchedShape.isResizeTouched(touchX, touchY)) != -1) {
-//                    Log.i("DrawingView", "isResizing = true");
-                    isResizing = true;
-                } else {
-                    for (int i = 0; i < shapes.size(); i++) {
-                        if (shapes.get(i).isTouched(touchX, touchY)) {
-                            touchedShape = shapes.get(i);
-                            touchedShape.setActive();
 
-                            touchOnShape = true;
-
-                            isSingleTouch = true;
-                            isMoving = true;
-
-//                            Log.i("DrawingView", "touched shape " + i);
-//                            Log.i("DrawingView", "Set Active shape " + i);
-
-                            touchedShape.initialMove(touchX, touchY);
-                        } else {
-//                            Log.i("DrawingView", "Set Inactive shape " + i);
-                            shapes.get(i).setInactive();
-                        }
-                    }
+                if (this.tool != null) {
+                    this.tool.touchDown(touchX, touchY, this);
                 }
 
-                if (!touchOnShape && !isResizing) {
-//                    Log.i("DrawingView", "touchedShape = null");
-                    touchedShape = null;
-                }
-
-                if (touchedShape == null && !isSingleTouch) {
-                    Shape newShape = tool.createShape(touchX, touchY);
-                    shapes.add(newShape);
-                    shapeOnCreating = newShape;
-                }
-
+//                if (touchedShape == null && !isSingleTouch) {
+//                    Shape newShape = tool.touchDown(touchX, touchY, this);
+//                    shapes.add(newShape);
+//                    shapeOnCreating = newShape;
+//                }
 
                 invalidate();
                 break;
@@ -108,13 +81,15 @@ public class DrawingView extends View {
 //                Log.i("MOVE", "isMoving");
                 isSingleTouch = false;
 
-                if (isResizing) {
-                    touchedShape.resize(selectedCircle, touchX, touchY);
-                } else if (shapeOnCreating != null) {
-                    tool.drag(touchX, touchY);
-                } else if (isMoving) {
-                    touchedShape.move(touchX, touchY);
-                }
+                this.tool.touchMove(touchX, touchY);
+
+//                if (isResizing) {
+//                    touchedShape.resize(selectedCircle, touchX, touchY);
+//                } else if (shapeOnCreating != null) {
+//                    tool.touchMove(touchX, touchY);
+//                } else if (isMoving) {
+//                    touchedShape.move(touchX, touchY);
+//                }
 
                 invalidate();
                 break;

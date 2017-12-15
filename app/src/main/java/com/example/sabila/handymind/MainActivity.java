@@ -26,6 +26,7 @@ import com.example.sabila.handymind.buttons.LineButton;
 import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
 import com.example.sabila.handymind.buttons.RoundRectButton;
+import com.example.sabila.handymind.buttons.SelectButton;
 import com.example.sabila.handymind.buttons.TextButton;
 import com.example.sabila.handymind.tools.CircleTool;
 import com.example.sabila.handymind.tools.DashedLineTool;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RoundRectButton roundRectBtn;
     private OvalButton ovalBtn;
     private TextButton textBtn;
+    private SelectButton selectBtn;
     private EditText inputText;
     private AlertDialog dialog;
     private String message;
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         redoBtn = (android.widget.Button) findViewById(R.id.redo_btn);
         deleteBtn = (android.widget.Button) findViewById(R.id.delete_button);
         saveBtn = (android.widget.Button) findViewById(R.id.save_button);
+        selectBtn = (SelectButton) findViewById(R.id.select_btn);
 
 
         rectBtn.setOnClickListener(this);
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         redoBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
         saveBtn.setOnClickListener(this);
+        selectBtn.setOnClickListener(this);
     }
 
     public void showDialog() {
@@ -209,6 +213,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     // Several error may come out with file handling or DOM
                     e.printStackTrace();
                 }
+                break;
+            case R.id.select_btn:
+                drawingView.setActiveTool(new SelectionTool());
+                Log.d("selection", "selection tool selected");
                 break;
         }
     }
