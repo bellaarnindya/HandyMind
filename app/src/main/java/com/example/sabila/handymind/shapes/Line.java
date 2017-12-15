@@ -26,7 +26,7 @@ public class Line extends Shape {
     private float xEnd;
     private float yEnd;
     private float length;
-    private final float EPSILON = 12;
+    private final float EPSILON = 3;
     private LineBodyBehavior bodyBehavior;
     private LineHeadBehavior headBehavior;
 

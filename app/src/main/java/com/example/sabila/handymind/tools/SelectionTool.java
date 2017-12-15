@@ -50,6 +50,10 @@ public class SelectionTool extends Tool {
 
     @Override
     public void touchMove(float x, float y) {
+        if (touchedShape == null) {
+            return;
+        }
+
         if (isResizing) {
             touchedShape.resize(selectedCircle, x, y);
         }
@@ -64,6 +68,7 @@ public class SelectionTool extends Tool {
             isSingleTouch = false;
         }
 
+        touchedShape = null;
         isResizing = false;
     }
 }
