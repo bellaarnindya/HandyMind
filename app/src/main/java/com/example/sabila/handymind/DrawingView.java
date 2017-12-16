@@ -104,4 +104,8 @@ public class DrawingView extends View {
         shapes.remove(index);
     }
 
+    public void clearAll(){
+        shapes = new ArrayList<>();
+        invalidate();
+    }
 }

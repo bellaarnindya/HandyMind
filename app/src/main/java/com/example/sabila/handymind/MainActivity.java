@@ -2,9 +2,12 @@ package com.example.sabila.handymind;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,6 +22,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.example.sabila.handymind.buttons.CircleButton;
 import com.example.sabila.handymind.buttons.DashedLineButton;
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DeleteButton deleteBtn;
     private Button undoBtn;
     private Button redoBtn;
+    private Button newBtn;
     private PopupWindow popupWindow;
 
     @Override
@@ -90,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         deleteBtn = (DeleteButton) findViewById(R.id.delete_button);
         saveBtn = (android.widget.Button) findViewById(R.id.save_button);
         selectBtn = (SelectButton) findViewById(R.id.select_btn);
-
+        newBtn = (Button) findViewById(R.id.new_btn);
 
         rectBtn.setOnClickListener(this);
         circleBtn.setOnClickListener(this);
@@ -104,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         deleteBtn.setOnClickListener(this);
         saveBtn.setOnClickListener(this);
         selectBtn.setOnClickListener(this);
+        newBtn.setOnClickListener(this);
+
     }
 
     public void showDialog() {
@@ -164,6 +171,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.delete_button:
                 drawingView.setActiveTool(new DeleteTool());
+                break;
+            case R.id.new_btn:
+                drawingView.clearAll();
                 break;
             case R.id.save_button:
                 if(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
