@@ -3,6 +3,8 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
+import android.util.Log;
 
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.ShapeObserver;

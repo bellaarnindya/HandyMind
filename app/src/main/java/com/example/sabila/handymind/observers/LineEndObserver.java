@@ -1,5 +1,6 @@
 package com.example.sabila.handymind.observers;
 
+import android.graphics.PointF;
 import android.util.Log;
 
 import com.example.sabila.handymind.Shape;
@@ -20,8 +21,9 @@ public class LineEndObserver extends ShapeObserver {
 
     @Override
     public void update(Shape shape) {
-        float x = shape.getLeft();
-        float y = (shape.getBottom() + shape.getTop()) / 2;
+        PointF point = shape.getPoint(lineObserver.getxEnd(), lineObserver.getyEnd());
+        float x = point.x;
+        float y = point.y;
 
         lineObserver.setxEnd(x);
         lineObserver.setyEnd(y);

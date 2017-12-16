@@ -3,6 +3,9 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.PointF;
+import android.util.Log;
 
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.ShapeObservable;
@@ -103,11 +106,7 @@ public class Circle extends Shape {
 
     @Override
     public boolean isTouched(float touchX, float touchY) {
-        double x = Double.parseDouble(Float.toString(this.getCx()));
-        double y = Double.parseDouble(Float.toString(this.getCy()));
-        double a = Double.parseDouble(Float.toString(touchX));
-        double b = Double.parseDouble(Float.toString(touchY));
-        float distance = (float) Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+        float distance = distance(touchX, touchY, cx, cy);
 
         if (distance <= this.getRadius()) {
             return true;
