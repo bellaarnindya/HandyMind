@@ -3,6 +3,8 @@ package com.example.sabila.handymind;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.PointF;
 import android.util.Log;
 
 import com.example.sabila.handymind.shapes.ActiveState;
@@ -188,4 +190,12 @@ public abstract class Shape implements ShapeObservable{
     }
 
     public abstract void delete();
+    public PointF getPoint(float xLine, float yLine) { return new PointF(0, 0);}
+    protected float distance(float xPos, float yPos, float aPos, float bPos) {
+        double x = Double.parseDouble(Float.toString(aPos));
+        double y = Double.parseDouble(Float.toString(bPos));
+        double a = Double.parseDouble(Float.toString(xPos));
+        double b = Double.parseDouble(Float.toString(yPos));
+        return (float) Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+    }
 }

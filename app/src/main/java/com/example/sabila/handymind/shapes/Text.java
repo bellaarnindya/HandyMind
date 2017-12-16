@@ -118,4 +118,10 @@ public class Text extends Shape {
         this.x = -1;
         this.y = -1;
     }
+
+    @Override
+    protected float distance(float xPos, float yPos, float aPos, float bPos) {
+        return 0;
+    }
+
 }

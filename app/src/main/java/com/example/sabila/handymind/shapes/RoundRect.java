@@ -3,6 +3,7 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.ShapeObservable;
@@ -23,6 +24,7 @@ public class RoundRect extends Shape {
     private static final float RY = 30;
     private float width;
     private float height;
+    private int position;
 
     private Paint drawPaint;
 
@@ -176,5 +178,42 @@ public class RoundRect extends Shape {
         this.y = -1;
         this.width = 0;
         this.height = 0;
+    }
+
+    @Override
+    public PointF getPoint(float xLine, float yLine) {
+        float minDistance = 9999999;
+        float pointX = 0;
+        float pointY = 0;
+        float xPos = 0;
+        float yPos = 0;
+
+        for (position = 1; position <= 4; position++) {
+            switch (position) {
+                case 1:
+                    xPos = (getRight() + getLeft()) / 2;
+                    yPos = getTop();
+                    break;
+                case 2:
+                    xPos = getRight();
+                    yPos = (getTop() + getBottom()) / 2;
+                    break;
+                case 3:
+                    xPos = (getRight() + getLeft()) / 2;
+                    yPos = getBottom();
+                    break;
+                case 4:
+                    xPos = getLeft();
+                    yPos = (getTop() + getBottom()) / 2;
+                    break;
+            }
+            float distance = distance(xPos, yPos, xLine, yLine);
+            if (minDistance > distance) {
+                minDistance = distance;
+                pointX = xPos;
+                pointY = yPos;
+            }
+        }
+        return new PointF(pointX, pointY);
     }
 }

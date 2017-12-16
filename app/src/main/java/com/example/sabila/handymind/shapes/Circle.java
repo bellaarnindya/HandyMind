@@ -3,6 +3,9 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.PointF;
+import android.util.Log;
 
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.ShapeObservable;
@@ -21,6 +24,7 @@ public class Circle extends Shape {
     private float cy;
     private float radius;
     private List<ShapeObserver> circleObservers;
+    private int position;
 
     private Paint drawPaint;
 
@@ -103,11 +107,7 @@ public class Circle extends Shape {
 
     @Override
     public boolean isTouched(float touchX, float touchY) {
-        double x = Double.parseDouble(Float.toString(this.getCx()));
-        double y = Double.parseDouble(Float.toString(this.getCy()));
-        double a = Double.parseDouble(Float.toString(touchX));
-        double b = Double.parseDouble(Float.toString(touchY));
-        float distance = (float) Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+        float distance = distance(touchX, touchY, cx, cy);
 
         if (distance <= this.getRadius()) {
             return true;
@@ -164,5 +164,42 @@ public class Circle extends Shape {
         this.cx = -1;
         this.cy = -1;
         this.radius = 0;
+    }
+
+    @Override
+    public PointF getPoint(float xLine, float yLine) {
+        float minDistance = 9999999;
+        float pointX = 0;
+        float pointY = 0;
+        float xPos = 0;
+        float yPos = 0;
+        for (position = 1; position <= 4; position++) {
+           switch (position){
+               case 1:
+                   xPos = (getRight() + getLeft()) / 2;
+                   yPos = getTop();
+                   break;
+               case 2:
+                   xPos = getRight();
+                   yPos = (getTop() + getBottom()) / 2;
+                   break;
+               case 3:
+                   xPos = (getRight() + getLeft()) / 2;
+                   yPos = getBottom();
+                   break;
+               case 4:
+                   xPos = getLeft();
+                   yPos = (getTop() + getBottom()) / 2;
+                   break;
+           }
+
+           float distance = distance(xPos, yPos, xLine, yLine);
+           if (minDistance > distance) {
+               minDistance = distance;
+               pointX = xPos;
+               pointY = yPos;
+           }
+        }
+        return new PointF(pointX, pointY);
     }
 }

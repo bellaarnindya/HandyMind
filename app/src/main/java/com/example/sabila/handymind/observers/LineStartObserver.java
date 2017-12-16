@@ -1,5 +1,6 @@
 package com.example.sabila.handymind.observers;
 
+import android.graphics.PointF;
 import android.util.Log;
 
 import com.example.sabila.handymind.Shape;
@@ -20,8 +21,9 @@ public class LineStartObserver extends ShapeObserver {
 
     @Override
     public void update(Shape shape) {
-        float x = shape.getRight();
-        float y = (shape.getBottom() + shape.getTop()) / 2;
+        PointF point = shape.getPoint(lineObserver.getxStart(), lineObserver.getyStart());
+        float x = point.x;
+        float y = point.y;
 
         lineObserver.setxStart(x);
         lineObserver.setyStart(y);
