@@ -175,18 +175,18 @@ public class DrawingView extends View {
     public void undo() {
         Log.d("Debug", "masuk fungsi undo");
 
-        if (caretaker.getUndo()) {
+        ShapeMemento undoMemento = caretaker.getUndo();
+        if (undoMemento != null) {
             Log.d("Debug", "bisa undo");
-            shapes = new ArrayList<>();
-            shapes = caretaker.getCurrentMemento().shapeList;
+            shapes = new ArrayList<Shape>(undoMemento.shapeList);
             originator.setShapeList(shapes);
-            invalidate();
+//            invalidate();
         }
         else {
             Log.d("Debug", "undo memento kosong");
-            shapes = originator.restore();
+            shapes = new ArrayList<Shape>(originator.restore());
             setFalse();
-            invalidate();
+//            invalidate();
         }
 
         invalidate();

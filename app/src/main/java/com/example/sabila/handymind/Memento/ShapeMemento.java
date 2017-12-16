@@ -13,7 +13,6 @@ public class ShapeMemento {
     public List<Shape> shapeList;
 
     public ShapeMemento( List<Shape> shapes ){
-        shapeList = new ArrayList<>();
-        shapeList = shapes;
+        shapeList = new ArrayList<Shape>(shapes);
     }
 }

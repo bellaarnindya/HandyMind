@@ -13,11 +13,11 @@ public class ShapeOriginator {
     public List<Shape> shapeList;
 
     public ShapeOriginator() {
-        shapeList = new ArrayList<>();
+        shapeList = new ArrayList<Shape>();
     }
 
     public void setShapeList(List<Shape> list) {
-        shapeList = list;
+        shapeList = new ArrayList<Shape>(list);
     }
 
     public ShapeMemento save() {
