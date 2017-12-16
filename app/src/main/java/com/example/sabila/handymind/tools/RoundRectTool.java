@@ -22,6 +22,8 @@ public class RoundRectTool extends Tool {
 
     @Override
     public void touchMove(float x, float y) {
+        if (roundRect == null) return;
+
         float width = x - roundRect.getX();
         float height = y - roundRect.getY();
 

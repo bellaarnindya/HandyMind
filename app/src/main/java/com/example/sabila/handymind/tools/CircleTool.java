@@ -23,11 +23,9 @@ public class CircleTool extends Tool {
 
     @Override
     public void touchMove(float x, float y) {
-        double x1 = Double.parseDouble(Float.toString(circle.getCx()));
-        double y1 = Double.parseDouble(Float.toString(circle.getCy()));
-        double a = Double.parseDouble(Float.toString(x));
-        double b = Double.parseDouble(Float.toString(y));
-        float radius =  (float) Math.sqrt(Math.pow(x1 - a, 2) + Math.pow(y1 - b, 2));
+        if (circle == null) return;
+
+        float radius = circle.distance(x, y, circle.getCx(), circle.getCy());
 
         if (radius > 0) {
             circle.setRadius(radius);

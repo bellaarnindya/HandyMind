@@ -28,12 +28,16 @@ public class LineTool extends Tool {
 
     @Override
     public void touchMove(float x, float y) {
+        if (line == null) return;
+
         line.setxEnd(x);
         line.setyEnd(y);
     }
 
     @Override
     public void touchUp(DrawingView drawingView) {
+        if (line == null) return;
+
         List<Shape> shapeList = drawingView.getShapes();
         for (Shape shape : shapeList) {
             if (shape instanceof Line || shape instanceof Text) continue;

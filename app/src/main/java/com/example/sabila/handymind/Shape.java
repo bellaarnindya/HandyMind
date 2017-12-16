@@ -226,7 +226,7 @@ public abstract class Shape implements ShapeObservable{
         }
         return new PointF(pointX, pointY);
     }
-    protected float distance(float xPos, float yPos, float aPos, float bPos) {
+    public float distance(float xPos, float yPos, float aPos, float bPos) {
         double x = Double.parseDouble(Float.toString(aPos));
         double y = Double.parseDouble(Float.toString(bPos));
         double a = Double.parseDouble(Float.toString(xPos));

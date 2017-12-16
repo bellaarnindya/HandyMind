@@ -22,6 +22,8 @@ public class OvalTool extends Tool {
 
     @Override
     public void touchMove(float x, float y) {
+        if (oval == null) return;
+
         float width = x - oval.getLeft();
         float height = y - oval.getTop();
 

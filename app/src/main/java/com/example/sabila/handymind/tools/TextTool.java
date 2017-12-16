@@ -35,6 +35,8 @@ public class TextTool extends Tool {
 
     @Override
     public void touchUp(DrawingView drawingView) {
+        if (text == null) return;
+
         List<Shape> shapeList = drawingView.getShapes();
         for (Shape shape : shapeList) {
             if (shape instanceof Line || shape instanceof Text) continue;

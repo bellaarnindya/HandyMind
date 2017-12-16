@@ -25,6 +25,8 @@ public class RectangleTool extends Tool {
 
     @Override
     public void touchMove(float x, float y) {
+        if (rectangle == null) return;
+
         float width = x - rectangle.getX();
         float height = y - rectangle.getY();
 
