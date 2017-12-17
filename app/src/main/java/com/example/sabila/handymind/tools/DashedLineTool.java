@@ -21,6 +21,7 @@ public class DashedLineTool extends Tool {
         line = new Line(x, y);
         line.setDashedLine();
         drawingView.addShape(line);
+        drawingView.saveShapeState();
     }
 
     @Override

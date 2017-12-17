@@ -1,7 +1,5 @@
 package com.example.sabila.handymind.Memento;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -32,29 +30,16 @@ public class ShapeCaretaker {
                 listOfShapeMemento.add(memento);
                 currentMemento = memento;
                 currentMementoNum += 1;
-                Log.d("Debug", "current index : " + listOfShapeMemento.indexOf(currentMemento) + " ukuran list : " + listOfShapeMemento.size());
             }
             else {
                 ListIterator<ShapeMemento> it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento));
-//                for(ListIterator<ShapeMemento> it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento)); it.hasNext(); ) {
-////                    listOfShapeMemento.remove(i);
-//                    it.next();
-//                    it.remove();
-//                    currentMementoNum -= 1;
-//                    Log.d("Debug", "current index : " + it.previousIndex());
-//                }
                 while(it.hasNext()) {
-//                    ShapeMemento a = it.next();
-//                    listOfShapeMemento.remove(a);
                     it.next();
                     it.remove();
                 }
                 listOfShapeMemento.add(memento);
                 currentMemento = memento;
                 currentMementoNum += 1;
-//                currentIndex += 1;
-//                lastIndex = currentIndex;
-                Log.d("Debug", "current index : " + listOfShapeMemento.indexOf(currentMemento) + " ukuran list : " + listOfShapeMemento.size());
             }
         }
         else {
@@ -62,16 +47,13 @@ public class ShapeCaretaker {
             listOfShapeMemento.add(memento);
             currentMemento = memento;
             currentMementoNum += 1;
-            Log.d("Debug", "current index : " + listOfShapeMemento.indexOf(currentMemento) + " ukuran list : " + listOfShapeMemento.size());
         }
     }
 
     public ShapeMemento getUndo() {
 
-        Log.d("Debug", "current index : " + currentIndex + " currentmemento index : " + listOfShapeMemento.indexOf(currentMemento));
         ListIterator<ShapeMemento> it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento));
         if (it.hasPrevious()) {
-            Log.d("Debug", "previous index : " + it.previousIndex() + " current index : " + currentIndex + " ukuran list ; " + listOfShapeMemento.size());
             currentMemento = listOfShapeMemento.get(it.previousIndex());
             return currentMemento;
         }
@@ -86,7 +68,6 @@ public class ShapeCaretaker {
         if (it.hasNext()) {
             it.next();
             if (it.hasNext()) {
-                Log.d("Debug", "previous index : " + it.nextIndex() + " first index : " + firstIndex + " ukuran list ; " + listOfShapeMemento.size());
                 currentMemento = listOfShapeMemento.get(it.nextIndex());
             }
             else {

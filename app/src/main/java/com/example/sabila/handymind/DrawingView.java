@@ -5,14 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.sabila.handymind.Memento.ShapeCaretaker;
 import com.example.sabila.handymind.Memento.ShapeMemento;
 import com.example.sabila.handymind.Memento.ShapeOriginator;
-import com.example.sabila.handymind.shapes.ActiveState;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.TextTool;
 
@@ -96,7 +94,6 @@ public class DrawingView extends View {
 
     public void setActiveTool(Tool activeTool) {
         this.tool = activeTool;
-
     }
 
     public void addShape(Shape shape) {
@@ -121,19 +118,14 @@ public class DrawingView extends View {
     }
 
     public void undo() {
-        Log.d("Debug", "masuk fungsi undo");
 
         ShapeMemento undoMemento = caretaker.getUndo();
         if (undoMemento != null) {
-            Log.d("Debug", "bisa undo");
             shapes = new ArrayList<Shape>(undoMemento.shapeList);
             originator.setShapeList(shapes);
-            setFalse();
         }
         else {
-            Log.d("Debug", "undo memento kosong");
 //            shapes = new ArrayList<Shape>(originator.restore());
-            setFalse();
         }
 
         invalidate();
@@ -143,25 +135,13 @@ public class DrawingView extends View {
 
         ShapeMemento redoMemento = caretaker.getRedo();
         if (redoMemento != null) {
-            Log.d("Debug", "bisa redo");
             shapes = new ArrayList<Shape>(redoMemento.shapeList);
             originator.setShapeList(shapes);
-            setFalse();
         }
         else {
-            Log.d("Debug", "redo memento kosong");
-            shapes = new ArrayList<Shape>(originator.restore());
-            setFalse();
+//            shapes = new ArrayList<Shape>(originator.restore());
         }
-
         invalidate();
     }
 
-    private void setFalse() {
-        touchedShape = null;
-        shapeOnCreating = null;
-        isSingleTouch = false;
-        isResizing = false;
-        isMoving = false;
-    }
 }
