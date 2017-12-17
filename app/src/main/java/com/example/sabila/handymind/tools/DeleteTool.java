@@ -3,7 +3,6 @@ package com.example.sabila.handymind.tools;
 import com.example.sabila.handymind.DrawingView;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.Tool;
-import com.example.sabila.handymind.shapes.ActiveState;
 
 import java.util.List;
 
@@ -12,6 +11,7 @@ import java.util.List;
  */
 
 public class DeleteTool extends Tool {
+
     private Shape shapeToDelete = null;
 
     @Override

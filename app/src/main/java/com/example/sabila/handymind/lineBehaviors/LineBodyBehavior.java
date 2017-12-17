@@ -1,4 +1,4 @@
-package com.example.sabila.handymind;
+package com.example.sabila.handymind.lineBehaviors;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

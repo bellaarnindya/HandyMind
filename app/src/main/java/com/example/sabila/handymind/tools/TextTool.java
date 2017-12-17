@@ -22,6 +22,7 @@ public class TextTool extends Tool {
     public void touchDown(float x, float y, DrawingView drawingView) {
         text = new Text(x, y, message);
         drawingView.addShape(text);
+        drawingView.saveShapeState();
     }
 
     @Override

@@ -8,7 +8,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.sabila.handymind.shapes.ActiveState;
+import com.example.sabila.handymind.Memento.ShapeCaretaker;
+import com.example.sabila.handymind.Memento.ShapeMemento;
+import com.example.sabila.handymind.Memento.ShapeOriginator;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.TextTool;
 
@@ -27,12 +29,15 @@ public class DrawingView extends View {
     private String textMessage;
     public Shape shape;
 
+    private ShapeCaretaker caretaker;
+    private ShapeOriginator originator;
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         tool = new RectangleTool();
-
         shapes = new ArrayList<>();
+        caretaker = new ShapeCaretaker();
+        originator = new ShapeOriginator();
     }
 
 
@@ -89,7 +94,6 @@ public class DrawingView extends View {
 
     public void setActiveTool(Tool activeTool) {
         this.tool = activeTool;
-
     }
 
     public void addShape(Shape shape) {
@@ -108,4 +112,36 @@ public class DrawingView extends View {
         shapes = new ArrayList<>();
         invalidate();
     }
+    public void saveShapeState() {
+        originator.setShapeList(shapes);
+        caretaker.saveState( originator.save() );
+    }
+
+    public void undo() {
+
+        ShapeMemento undoMemento = caretaker.getUndo();
+        if (undoMemento != null) {
+            shapes = new ArrayList<Shape>(undoMemento.shapeList);
+            originator.setShapeList(shapes);
+        }
+        else {
+//            shapes = new ArrayList<Shape>(originator.restore());
+        }
+
+        invalidate();
+    }
+
+    public void redo() {
+
+        ShapeMemento redoMemento = caretaker.getRedo();
+        if (redoMemento != null) {
+            shapes = new ArrayList<Shape>(redoMemento.shapeList);
+            originator.setShapeList(shapes);
+        }
+        else {
+//            shapes = new ArrayList<Shape>(originator.restore());
+        }
+        invalidate();
+    }
+
 }

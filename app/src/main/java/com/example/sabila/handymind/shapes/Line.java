@@ -5,8 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
-import com.example.sabila.handymind.LineBodyBehavior;
-import com.example.sabila.handymind.LineHeadBehavior;
+import com.example.sabila.handymind.lineBehaviors.LineBodyBehavior;
+import com.example.sabila.handymind.lineBehaviors.LineHeadBehavior;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.ShapeObservable;
 import com.example.sabila.handymind.ShapeObserver;

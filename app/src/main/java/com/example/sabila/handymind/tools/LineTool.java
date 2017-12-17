@@ -1,8 +1,5 @@
 package com.example.sabila.handymind.tools;
 
-import android.graphics.PointF;
-import android.util.Log;
-
 import com.example.sabila.handymind.DrawingView;
 import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.Tool;
@@ -24,6 +21,7 @@ public class LineTool extends Tool {
     public void touchDown(float x, float y, DrawingView drawingView) {
         line = new Line(x, y);
         drawingView.addShape(line);
+        drawingView.saveShapeState();
     }
 
     @Override

@@ -1,11 +1,8 @@
 package com.example.sabila.handymind.tools;
 
 import com.example.sabila.handymind.DrawingView;
-import com.example.sabila.handymind.Shape;
 import com.example.sabila.handymind.Tool;
 import com.example.sabila.handymind.shapes.Circle;
-
-import java.util.List;
 
 /**
  * Created by Sabila on 12/10/2017.
@@ -19,6 +16,7 @@ public class CircleTool extends Tool {
     public void touchDown(float x, float y, DrawingView drawingView) {
         circle = new Circle(x, y);
         drawingView.addShape(circle);
+        drawingView.saveShapeState();
     }
 
     @Override
