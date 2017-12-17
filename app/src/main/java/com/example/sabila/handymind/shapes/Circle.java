@@ -3,8 +3,16 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.PointF;
+import android.util.Log;
 
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.ShapeObservable;
+import com.example.sabila.handymind.ShapeObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sabila on 11/28/2017.
@@ -15,12 +23,15 @@ public class Circle extends Shape {
     private float cx;
     private float cy;
     private float radius;
+    private List<ShapeObserver> circleObservers;
 
     private Paint drawPaint;
 
     public Circle(float cx, float cy) {
         this.cx = cx;
         this.cy = cy;
+
+        circleObservers = new ArrayList<>();
 
         drawPaint = new Paint();
         drawPaint.setColor(Color.BLACK);
@@ -86,6 +97,7 @@ public class Circle extends Shape {
         this.cy = touchY - yCoordsOnTouch;
 
         this.updatePoint();
+        notifyAllObservers();
     }
 
     @Override
@@ -94,11 +106,7 @@ public class Circle extends Shape {
 
     @Override
     public boolean isTouched(float touchX, float touchY) {
-        double x = Double.parseDouble(Float.toString(this.getCx()));
-        double y = Double.parseDouble(Float.toString(this.getCy()));
-        double a = Double.parseDouble(Float.toString(touchX));
-        double b = Double.parseDouble(Float.toString(touchY));
-        float distance = (float) Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+        float distance = distance(touchX, touchY, cx, cy);
 
         if (distance <= this.getRadius()) {
             return true;
@@ -137,4 +145,23 @@ public class Circle extends Shape {
     public void setBottom(float y) { this.setRadius(y - this.cy); }
     @Override
     public void setTop(float y) { this.setRadius(this.cy - y); }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+        circleObservers.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        for (ShapeObserver observer : circleObservers) {
+            observer.update(this);
+        }
+    }
+
+    @Override
+    public void delete() {
+        this.cx = -1;
+        this.cy = -1;
+        this.radius = 0;
+    }
 }

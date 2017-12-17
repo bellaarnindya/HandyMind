@@ -103,4 +103,25 @@ public class Text extends Shape {
     public void setInactive() {
         drawPaint.setStrokeWidth(5);
     }
+
+    @Override
+    public void notifyAllObservers() {
+        super.notifyAllObservers();
+    }
+
+    public boolean intersects(float x, float y, Shape shape) {
+        return shape.isTouched(x, y);
+    }
+
+    @Override
+    public void delete() {
+        this.x = -1;
+        this.y = -1;
+    }
+
+    @Override
+    protected float distance(float xPos, float yPos, float aPos, float bPos) {
+        return 0;
+    }
+
 }

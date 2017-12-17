@@ -2,9 +2,12 @@ package com.example.sabila.handymind;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,20 +22,25 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.example.sabila.handymind.buttons.CircleButton;
 import com.example.sabila.handymind.buttons.DashedLineButton;
+import com.example.sabila.handymind.buttons.DeleteButton;
 import com.example.sabila.handymind.buttons.LineButton;
 import com.example.sabila.handymind.buttons.OvalButton;
 import com.example.sabila.handymind.buttons.RectButton;
 import com.example.sabila.handymind.buttons.RoundRectButton;
+import com.example.sabila.handymind.buttons.SelectButton;
 import com.example.sabila.handymind.buttons.TextButton;
 import com.example.sabila.handymind.tools.CircleTool;
 import com.example.sabila.handymind.tools.DashedLineTool;
+import com.example.sabila.handymind.tools.DeleteTool;
 import com.example.sabila.handymind.tools.LineTool;
 import com.example.sabila.handymind.tools.OvalTool;
 import com.example.sabila.handymind.tools.RectangleTool;
 import com.example.sabila.handymind.tools.RoundRectTool;
+import com.example.sabila.handymind.tools.SelectionTool;
 import com.example.sabila.handymind.tools.TextTool;
 
 import java.io.File;
@@ -49,13 +57,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RoundRectButton roundRectBtn;
     private OvalButton ovalBtn;
     private TextButton textBtn;
+    private SelectButton selectBtn;
     private EditText inputText;
     private AlertDialog dialog;
     private String message;
     private Button saveBtn;
-    private Button deleteBtn;
+    private DeleteButton deleteBtn;
     private Button undoBtn;
     private Button redoBtn;
+    private Button newBtn;
     private PopupWindow popupWindow;
 
     @Override
@@ -82,9 +92,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textBtn = (TextButton) findViewById(R.id.text_btn);
         undoBtn = (android.widget.Button) findViewById(R.id.undo_btn);
         redoBtn = (android.widget.Button) findViewById(R.id.redo_btn);
-        deleteBtn = (android.widget.Button) findViewById(R.id.delete_button);
+        deleteBtn = (DeleteButton) findViewById(R.id.delete_button);
         saveBtn = (android.widget.Button) findViewById(R.id.save_button);
-
+        selectBtn = (SelectButton) findViewById(R.id.select_btn);
+        newBtn = (Button) findViewById(R.id.new_btn);
 
         rectBtn.setOnClickListener(this);
         circleBtn.setOnClickListener(this);
@@ -97,6 +108,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         redoBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
         saveBtn.setOnClickListener(this);
+        selectBtn.setOnClickListener(this);
+        newBtn.setOnClickListener(this);
+
     }
 
     public void showDialog() {
@@ -152,14 +166,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 showDialog();
                 dialog.show();
                 break;
+            case R.id.select_btn:
+                drawingView.setActiveTool(new SelectionTool());
+                break;
             case R.id.delete_button:
-                drawingView.deleteShape();
+                drawingView.setActiveTool(new DeleteTool());
                 break;
-            case R.id.undo_btn:
-                drawingView.undo();
-                break;
-            case R.id.redo_btn:
-                drawingView.redo();
+            case R.id.new_btn:
+                drawingView.clearAll();
                 break;
             case R.id.save_button:
                 if(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){

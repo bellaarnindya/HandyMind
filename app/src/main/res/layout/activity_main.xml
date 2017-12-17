@@ -58,7 +58,7 @@
                     android:background="@drawable/newbtn"
                     android:backgroundTint="@color/button_tint" />
 
-                <Button
+                <com.example.sabila.handymind.buttons.SelectButton
                     android:id="@+id/select_btn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -105,7 +105,7 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <Button
+                <com.example.sabila.handymind.buttons.DeleteButton
                     android:id="@+id/delete_button"
                     android:layout_width="30dp"
                     android:layout_height="30dp"

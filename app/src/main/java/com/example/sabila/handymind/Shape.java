@@ -3,6 +3,8 @@ package com.example.sabila.handymind;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.PointF;
 import android.util.Log;
 
 import com.example.sabila.handymind.shapes.ActiveState;
@@ -18,7 +20,7 @@ import java.util.UUID;
  * Created by Sabila on 11/20/2017.
  */
 
-public abstract class Shape {
+public abstract class Shape implements ShapeObservable{
     private UUID ID;
     public ShapeState currentState;
     protected float xCoordsOnTouch;
@@ -158,6 +160,7 @@ public abstract class Shape {
         }
 
         this.updatePoint();
+        notifyAllObservers();
     }
 
     protected void drawResizingCircles(Canvas canvas) {
@@ -166,13 +169,68 @@ public abstract class Shape {
         }
     }
 
-    protected float getLeft(){ return (float) 0.0; }
-    protected float getRight(){ return (float) 0.0; }
-    protected float getBottom(){ return (float) 0.0; }
-    protected float getTop(){ return (float) 0.0; }
+    public float getLeft(){ return (float) 0.0; }
+    public float getRight(){ return (float) 0.0; }
+    public float getBottom(){ return (float) 0.0; }
+    public float getTop(){ return (float) 0.0; }
 
-    protected void setLeft(float x){  }
-    protected void setRight(float x){  }
-    protected void setBottom(float y){  }
-    protected void setTop(float y){  }
+    public void setLeft(float x){  }
+    public void setRight(float x){  }
+    public void setBottom(float y){  }
+    public void setTop(float y){  }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+
+    }
+
+    @Override
+    public void notifyAllObservers() {
+
+    }
+
+    public abstract void delete();
+
+    public PointF getPoint(float xLine, float yLine) {
+        float minDistance = 9999999;
+        float pointX = 0;
+        float pointY = 0;
+        float xPos = 0;
+        float yPos = 0;
+
+        for (int position = 1; position <= 4; position++) {
+            switch (position) {
+                case 1:
+                    xPos = (getRight() + getLeft()) / 2;
+                    yPos = getTop();
+                    break;
+                case 2:
+                    xPos = getRight();
+                    yPos = (getTop() + getBottom()) / 2;
+                    break;
+                case 3:
+                    xPos = (getRight() + getLeft()) / 2;
+                    yPos = getBottom();
+                    break;
+                case 4:
+                    xPos = getLeft();
+                    yPos = (getTop() + getBottom()) / 2;
+                    break;
+            }
+            float distance = distance(xPos, yPos, xLine, yLine);
+            if (minDistance > distance) {
+                minDistance = distance;
+                pointX = xPos;
+                pointY = yPos;
+            }
+        }
+        return new PointF(pointX, pointY);
+    }
+    protected float distance(float xPos, float yPos, float aPos, float bPos) {
+        double x = Double.parseDouble(Float.toString(aPos));
+        double y = Double.parseDouble(Float.toString(bPos));
+        double a = Double.parseDouble(Float.toString(xPos));
+        double b = Double.parseDouble(Float.toString(yPos));
+        return (float) Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+    }
 }

@@ -3,10 +3,14 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 
 import com.example.sabila.handymind.lineBehaviors.LineBodyBehavior;
 import com.example.sabila.handymind.lineBehaviors.LineHeadBehavior;
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.ShapeObservable;
+import com.example.sabila.handymind.ShapeObserver;
+import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
 import com.example.sabila.handymind.lineBehaviors.LineDashedBody;
 import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
 import com.example.sabila.handymind.lineBehaviors.LineWithArrowHead;
@@ -23,7 +27,7 @@ public class Line extends Shape {
     private float xEnd;
     private float yEnd;
     private float length;
-    private final float EPSILON = 15;
+    private final float EPSILON = 3;
     private LineBodyBehavior bodyBehavior;
     private LineHeadBehavior headBehavior;
 
@@ -147,5 +151,24 @@ public class Line extends Shape {
 
     public void setArrowHead() {
         this.headBehavior = new LineWithArrowHead();
+    }
+
+
+    public boolean intersects(float x, float y, Shape shape){
+        return shape.isTouched(x, y);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        super.notifyAllObservers();
+    }
+
+    @Override
+    public void delete() {
+        this.xStart = -1;
+        this.yStart = -1;
+        this.xEnd = -1;
+        this.yEnd = -1;
+        this.length = 0;
     }
 }
