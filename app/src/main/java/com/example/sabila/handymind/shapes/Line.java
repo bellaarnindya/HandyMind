@@ -23,7 +23,7 @@ public class Line extends Shape {
     private float xEnd;
     private float yEnd;
     private float length;
-    private final float EPSILON = 10;
+    private final float EPSILON = 20;
     private LineBodyBehavior bodyBehavior;
     private LineHeadBehavior headBehavior;
 
