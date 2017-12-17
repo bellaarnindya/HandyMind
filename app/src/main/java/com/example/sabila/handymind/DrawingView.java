@@ -180,13 +180,12 @@ public class DrawingView extends View {
             Log.d("Debug", "bisa undo");
             shapes = new ArrayList<Shape>(undoMemento.shapeList);
             originator.setShapeList(shapes);
-//            invalidate();
+            setFalse();
         }
         else {
             Log.d("Debug", "undo memento kosong");
-            shapes = new ArrayList<Shape>(originator.restore());
+//            shapes = new ArrayList<Shape>(originator.restore());
             setFalse();
-//            invalidate();
         }
 
         invalidate();
@@ -194,20 +193,18 @@ public class DrawingView extends View {
 
     public void redo() {
 
-        ShapeMemento coba = caretaker.getCurrentMemento();
-        shapes = coba.shapeList;
-//        invalidate();
-//        ShapeMemento redoMemento = caretaker.getRedo();
-//        if (redoMemento != null) {
-//            shapes = redoMemento.shapeList;
-//            originator.setShapeList(shapes);
-//            setFalse();
-//        }
-//        else {
-//            shapes = originator.restore();
-//            setFalse();
-//        }
-
+        ShapeMemento redoMemento = caretaker.getRedo();
+        if (redoMemento != null) {
+            Log.d("Debug", "bisa redo");
+            shapes = new ArrayList<Shape>(redoMemento.shapeList);
+            originator.setShapeList(shapes);
+            setFalse();
+        }
+        else {
+            Log.d("Debug", "redo memento kosong");
+            shapes = new ArrayList<Shape>(originator.restore());
+            setFalse();
+        }
 
         invalidate();
     }

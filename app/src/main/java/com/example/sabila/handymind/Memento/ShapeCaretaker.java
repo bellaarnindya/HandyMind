@@ -13,89 +13,90 @@ import java.util.ListIterator;
 public class ShapeCaretaker {
     private List<ShapeMemento> listOfShapeMemento;
     public ShapeMemento currentMemento ;
+    private static int firstIndex;
+    private static int lastIndex;
+    private static int currentIndex;
     private static int currentMementoNum;
-    private final static int maxMemento = 20;
+    private final static int maxMemento = 10;
 
     public ShapeCaretaker() {
-        listOfShapeMemento = new ArrayList<>();
+        listOfShapeMemento = new ArrayList<ShapeMemento>();
+        firstIndex = 1;
+        currentIndex = 0;
+        lastIndex = 0;
     }
 
     public void saveState(ShapeMemento memento) {
-//        if (currentMementoNum < maxMemento) {
-//            if(currentState != lasState) {
-//
-//            }
-//            else {
-//                currentMemento = currentMemento + 1;
-//                listOfShapeMemento.add(memento);
-//            }
-//        }
-//        else {
-//            remove_last();
-//        }
-        listOfShapeMemento.add(memento);
-        currentMemento = memento;
-        currentMementoNum += 1;
+        if (currentMementoNum < maxMemento) {
+            if(listOfShapeMemento.indexOf(currentMemento) == listOfShapeMemento.size()-1) {
+                listOfShapeMemento.add(memento);
+                currentMemento = memento;
+                currentMementoNum += 1;
+                Log.d("Debug", "current index : " + listOfShapeMemento.indexOf(currentMemento) + " ukuran list : " + listOfShapeMemento.size());
+            }
+            else {
+                ListIterator<ShapeMemento> it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento));
+//                for(ListIterator<ShapeMemento> it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento)); it.hasNext(); ) {
+////                    listOfShapeMemento.remove(i);
+//                    it.next();
+//                    it.remove();
+//                    currentMementoNum -= 1;
+//                    Log.d("Debug", "current index : " + it.previousIndex());
+//                }
+                while(it.hasNext()) {
+//                    ShapeMemento a = it.next();
+//                    listOfShapeMemento.remove(a);
+                    it.next();
+                    it.remove();
+                }
+                listOfShapeMemento.add(memento);
+                currentMemento = memento;
+                currentMementoNum += 1;
+//                currentIndex += 1;
+//                lastIndex = currentIndex;
+                Log.d("Debug", "current index : " + listOfShapeMemento.indexOf(currentMemento) + " ukuran list : " + listOfShapeMemento.size());
+            }
+        }
+        else {
+            listOfShapeMemento.remove(0);
+            listOfShapeMemento.add(memento);
+            currentMemento = memento;
+            currentMementoNum += 1;
+            Log.d("Debug", "current index : " + listOfShapeMemento.indexOf(currentMemento) + " ukuran list : " + listOfShapeMemento.size());
+        }
     }
 
     public ShapeMemento getUndo() {
 
-        ListIterator it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento));
-        Log.d("Debug", "index sekarang : " + listOfShapeMemento.indexOf(currentMemento));
+        Log.d("Debug", "current index : " + currentIndex + " currentmemento index : " + listOfShapeMemento.indexOf(currentMemento));
+        ListIterator<ShapeMemento> it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento));
         if (it.hasPrevious()) {
-            int prevIndex = it.previousIndex();
-            currentMemento = listOfShapeMemento.get(prevIndex);
-            Log.d("Debug", "index sekarang : " + listOfShapeMemento.indexOf(currentMemento));
+            Log.d("Debug", "previous index : " + it.previousIndex() + " current index : " + currentIndex + " ukuran list ; " + listOfShapeMemento.size());
+            currentMemento = listOfShapeMemento.get(it.previousIndex());
             return currentMemento;
         }
         else {
             return null;
         }
-//        ListIterator it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento));
-//        int currentIndex = listOfShapeMemento.indexOf(currentMemento);
-//        Log.d("Debug", "current index : " + currentIndex);
-//        ShapeMemento undoMemento = listOfShapeMemento.get(currentIndex-1);
-//        if (undoMemento != null) {
-//            currentMemento = undoMemento;
-//            Log.d("Debug", "undo index : " + listOfShapeMemento.indexOf(currentMemento));
-//            return true;
-//        }
-//        else {
-//            return false;
-//        }
     }
 
-    public boolean getRedo() {
+    public ShapeMemento getRedo() {
 
-        ListIterator it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento));
-        int currentIndex = listOfShapeMemento.indexOf(currentMemento);
-        ShapeMemento redoMemento = listOfShapeMemento.get(currentIndex+1);
-        if (redoMemento != null) {
-            currentMemento = redoMemento;
-            return true;
+        ListIterator<ShapeMemento> it = listOfShapeMemento.listIterator(listOfShapeMemento.indexOf(currentMemento));
+        if (it.hasNext()) {
+            it.next();
+            if (it.hasNext()) {
+                Log.d("Debug", "previous index : " + it.nextIndex() + " first index : " + firstIndex + " ukuran list ; " + listOfShapeMemento.size());
+                currentMemento = listOfShapeMemento.get(it.nextIndex());
+            }
+            else {
+                currentMemento = listOfShapeMemento.get(it.previousIndex());
+            }
+            return currentMemento;
         }
         else {
-            return false;
+            return null;
         }
-
-//        Log.d("Debug", "index sekarang : " + listOfShapeMemento.indexOf(currentMemento));
-//        if (it.hasNext()) {
-//            ShapeMemento getNext = (ShapeMemento) it.next();
-//            currentMemento = getNext;
-//            Log.d("Debug", "index sekarang : " + listOfShapeMemento.indexOf(currentMemento));
-//            return currentMemento;
-//        }
-//        else {
-//            return null;
-//        }
     }
 
-    public ShapeMemento getCurrentMemento() {
-        Log.d("Debug", "current index : " + listOfShapeMemento.indexOf(currentMemento));
-        return currentMemento;
-    }
-
-//    public remove_last() {
-//
-//    }
 }
