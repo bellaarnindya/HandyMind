@@ -15,11 +15,11 @@ HandyMind sekarang tersedia di Play Store, anda dapat memeriksanya [di sini](htt
 
 Tim Kami
 ---
-- [Sabila Malahati A](https://github.com/bellaarnindya)!
-- [Ananda Ricky](https://github.com/nandaricky)!
-- [Panji Rimawan](https://github.com/njiipanji)!
-- [Syukron Rifa'i M](https://github.com/syukronrm)!
-- [Nafiar Rahmansyah](https://github.com/nafiar)!
+[Sabila Malahati A](https://github.com/bellaarnindya)
+[Ananda Ricky](https://github.com/nandaricky)
+[Panji Rimawan](https://github.com/njiipanji)
+[Syukron Rifa'i M](https://github.com/syukronrm)
+[Nafiar Rahmansyah](https://github.com/nafiar)
 
 ### License: 
 	MIT License
