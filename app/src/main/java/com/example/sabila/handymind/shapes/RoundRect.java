@@ -3,9 +3,14 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
+import android.graphics.PointF;
 
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.ShapeObservable;
+import com.example.sabila.handymind.ShapeObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sabila on 11/29/2017.
@@ -22,14 +27,30 @@ public class RoundRect extends Shape {
 
     private Paint drawPaint;
 
+    private List<ShapeObserver> roundRectObservers;
+
     public RoundRect(float x, float y) {
         this.x = x;
         this.y = y;
+
+        roundRectObservers = new ArrayList<>();
 
         drawPaint = new Paint();
         drawPaint.setColor(Color.BLACK);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeWidth(4);
+
+        onResize = false;
+
+        CircleResize cTopLeft = new CircleResize(x, y);
+        CircleResize cTopRight = new CircleResize(x, y);
+        CircleResize cBottomRight = new CircleResize(x, y);
+        CircleResize cBottomLeft = new CircleResize(x, y);
+
+        resizingCircle.add(cTopLeft);
+        resizingCircle.add(cTopRight);
+        resizingCircle.add(cBottomRight);
+        resizingCircle.add(cBottomLeft);
     }
 
     public float getX() {
@@ -65,13 +86,12 @@ public class RoundRect extends Shape {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawRoundRect(x, y, x+width, y+height, RX, RY, paint);
-    }
-
-    @Override
     public void draw(Canvas canvas) {
         canvas.drawRoundRect(x, y, width + x, height + y, RX, RY, drawPaint);
+
+        if (onResize) {
+            this.drawResizingCircles(canvas);
+        }
     }
 
     @Override
@@ -84,32 +104,13 @@ public class RoundRect extends Shape {
     public void move(float touchX, float touchY) {
         this.x = touchX - xCoordsOnTouch;
         this.y = touchY - yCoordsOnTouch;
+
+        this.updatePoint();
+        notifyAllObservers();
     }
 
     @Override
     public void finishMove(){}
-
-    @Override
-    public void drag(float touchX, float touchY) {
-        float width = touchX - this.x;
-        float height = touchY - this.y;
-
-        if (width > 0 && height > 0) {
-            this.width = width;
-            this.height = height;
-        }
-    }
-
-    @Override
-    public void resize(float touchX, float touchY) {
-        float width = touchX - this.x;
-        float height = touchY - this.y;
-
-        if (width > 0 && height > 0) {
-            this.width = width;
-            this.height = height;
-        }
-    }
 
     @Override
     public boolean isTouched(float touchX, float touchY) {
@@ -122,8 +123,59 @@ public class RoundRect extends Shape {
     @Override
     public void setActive() {
         drawPaint.setStrokeWidth(7);
+        onResize = true;
+        this.setState(new ActiveState());
     }
 
     @Override
-    public void setInactive() {drawPaint.setStrokeWidth(5); }
+    public void setInactive() {
+        drawPaint.setStrokeWidth(5);
+        onResize = false;
+        this.setState(new InactiveState());
+    }
+
+    @Override
+    public float getLeft(){ return this.x; }
+    @Override
+    public float getRight(){ return this.x + this.width; }
+    @Override
+    public float getBottom(){ return this.y + this.height; }
+    @Override
+    public float getTop(){ return this.y; }
+
+    @Override
+    public void setRight(float x) { this.width = x - this.x; }
+    @Override
+    public void setLeft(float x) {
+        this.setWidth(getRight() - x);
+        this.x = x;
+    }
+    @Override
+    public void setBottom(float y) { this.height = y - this.y; }
+    @Override
+    public void setTop(float y) {
+        float bottom = getBottom();
+        this.setHeight(bottom - y);
+        this.y = y;
+    }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+        roundRectObservers.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        for (ShapeObserver observer : roundRectObservers) {
+            observer.update(this);
+        }
+    }
+
+    @Override
+    public void delete() {
+        this.x = -1;
+        this.y = -1;
+        this.width = 0;
+        this.height = 0;
+    }
 }

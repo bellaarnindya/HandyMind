@@ -3,8 +3,15 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
+import android.util.Log;
 
 import com.example.sabila.handymind.Shape;
+import com.example.sabila.handymind.ShapeObservable;
+import com.example.sabila.handymind.ShapeObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sabila on 11/29/2017.
@@ -22,6 +29,8 @@ public class Oval extends Shape {
     private float rightOnTouch;
     private float bottomOnTouch;
 
+    private List<ShapeObserver> ovalObservers;
+
     private Paint drawPaint;
 
     public Oval(float left, float top) {
@@ -30,40 +39,46 @@ public class Oval extends Shape {
         this.top = top;
         this.bottom = top;
 
+        ovalObservers = new ArrayList<>();
+
         drawPaint = new Paint();
         drawPaint.setColor(Color.BLACK);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeWidth(4);
+
+        onResize = false;
+
+        CircleResize cTopLeft = new CircleResize(left, top);
+        CircleResize cTopRight = new CircleResize(left, top);
+        CircleResize cBottomRight = new CircleResize(left, top);
+        CircleResize cBottomLeft = new CircleResize(left, top);
+
+        resizingCircle.add(cTopLeft);
+        resizingCircle.add(cTopRight);
+        resizingCircle.add(cBottomRight);
+        resizingCircle.add(cBottomLeft);
     }
 
-    public float getLeft() {
-        return left;
+    public float getLeft() { return left; }
+    public float getTop() {
+        return top;
+    }
+    public float getRight() {
+        return right;
+    }
+    public float getBottom() {
+        return bottom;
     }
 
     public void setLeft(float left) {
         this.left = left;
     }
-
-    public float getTop() {
-        return top;
-    }
-
     public void setTop(float top) {
         this.top = top;
     }
-
-    public float getRight() {
-        return right;
-    }
-
     public void setRight(float right) {
         this.right = right;
     }
-
-    public float getBottom() {
-        return bottom;
-    }
-
     public void setBottom(float bottom) {
         this.bottom = bottom;
     }
@@ -97,25 +112,14 @@ public class Oval extends Shape {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawOval(left, top, right, bottom, paint);
-    }
-
-    @Override
     public void draw(Canvas canvas) {
         canvas.drawOval(left, top, right, bottom, drawPaint);
-    }
 
-    @Override
-    public void drag(float touchX, float touchY) {
-        float width = touchX - this.getLeft();
-        float height = touchY - this.getTop();
-
-        if (width > 0 && height > 0) {
-            this.setRight(touchX);
-            this.setBottom(touchY);
+        if (onResize) {
+            this.drawResizingCircles(canvas);
         }
     }
+
 
     @Override
     public boolean isTouched(float touchX, float touchY) {
@@ -147,13 +151,42 @@ public class Oval extends Shape {
         this.setBottom(this.bottomOnTouch + deltaY);
         this.setRight(this.rightOnTouch + deltaX);
         this.setLeft(this.leftOnTouch + deltaX);
+
+        this.updatePoint();
+        notifyAllObservers();
     }
 
     @Override
     public void setActive() {
         drawPaint.setStrokeWidth(7);
+        onResize = true;
+        this.setState(new ActiveState());
     }
 
     @Override
-    public void setInactive() {drawPaint.setStrokeWidth(5); }
+    public void setInactive() {
+        drawPaint.setStrokeWidth(5);
+        onResize = false;
+        this.setState(new InactiveState());
+    }
+
+    @Override
+    public void attach(ShapeObserver observer) {
+        ovalObservers.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        for (ShapeObserver observer : ovalObservers) {
+            observer.update(this);
+        }
+    }
+
+    @Override
+    public void delete() {
+        this.top = -1;
+        this.bottom = -1;
+        this.right = -1;
+        this.left = -1;
+    }
 }
