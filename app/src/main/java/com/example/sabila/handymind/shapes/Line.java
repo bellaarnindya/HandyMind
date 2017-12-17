@@ -3,15 +3,11 @@ package com.example.sabila.handymind.shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
 
-import com.example.sabila.handymind.lineBehaviors.LineBodyBehavior;
-import com.example.sabila.handymind.lineBehaviors.LineHeadBehavior;
 import com.example.sabila.handymind.Shape;
-import com.example.sabila.handymind.ShapeObservable;
-import com.example.sabila.handymind.ShapeObserver;
-import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
+import com.example.sabila.handymind.lineBehaviors.LineBodyBehavior;
 import com.example.sabila.handymind.lineBehaviors.LineDashedBody;
+import com.example.sabila.handymind.lineBehaviors.LineHeadBehavior;
 import com.example.sabila.handymind.lineBehaviors.LineStraightBody;
 import com.example.sabila.handymind.lineBehaviors.LineWithArrowHead;
 import com.example.sabila.handymind.lineBehaviors.LineWithoutHead;
@@ -27,7 +23,7 @@ public class Line extends Shape {
     private float xEnd;
     private float yEnd;
     private float length;
-    private final float EPSILON = 3;
+    private final float EPSILON = 10;
     private LineBodyBehavior bodyBehavior;
     private LineHeadBehavior headBehavior;
 
@@ -45,38 +41,44 @@ public class Line extends Shape {
         drawPaint.setColor(Color.BLACK);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeWidth(7);
-    }
 
-    public float getxStart() {
-        return xStart;
+        CircleResize startPoint = new CircleResize(xStart, yStart);
+        CircleResize endPoint = new CircleResize(xEnd, yEnd);
+
+        resizingCircle.add(startPoint);
+        resizingCircle.add(endPoint);
     }
 
     public void setxStart(float xStart) {
         this.xStart = xStart;
     }
 
-    public float getyStart() {
-        return yStart;
-    }
-
     public void setyStart(float yStart) {
         this.yStart = yStart;
-    }
-
-    public float getxEnd() {
-        return xEnd;
     }
 
     public void setxEnd(float xEnd) {
         this.xEnd = xEnd;
     }
 
-    public float getyEnd() {
-        return yEnd;
-    }
-
     public void setyEnd(float yEnd) {
         this.yEnd = yEnd;
+    }
+
+    public float getxStart() {
+        return xStart;
+    }
+
+    public float getyStart() {
+        return yStart;
+    }
+
+    public float getxEnd() {
+        return xEnd;
+    }
+
+    public float getyEnd() {
+        return yEnd;
     }
 
     public float getLength() {
@@ -91,6 +93,10 @@ public class Line extends Shape {
     public void draw(Canvas canvas) {
         this.bodyBehavior.drawBody(canvas, drawPaint, xStart, yStart, xEnd, yEnd);
         this.headBehavior.drawHead(canvas, drawPaint, xStart, yStart, xEnd, yEnd);
+
+        if (onResize) {
+            this.drawResizingCircles(canvas);
+        }
     }
 
     @Override
@@ -107,13 +113,38 @@ public class Line extends Shape {
         this.yStart = touchY - yCoordsOnTouch;
         this.xEnd = this.xEnd + diffX;
         this.yEnd = this.yEnd +diffY;
+
+        updatePoint();
+    }
+
+    private void moveStart(float touchX, float touchY) {
+        setxStart(touchX);
+        setyStart(touchY);
+    }
+
+    private void moveEnd(float touchX, float touchY) {
+        setxEnd(touchX);
+        setyEnd(touchY);
     }
 
     @Override
     public void finishMove(){}
 
     @Override
-    public void resize(int selectedCircle, float x, float y) {}
+    public void resize(int selectedCircle, float touchX, float touchY) {
+        switch (selectedCircle) {
+            case 0 : {
+                moveStart(touchX, touchY);
+                break;
+            }
+            case 1 : {
+                moveEnd(touchX, touchY);
+                break;
+            }
+        }
+
+        updatePoint();
+    }
 
     @Override
     public boolean isTouched(float touchX, float touchY) {
@@ -136,12 +167,14 @@ public class Line extends Shape {
     @Override
     public void setActive() {
         drawPaint.setStrokeWidth(7);
+        onResize = true;
         this.setState(new ActiveState());
     }
 
     @Override
     public void setInactive() {
         drawPaint.setStrokeWidth(5);
+        onResize = false;
         this.setState(new InactiveState());
     }
 
@@ -170,5 +203,11 @@ public class Line extends Shape {
         this.xEnd = -1;
         this.yEnd = -1;
         this.length = 0;
+    }
+
+    @Override
+    public void updatePoint() {
+        resizingCircle.get(0).updateCoordiate(getxStart(), getyStart());
+        resizingCircle.get(1).updateCoordiate(getxEnd(), getyEnd());
     }
 }
