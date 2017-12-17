@@ -4,8 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.example.sabila.handymind.Shape;
-
 public class CircleResize {
     private Paint drawPaint;
     private float radius;
@@ -48,7 +46,7 @@ public class CircleResize {
         double b = Double.parseDouble(Float.toString(touchY));
         float distance = (float) Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
 
-        if (distance <= this.radius) {
+        if (distance <= this.radius + 50) {
             return true;
         }
         return false;

@@ -3,11 +3,9 @@ package com.example.sabila.handymind;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.Log;
 
-import com.example.sabila.handymind.shapes.ActiveState;
 import com.example.sabila.handymind.shapes.CircleResize;
 import com.example.sabila.handymind.shapes.InactiveState;
 import com.example.sabila.handymind.shapes.ShapeState;
@@ -164,6 +162,7 @@ public abstract class Shape implements ShapeObservable{
     }
 
     protected void drawResizingCircles(Canvas canvas) {
+        Log.d("Debug", "size resizing circle : " + resizingCircle.size());
         for (int i = 0; i < resizingCircle.size(); i++) {
             resizingCircle.get(i).draw(canvas);
         }
