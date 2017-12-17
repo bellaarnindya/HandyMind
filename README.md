@@ -2,7 +2,7 @@
 # HandyMind
 <img src="/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" align="left" width="200" hspace="10" vspace="10">
 HandyMind membantu anda dalam mengorganisasikan apa yang anda pikirkan, mengingat dan membuat ide - ide baru anda. Simpan secara langsung apa yang anda pikirkan menjadi mind map, ubah secara langsung untuk membantu anda mempresentasikan ide anda, bagikan ide  anda kepada orang lain dengan mudah.</br>
-HandyMind sekarang tersedia di Play Store, anda dapat memeriksanya [di sini](https://play.google.com/store/apps/details?id=air.com.EXswap.Mindomo)!</br>
+HandyMind sekarang tersedia di Play Store, anda dapat memeriksanya [di sini](https://play.google.com/store/apps/details?id=air.com.kpl.HandyMind)</br>
 
 <div style="display:flex;" >
 <a href="https://play.google.com/store/apps/details?id=air.com.EXswap.Mindomo">
@@ -15,11 +15,11 @@ HandyMind sekarang tersedia di Play Store, anda dapat memeriksanya [di sini](htt
 
 Tim Kami
 ---
-[Sabila Malahati A](https://github.com/bellaarnindya)
-[Ananda Ricky](https://github.com/nandaricky)
-[Panji Rimawan](https://github.com/njiipanji)
-[Syukron Rifa'i M](https://github.com/syukronrm)
-[Nafiar Rahmansyah](https://github.com/nafiar)
+- [Sabila Malahati A](https://github.com/bellaarnindya)
+- [Ananda Ricky](https://github.com/nandaricky)
+- [Panji Rimawan](https://github.com/njiipanji)
+- [Syukron Rifa'i M](https://github.com/syukronrm)
+- [Nafiar Rahmansyah](https://github.com/nafiar)
 
 ### License: 
 	MIT License
