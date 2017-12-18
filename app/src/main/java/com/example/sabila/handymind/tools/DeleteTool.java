@@ -22,7 +22,7 @@ public class DeleteTool extends Tool {
                 shape.setActive();
                 shapeToDelete = shape;
                 int indexOfDelete = shapeList.indexOf(shapeToDelete);
-                shapeToDelete.delete();
+//                shapeToDelete.delete();
                 drawingView.deleteShape(indexOfDelete);
                 shapeToDelete.notifyAllObservers();
                 break;

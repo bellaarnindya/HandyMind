@@ -106,10 +106,12 @@ public class DrawingView extends View {
 
     public void deleteShape(int index) {
         shapes.remove(index);
+        saveShapeState();
     }
 
     public void clearAll(){
         shapes = new ArrayList<>();
+        saveShapeState();
         invalidate();
     }
     public void saveShapeState() {
