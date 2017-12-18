@@ -15,7 +15,7 @@ public class ShapeCaretaker {
     private static int lastIndex;
     private static int currentIndex;
     private static int currentMementoNum;
-    private final static int maxMemento = 10;
+    private final static int maxMemento = 20;
 
     public ShapeCaretaker() {
         listOfShapeMemento = new ArrayList<ShapeMemento>();
