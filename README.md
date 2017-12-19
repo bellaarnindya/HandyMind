@@ -13,6 +13,16 @@ HandyMind sekarang tersedia di Play Store, anda dapat memeriksanya [di sini](htt
 </div>
 </br></br>
 
+## Fitur
+<div style="display:flex;" >
+<img  src="screenshots/1.png" width="19%" >
+<img style="margin-left:10px;" src="gif/undoredo.gif" width="19%" >
+<img style="margin-left:10px;" src="gif/textwithshape.gif" width="19%" >
+<img style="margin-left:10px;" src="sgif/observer-line.gif" width="19%" >
+<img style="margin-left:10px;" src="gif/dash-straighline.gif" width="19%" >
+
+</div>
+
 Tim Kami
 ---
 - [Sabila Malahati A](https://github.com/bellaarnindya)
