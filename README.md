@@ -5,7 +5,7 @@ HandyMind membantu anda dalam mengorganisasikan apa yang anda pikirkan, menginga
 HandyMind sekarang tersedia di Play Store, anda dapat memeriksanya [di sini](https://play.google.com/store/apps/details?id=air.com.kpl.HandyMind)</br>
 
 <div style="display:flex;" >
-<a href="https://play.google.com/store/apps/details?id=air.com.EXswap.Mindomo">
+<a href="#">
     <img alt="Get it on Google Play"
         height="80"
         src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
@@ -21,7 +21,7 @@ Tim Kami
 - [Syukron Rifa'i M](https://github.com/syukronrm)
 - [Nafiar Rahmansyah](https://github.com/nafiar)
 
-### License: 
+### Lisensi: 
 	MIT License
 
 	Copyright (c) 2017 Sabila Malahati Arnindya
